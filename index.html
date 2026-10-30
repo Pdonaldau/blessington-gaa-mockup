@@ -18,7 +18,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,sans-serif;background:var(--night);color:#fff;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:Inter,system-ui,sans-serif;background:#14296a;color:#fff;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 button{font:inherit;cursor:pointer}
@@ -452,6 +452,76 @@ footer a:hover{color:var(--gold)}
   .mbar b{font-family:Anton;font-weight:400;font-size:17px;color:#fff;line-height:1.1}
   .mbar a.j{background:var(--gold);color:var(--night)}
   .mbar a.j b{color:var(--night)}
+}
+
+/* =========================================================
+   ALL-BLUE THEME — every section sits on club blue.
+   (Overrides the earlier light sections.)
+   ========================================================= */
+.light{background:transparent;color:#fff}
+.light .sub{color:var(--txt-d)}
+.light .kicker{color:var(--sky)}
+.light .sample{background:rgba(255,200,61,.15);color:var(--gold);border-color:rgba(255,200,61,.35)}
+#week{background:linear-gradient(180deg,#1a3778 0%,#16306f 100%)}
+#play{background:linear-gradient(180deg,#16306f 0%,#132a63 100%)}
+#fixtures{background:linear-gradient(180deg,#132a63 0%,var(--night) 100%)}
+#join{background:linear-gradient(180deg,var(--night) 0%,#16306f 100%)}
+.sponsors,footer{background:linear-gradient(180deg,#16306f 0%,var(--night) 100%)}
+footer{background:var(--night)}
+
+/* glass cards */
+.light .tile,.light .panel,.light .fx,.light .mem,.light .tabs{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);box-shadow:none}
+.light .tile:hover,.light .fx:hover{border-color:rgba(127,182,255,.5);box-shadow:0 14px 40px rgba(0,0,0,.18)}
+
+/* right now tiles */
+.t-match{background:linear-gradient(135deg,#3a78ff,#173f9f)!important;border:0!important}
+.t-news{background:rgba(255,255,255,.07)!important;color:#fff}
+.t-news .tk{color:var(--sky)}
+.t-news p,.t-news .when{color:var(--txt-d)!important}
+.t-allstars{background:linear-gradient(160deg,#6aaeff,#2f6bff)!important;border:0!important}
+.t-lotto{background:radial-gradient(circle at 30% 0%,#4a3600,#0c1a3d 75%)!important;border:1px solid rgba(255,200,61,.3)!important}
+.t-join{background:var(--gold)!important;border:0!important;color:var(--night)}
+
+/* pathways */
+.light .paths{border-top-color:rgba(255,255,255,.14)}
+.light .path{color:#fff}
+.light .path .n,.light .path p{color:var(--txt-d)}
+.light .path:hover h3,.light .path.on h3{color:var(--gold)}
+.light .path.on{border-bottom-color:var(--gold)}
+.light .panel p{color:var(--txt-d)}
+.light .panel li{background:rgba(255,255,255,.08)}
+.light .panel .acts .btn-line{border-color:rgba(255,255,255,.35);color:#fff}
+.light .panel .acts .btn-line:hover{background:#fff;color:var(--night)}
+
+/* fixtures */
+.light .tabs button{color:var(--txt-d)}
+.light .tabs button.on{background:#fff;color:var(--night)}
+.light .fx .d{border-right-color:rgba(255,255,255,.14)}
+.light .fx .d b{color:#fff}
+.light .fx .d span{color:var(--sky)}
+.light .fx .m,.light .fx-cols h4,.light .src{color:var(--txt-d)}
+.light .home{background:rgba(127,182,255,.2);color:var(--sky)}
+.light .W{background:rgba(52,211,121,.18);color:#6ee7a0}
+.light .L{background:rgba(248,113,113,.18);color:#fca5a5}
+.light .D{background:rgba(255,255,255,.12);color:#dbe3f5}
+
+/* membership */
+.light .grp{color:var(--sky)}
+.light .row{border-bottom-color:rgba(255,255,255,.12)}
+.light .row .p{color:var(--txt-d)}
+.light .step button{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#fff}
+.light .step button:hover{background:#fff;color:var(--night)}
+.light .total{background:linear-gradient(160deg,#2f6bff,#163d9e)}
+
+@media(max-width:720px){
+  .light .path{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}
+  .light .path.on{background:#fff;border-color:#fff}
+  .light .path.on h3{color:var(--night)}
+  .light .seg{background:rgba(255,255,255,.08)}
+  .light .seg button{color:var(--txt-d)}
+  .light .seg button.on{background:#fff;color:var(--night)}
+  .light .more{border-color:rgba(255,255,255,.25);color:var(--sky)}
+  .m-light{background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.15)!important}
 }
 </style>
 </head>
