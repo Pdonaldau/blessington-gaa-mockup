@@ -322,6 +322,104 @@ footer a:hover{color:var(--gold)}
   .scroll-cue{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero-row,.hero-years{opacity:1;transform:none}.hero h1 span b{transform:none}}
+
+/* ---------- compact controls (phone only by default) ---------- */
+.seg,.m-toggle,.more,.mbar{display:none}
+.bento-hint{display:none}
+
+@media(max-width:720px){
+  section{padding:60px 0}
+  .h2{font-size:clamp(40px,12vw,56px);margin:10px 0 12px}
+  .sub{font-size:15.5px}
+  body{padding-bottom:72px}
+
+  /* timeline: the whole line fits the screen; gold wins labelled, the rest are dots you scrub through */
+  .tl-scroll{overflow:visible;margin-top:26px}
+  .tl{min-width:0;height:200px;touch-action:pan-y;cursor:grab}
+  .tl-axis,.tl-draw,.tl-tick,.ev{top:64%}
+  .tl-axis,.tl-draw{height:3px}
+  .tl-dec{display:none}
+  .tl-dec.major{display:block}
+  .ev{pointer-events:none}
+  .ev .dot{width:9px;height:9px;box-shadow:0 0 0 3px rgba(127,182,255,.18)}
+  .ev:not(.sr) .lab,.ev:not(.sr) .stem{display:none}
+  .ev.sr{--h:22px}
+  .ev.sr.m-hi{--h:60px}
+  .ev.sr .dot{width:14px;height:14px}
+  .ev.sr .stem{top:auto;bottom:calc(100% - 9px);transform-origin:bottom}
+  .ev.sr .lab{top:auto;bottom:calc(100% - 9px + var(--h) + 6px);font-size:24px}
+  .ev.sr.m-l .lab{transform:translateX(-90%);text-align:right}
+  .ev.sr.m-r .lab{transform:translateX(-10%);text-align:left}
+  .ev.on:not(.sr) .stem{display:block;top:25px;bottom:auto;transform-origin:top;--h:12px;background:#fff}
+  .ev.on:not(.sr) .lab{display:block;top:calc(25px + 12px + 4px);bottom:auto;font-size:18px}
+  .ev.on:not(.sr) .lab small{display:none}
+  .ev.on .dot{transform:translate(-50%,-50%) scale(1.9)}
+  .tl-legend{gap:6px 14px;font-size:12px}
+  .tl-legend span:last-child{display:none}
+  .tl-detail{margin-top:18px;touch-action:pan-y}
+  .tl-detail .big{font-size:54px;min-width:0}
+  .tl-nav{justify-content:space-between}
+
+  /* "Right now": swipeable row of tiles */
+  .bento{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:24px -20px 0;padding:4px 20px 18px;scrollbar-width:none}
+  .bento::-webkit-scrollbar{display:none}
+  .bento .tile{flex:0 0 84%;scroll-snap-align:center;min-height:300px}
+  .bento .t-join{flex-direction:column;align-items:flex-start;justify-content:space-between}
+  .bento-hint{display:block;font-size:12px;color:var(--muted)}
+
+  /* pathways: a row of chips */
+  .paths{display:flex;overflow-x:auto;gap:8px;border:0;margin-top:22px;scrollbar-width:none}
+  .paths::-webkit-scrollbar{display:none}
+  .path{flex:0 0 auto;padding:10px 16px;border:1.5px solid var(--line-l);border-radius:999px;background:#fff}
+  .path .n,.path p{display:none}
+  .path h3{font-size:20px;margin:0}
+  .path.on{background:var(--ink);border-color:var(--ink)}
+  .path.on h3{color:#fff}
+  .panel{margin-top:16px;gap:18px}
+  .panel h3{font-size:34px}
+
+  /* fixtures: Upcoming / Results toggle, three at a time */
+  .fx-head .tabs{order:3}
+  .seg{display:flex;background:#e6ebf5;border-radius:12px;padding:4px;margin-top:20px}
+  .seg button{flex:1;border:0;background:none;padding:11px;border-radius:9px;font-weight:700;font-size:14px;color:var(--muted)}
+  .seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(15,32,72,.12)}
+  .fx-cols{margin-top:14px}
+  .fx-col{display:none}
+  .fx-col.on{display:block}
+  .fx-col h4{display:none}
+  .fx-col:not(.all) .fx:nth-child(n+4){display:none}
+  .more{display:block;width:100%;padding:13px;border-radius:14px;border:1.5px dashed #c5cfe2;background:none;font-weight:700;color:var(--blue)}
+  .more[hidden]{display:none}
+
+  /* lotto: numbers open on tap */
+  .lotto .sub{font-size:14.5px}
+  .lotto-grid{gap:24px}
+  .picker{padding:18px}
+  .picker>h3,.picker .hint{display:none}
+  .picker:not(.open) .nums,.picker:not(.open) #lucky,.picker:not(.open) #pickMsg{display:none}
+  .picker:not(.open) .pick-foot{margin-top:12px}
+  .picker:not(.open) .pick-foot>div,.picker:not(.open) .pick-foot .btn-gold{width:100%;justify-content:center}
+  .picker.open .nums{margin-top:14px}
+
+  /* shared collapse button */
+  .m-toggle{display:flex;width:100%;justify-content:space-between;align-items:center;padding:16px 18px;border-radius:14px;border:1px solid var(--line-d);background:rgba(255,255,255,.06);color:#fff;font-family:Anton;font-size:21px;text-transform:uppercase;text-align:left;line-height:1.1}
+  .m-toggle span{font-family:Inter;font-size:24px;transition:transform .3s}
+  [aria-expanded="true"] span{transform:rotate(45deg)}
+  .m-light{background:var(--ink);border:0;margin-top:20px}
+  .mem-grid{display:none;margin-top:14px}
+  .mem-grid.open{display:grid}
+
+  /* footer: tighter */
+  .f-big{margin-bottom:30px}
+  .f-grid>div:nth-child(2),.f-grid>div:nth-child(3){display:none}
+
+  /* bottom quick bar */
+  .mbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:10px;right:10px;bottom:10px;z-index:55;background:rgba(15,32,72,.92);backdrop-filter:blur(14px);border:1px solid var(--line-d);border-radius:18px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .mbar a{display:flex;flex-direction:column;align-items:center;gap:1px;padding:7px 0;border-radius:12px;font-size:11px;font-weight:600;color:var(--txt-d)}
+  .mbar b{font-family:Anton;font-weight:400;font-size:17px;color:#fff;line-height:1.1}
+  .mbar a.j{background:var(--gold);color:var(--night)}
+  .mbar a.j b{color:var(--night)}
+}
 </style>
 </head>
 <body>
@@ -385,7 +483,7 @@ footer a:hover{color:var(--gold)}
     <div class="tl-scroll" id="tlScroll">
       <div class="tl" id="tl"><div class="tl-axis"></div><div class="tl-draw" id="tlDraw"></div></div>
     </div>
-    <div class="swipe-hint">Swipe the timeline →</div>
+    <div class="swipe-hint">Drag along the line to travel through the years</div>
     <div class="tl-legend">
       <span><i style="background:var(--gold);box-shadow:0 0 10px rgba(255,200,61,.7)"></i>Wicklow senior title</span>
       <span><i style="background:var(--sky)"></i>Intermediate / junior title</span>
@@ -436,6 +534,7 @@ footer a:hover{color:var(--gold)}
         <a href="#join" class="btn btn-dark">Work out your price <span class="ar">→</span></a>
       </div>
     </div>
+    <div class="bento-hint">Swipe for more →</div>
   </div>
 </section>
 
@@ -468,9 +567,10 @@ footer a:hover{color:var(--gold)}
         <button class="on" data-f="all">All</button><button data-f="men">Men</button><button data-f="ladies">Ladies</button><button data-f="juv">Juvenile</button><button data-f="hurl">Hurling</button>
       </div>
     </div>
+    <div class="seg" id="fxSeg"><button class="on" data-c="up">Upcoming</button><button data-c="res">Results</button></div>
     <div class="fx-cols">
-      <div><h4>Upcoming</h4><div id="fxUp"></div></div>
-      <div><h4>Recent results</h4><div id="fxRes"></div></div>
+      <div class="fx-col on" data-c="up"><h4>Upcoming</h4><div id="fxUp"></div><button class="more">Show all</button></div>
+      <div class="fx-col" data-c="res"><h4>Recent results</h4><div id="fxRes"></div><button class="more">Show all</button></div>
     </div>
     <p class="src" id="fxSrc">Showing sample fixtures.</p>
   </div>
@@ -489,7 +589,8 @@ footer a:hover{color:var(--gold)}
         <div><b>1–28</b><span>Pick four</span></div>
       </div>
     </div>
-    <div class="picker rv">
+    <div class="picker rv" id="picker">
+      <button class="m-toggle" id="pickToggle" aria-expanded="false">Pick your lucky four <span>+</span></button>
       <h3>Pick your lucky four</h3>
       <p class="hint">Tap four numbers, or let us choose.</p>
       <div class="nums" id="nums"></div>
@@ -510,7 +611,8 @@ footer a:hover{color:var(--gold)}
     <div class="kicker">2026 membership</div>
     <h2 class="h2 disp">What will it cost<br>your family?</h2>
     <p class="sub">Add everyone in your household. Family price is capped at €420.</p>
-    <div class="mem-grid">
+    <button class="m-toggle m-light" id="memToggle" aria-expanded="false">Open the price calculator <span>+</span></button>
+    <div class="mem-grid" id="memGrid">
       <div class="mem" id="mem"></div>
       <div class="total">
         <div class="lab">Your total</div>
@@ -526,6 +628,13 @@ footer a:hover{color:var(--gold)}
 <div class="sponsors">
   <div class="wrap" style="margin-bottom:26px"><div class="kicker">Proudly supported by</div></div>
   <div class="marquee" id="marquee"></div>
+</div>
+
+<div class="mbar" role="navigation" aria-label="Quick links">
+  <a href="#story"><b>1909</b>Story</a>
+  <a href="#fixtures"><b>vs</b>Fixtures</a>
+  <a href="#lotto"><b>€</b>Lotto</a>
+  <a href="#join" class="j"><b>+</b>Join</a>
 </div>
 
 <footer>
@@ -605,22 +714,26 @@ let lang='en';
 $('#lang').onclick=()=>{lang=lang==='en'?'ga':'en';$('#lang').textContent=lang==='en'?'GA':'EN';$$('[data-i18n]').forEach(e=>e.textContent=i18n[lang][e.dataset.i18n])};
 
 /* ---------- story timeline (zoomed-out chronology) ---------- */
-const S = CLUB.story, tl = $('#tl'), FROM = 1900, TO = 2030;
+const S = CLUB.story, tl = $('#tl'), FROM = 1900, TO = 2032;
 const yrNum = s => s.n || parseInt(s.y);
 const pos = s => (yrNum(s) - FROM) / (TO - FROM);
 const kind = s => s.sr ? 'sr' : s.c ? 'tt' : 'ms';
 const short = s => s.sr ? 'Senior' : ({Intermediate:'Inter.'}[s.l] || s.l);
 // decade scale + ticks
 for(let y=1910;y<=2020;y+=10){const x=(y-FROM)/(TO-FROM)*100;
-  tl.insertAdjacentHTML('beforeend',`<span class="tl-tick" style="left:${x}%"></span><span class="tl-dec" style="left:${x}%">${y}</span>`)}
+  tl.insertAdjacentHTML('beforeend',`<span class="tl-tick" style="left:${x}%"></span><span class="tl-dec${(y-1910)%30?'':' major'}" style="left:${x}%">${y}</span>`)}
 // events: alternate above/below, two stem heights so close years never collide
-S.forEach((s,i)=>{const side=i%2?'down':'up', lv=(i%4)>1?'lv2':'lv1';
-  tl.insertAdjacentHTML('beforeend',`<button class="ev ${side} ${lv} ${kind(s)}" data-i="${i}" style="left:${pos(s)*100}%" aria-label="${s.y}: ${s.t}">
+let srN=0;
+S.forEach((s,i)=>{const side=i%2?'down':'up', lv=(i%4)>1?'lv2':'lv1', hi=s.sr&&(srN++%2)?' m-hi':'';
+  tl.insertAdjacentHTML('beforeend',`<button class="ev ${side} ${lv} ${kind(s)}${hi}" data-i="${i}" style="left:${pos(s)*100}%" aria-label="${s.y}: ${s.t}">
     <span class="stem"></span><span class="dot"></span><span class="lab">${s.y}<small>${short(s)}</small></span></button>`)});
 const evs=$$('.ev');
+// phone: when two title years sit close together, push their labels apart
+const srIdx=S.map((s,i)=>s.sr?i:-1).filter(i=>i>=0);
+srIdx.forEach((i,k)=>{const j=srIdx[k+1];if(j!==undefined&&yrNum(S[j])-yrNum(S[i])<6){evs[i].classList.add('m-l');evs[j].classList.add('m-r')}});
 let sr=0, all=0; const tallies=S.map(s=>{if(s.sr){sr++;all++} if(s.c) all+=s.c; return [sr,all]});
 let cur=-1;
-function select(i){cur=i;const s=S[i];
+function select(i){if(i===cur)return;cur=i;const s=S[i];
   evs.forEach((e,k)=>e.classList.toggle('on',k===i));
   const d=$('#tlDetail'); d.className='tl-detail'+(s.sr?' sr':'');
   d.innerHTML=`<div class="big">${s.y}</div><div><span class="chip">${s.l}</span><h3>${s.t}</h3><p>${s.d}</p></div>
@@ -632,6 +745,17 @@ function select(i){cur=i;const s=S[i];
 }
 function setTally(i){$('#tYear').textContent=yrNum(S[i]);$('#tSenior').textContent=tallies[i][0];$('#tAll').textContent=tallies[i][1]}
 evs.forEach(e=>e.onclick=()=>select(+e.dataset.i));
+// phone: drag along the line to scrub, swipe the story card to step
+const phone=()=>innerWidth<=720;
+const nearest=x=>{const r=tl.getBoundingClientRect(),p=(x-r.left)/r.width;let b=0,bd=9;S.forEach((s,i)=>{const d=Math.abs(pos(s)-p);if(d<bd){bd=d;b=i}});return b};
+let scrub=false;
+tl.addEventListener('pointerdown',e=>{if(!phone())return;scrub=true;select(nearest(e.clientX))});
+tl.addEventListener('pointermove',e=>{if(scrub)select(nearest(e.clientX))});
+['pointerup','pointercancel'].forEach(t=>addEventListener(t,()=>scrub=false));
+let sx=null;
+$('#tlDetail').addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+$('#tlDetail').addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;
+  if(Math.abs(dx)>40&&cur>=0)select((cur+(dx<0?1:-1)+S.length)%S.length)});
 // play: the line draws left to right and each year pops in as it is reached
 let played=false;
 function playTimeline(){
@@ -709,9 +833,15 @@ function renderFx(f){curF=f;const list=fixtures.filter(x=>f==='all'||x.group===f
     <div class="s">${x.score?`${x.score}<br><span class="tag ${x.result}">${({W:'WIN',L:'LOSS',D:'DRAW'})[x.result]||''}</span>`:''}</div></div>`};
   const up=list.filter(x=>!x.score).sort((a,b)=>a.date.localeCompare(b.date)),res=list.filter(x=>x.score).sort((a,b)=>b.date.localeCompare(a.date));
   $('#fxUp').innerHTML=up.map(card).join('')||'<p class="sub">No upcoming fixtures.</p>';
-  $('#fxRes').innerHTML=res.map(card).join('')||'<p class="sub">No recent results.</p>'}
+  $('#fxRes').innerHTML=res.map(card).join('')||'<p class="sub">No recent results.</p>';
+  [['#fxUp',up],['#fxRes',res]].forEach(([id,l])=>{const m=$(id).parentElement.querySelector('.more');if(m)m.hidden=l.length<=3})}
 $$('#fxTabs button').forEach(b=>b.onclick=()=>{$$('#fxTabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderFx(b.dataset.f)});
 renderFx('all'); loadFixtures();
+$$('#fxSeg button').forEach(b=>b.onclick=()=>{$$('#fxSeg button').forEach(x=>x.classList.toggle('on',x===b));$$('.fx-col').forEach(c=>c.classList.toggle('on',c.dataset.c===b.dataset.c))});
+$$('.fx-col .more').forEach(b=>b.onclick=()=>{const c=b.parentElement;c.classList.toggle('all');b.textContent=c.classList.contains('all')?'Show fewer':'Show all'});
+// collapse toggles (phone)
+function toggler(btn,target,cls='open'){btn.onclick=()=>{const o=target.classList.toggle(cls);btn.setAttribute('aria-expanded',o)}}
+toggler($('#pickToggle'),$('#picker')); toggler($('#memToggle'),$('#memGrid'));
 
 /* ---------- lotto picker ---------- */
 const picks=new Set();
