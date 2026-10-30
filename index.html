@@ -360,12 +360,45 @@ footer a:hover{color:var(--gold)}
   .tl-detail .big{font-size:54px;min-width:0}
   .tl-nav{justify-content:space-between}
 
-  /* "Right now": swipeable row of tiles */
-  .bento{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:24px -20px 0;padding:4px 20px 18px;scrollbar-width:none}
-  .bento::-webkit-scrollbar{display:none}
-  .bento .tile{flex:0 0 84%;scroll-snap-align:center;min-height:300px}
-  .bento .t-join{flex-direction:column;align-items:flex-start;justify-content:space-between}
-  .bento-hint{display:block;font-size:12px;color:var(--muted)}
+  /* "Right now": a compact mosaic that keeps the desktop's mix of big and small tiles */
+  .bento{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:auto;gap:10px;margin-top:22px}
+  .bento .tile{padding:16px;border-radius:18px;min-height:0}
+  .bento .tile .tk{font-size:9.5px;letter-spacing:1.5px}
+  .bento .tile h3{font-size:22px;margin:8px 0 6px}
+  .bento .tile p{font-size:12.5px;line-height:1.4}
+  .bento .tile .go{padding-top:10px;font-size:13px}
+  /* next match: full width, slim */
+  .t-match{grid-column:1 / -1!important}
+  .t-match .vs{gap:10px;margin:12px 0}
+  .t-match .crest{width:44px;height:44px;font-size:16px}
+  .t-match .vs .v{font-size:20px}
+  .t-match .meta{margin-left:4px}
+  .t-match .meta b{font-size:16px}.t-match .meta span{font-size:12.5px}
+  .t-match .cd{gap:6px}
+  .t-match .cd div{padding:8px 4px;border-radius:10px}
+  .t-match .cd b{font-size:28px}
+  .t-match .cd span{font-size:9px}
+  /* lotto: tall tile on the left */
+  .t-lotto{grid-column:1!important;grid-row:span 2!important}
+  .t-lotto .jack{font-size:46px;margin:10px 0 2px}
+  .t-lotto>p{display:none}
+  .t-lotto .balls{gap:4px;margin:10px 0 6px;flex-wrap:wrap}
+  .t-lotto .ball{width:28px;height:28px;font-size:13px}
+  .t-lotto dl{grid-template-columns:1fr;gap:6px;margin:8px 0 12px}
+  .t-lotto dl>div:nth-child(3),.t-lotto dl>div:nth-child(4){display:none}
+  .t-lotto dt{font-size:9.5px}.t-lotto dd{font-size:13px}
+  .t-lotto .btn{padding:11px 8px;font-size:12.5px}
+  .t-lotto .btn .ar{display:none}
+  /* news and all-stars stack on the right */
+  .t-news p,.t-news .when{display:none}
+  .t-allstars .big{font-size:30px;margin:8px 0 4px}
+  .t-allstars p{display:none}
+  /* membership strip: full width */
+  .t-join{grid-column:1 / -1!important;flex-direction:row!important;align-items:center;padding:16px 18px!important}
+  .t-join h3{font-size:24px!important}
+  .t-join p{font-size:12px!important}
+  .t-join .btn{padding:11px 14px;font-size:13px}
+  .t-join .btn .ar{display:none}
 
   /* pathways: a row of chips */
   .paths{display:flex;overflow-x:auto;gap:8px;border:0;margin-top:22px;scrollbar-width:none}
@@ -534,7 +567,6 @@ footer a:hover{color:var(--gold)}
         <a href="#join" class="btn btn-dark">Work out your price <span class="ar">→</span></a>
       </div>
     </div>
-    <div class="bento-hint">Swipe for more →</div>
   </div>
 </section>
 
