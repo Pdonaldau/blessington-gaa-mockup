@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blessington GAA &amp; LGFA — Where We All Belong</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Blessington GAA & LGFA — Gaelic football, ladies football, hurling and community in Blessington, Co. Wicklow since 1909.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0f2048; --night-2:#18306a; --navy:#0f2257; --blue:#2f6bff; --sky:#7fb6ff;
+  --gold:#ffc83d; --gold-2:#ffdf85; --paper:#f4f6fb; --ink:#0b1222; --muted:#6a7590;
+  --line-d:rgba(255,255,255,.10); --line-l:#e3e8f2; --txt-d:#d3ddf4;
+  --r:22px; --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--night);color:#fff;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer}
+.disp{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;line-height:.92}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--sky);display:flex;align-items:center;gap:10px}
+.kicker::before{content:"";width:28px;height:2px;background:currentColor}
+.h2{font-size:clamp(44px,7vw,92px);margin:14px 0 16px}
+.sub{color:var(--txt-d);max-width:560px;font-size:17px}
+.light{background:var(--paper);color:var(--ink)}
+.light .sub{color:var(--muted)}
+.light .kicker{color:var(--blue)}
+section{padding:110px 0;position:relative}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font-weight:700;font-size:15px;border:1.5px solid transparent;transition:.25s var(--ease);white-space:nowrap}
+.btn .ar{transition:transform .25s var(--ease)}
+.btn:hover .ar{transform:translateX(4px)}
+.btn-gold{background:var(--gold);color:var(--night)}
+.btn-gold:hover{background:var(--gold-2)}
+.btn-line{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-line:hover{background:#fff;color:var(--night)}
+.btn-dark{background:var(--night);color:#fff}
+.btn-dark:hover{background:var(--blue)}
+.sample{display:inline-block;font:600 11px Inter;background:rgba(255,200,61,.15);color:var(--gold);border:1px solid rgba(255,200,61,.35);border-radius:6px;padding:2px 8px;vertical-align:middle;letter-spacing:0;text-transform:none}
+.light .sample{background:#fff4d6;color:#8a6200;border-color:#f1d58a}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ---------- Header ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:60;transition:.35s var(--ease)}
+header.solid{background:rgba(15,32,72,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-d)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:74px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:44px;width:auto}
+.brand .cf{width:38px;height:44px;border-radius:9px 9px 50% 50%;background:linear-gradient(var(--sky),var(--blue));display:none}
+.brand b{font-family:Anton;font-weight:400;font-size:22px;letter-spacing:.5px;text-transform:uppercase;line-height:1;display:block}
+.brand small{font-size:10.5px;color:var(--txt-d);letter-spacing:2px;text-transform:uppercase}
+nav ul{display:flex;align-items:center;gap:4px;list-style:none}
+nav a{padding:10px 14px;border-radius:999px;font-weight:600;font-size:14.5px;color:#e6ecfb;transition:.2s}
+nav a:hover{background:rgba(255,255,255,.08)}
+nav .btn{padding:10px 18px;margin-left:6px}
+.lang{background:none;border:1px solid var(--line-d);color:#fff;border-radius:999px;padding:7px 12px;font-weight:700;font-size:12px;margin-left:4px}
+.burger{display:none;background:none;border:0;padding:8px}
+.burger span{display:block;width:24px;height:2px;background:#fff;margin:6px 0;transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* ---------- Hero ---------- */
+.hero{min-height:100svh;padding:0;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url("https://images.squarespace-cdn.com/content/v1/61e8273a42b24347e6b24859/6de11c11-f142-45ad-935e-2494ad448c97/DJI_0396.jpg?format=2500w") center/cover,linear-gradient(135deg,var(--navy),var(--night));transform:scale(1.12);animation:zoom 20s var(--ease) forwards}
+@keyframes zoom{to{transform:scale(1)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,32,72,.15) 0%,rgba(15,32,72,.4) 45%,var(--night) 100%),radial-gradient(ellipse at 20% 100%,rgba(47,107,255,.35),transparent 60%)}
+.hero .wrap{position:relative;z-index:2;width:100%;padding:110px 20px 56px}
+.hero-years{font-family:Anton;font-size:clamp(18px,2.4vw,26px);color:var(--gold);letter-spacing:4px;display:flex;align-items:center;gap:14px;opacity:0;animation:up .8s .2s var(--ease) forwards}
+.hero-years i{flex:0 0 60px;height:2px;background:var(--gold)}
+.hero h1{font-size:clamp(64px,min(13vw,19vh),190px);margin:14px 0 22px}
+.hero h1 span{display:block;overflow:hidden}
+.hero h1 span b{display:block;font-weight:400;transform:translateY(105%);animation:rise .9s var(--ease) forwards}
+.hero h1 span:nth-child(2) b{animation-delay:.12s;color:transparent;-webkit-text-stroke:2px #fff}
+.hero h1 span:nth-child(3) b{animation-delay:.24s;color:var(--sky)}
+@keyframes rise{to{transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;opacity:0;animation:up .8s .5s var(--ease) forwards}
+.hero-row p{max-width:460px;color:var(--txt-d);font-size:17px}
+.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--txt-d)}
+.scroll-cue i{width:1.5px;height:54px;background:linear-gradient(var(--gold),transparent);animation:cue 2s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- Ticker ---------- */
+.ticker{border-top:1px solid var(--line-d);border-bottom:1px solid var(--line-d);overflow:hidden;white-space:nowrap;background:var(--night)}
+.ticker-track{display:inline-flex;animation:tick 45s linear infinite;padding:16px 0}
+.ticker span{font-family:Anton;font-size:22px;text-transform:uppercase;letter-spacing:1px;margin:0 22px;color:#fff}
+.ticker span em{font-style:normal;color:var(--gold);margin-right:22px}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- Story timeline ---------- */
+.story{background:linear-gradient(180deg,var(--night) 0%,#1a3778 100%);overflow:hidden}
+.story-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.story-head .h2{margin-bottom:0}
+.tally{display:flex;gap:28px}
+.tally div{text-align:right}
+.tally b{font-family:Anton;font-weight:400;font-size:56px;line-height:1;display:block}
+.tally b.g{color:var(--gold)}
+.tally span{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt-d);white-space:nowrap}
+.tl-scroll{overflow-x:auto;margin-top:46px;scrollbar-width:none}
+.tl-scroll::-webkit-scrollbar{display:none}
+.tl{position:relative;height:340px;min-width:980px}
+.tl-axis,.tl-draw{position:absolute;left:0;right:0;top:48%;height:2px}
+.tl-axis{background:rgba(255,255,255,.14)}
+.tl-draw{background:linear-gradient(90deg,var(--sky),var(--gold));transform-origin:left;transform:scaleX(0)}
+.tl-tick{position:absolute;top:48%;width:1px;height:8px;margin-top:-3px;background:rgba(255,255,255,.25)}
+.tl-dec{position:absolute;bottom:0;transform:translateX(-50%);font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.4)}
+.ev{position:absolute;top:48%;width:34px;height:34px;margin:-16px 0 0 -17px;background:none;border:0;color:#fff;--h:30px}
+.ev.lv2{--h:84px}
+.ev>*{position:absolute;left:17px}
+.ev .dot{top:17px;width:12px;height:12px;border-radius:50%;background:var(--sky);transform:translate(-50%,-50%) scale(0);transition:transform .45s var(--ease);box-shadow:0 0 0 4px rgba(127,182,255,.18)}
+.ev .stem{width:1px;margin-left:-.5px;height:var(--h);background:rgba(255,255,255,.28);transform:scaleY(0);transition:transform .4s .08s var(--ease)}
+.ev.up .stem{bottom:calc(100% - 9px);transform-origin:bottom}
+.ev.down .stem{top:25px;transform-origin:top}
+.ev .lab{transform:translateX(-50%);white-space:nowrap;text-align:center;font-family:Anton;font-size:21px;line-height:1;opacity:0;transition:opacity .35s .15s,color .2s}
+.ev .lab small{display:block;font:600 10px Inter;letter-spacing:1px;text-transform:uppercase;color:var(--txt-d);margin-top:4px}
+.ev.up .lab{bottom:calc(100% - 9px + var(--h) + 8px)}
+.ev.down .lab{top:calc(25px + var(--h) + 8px)}
+.ev.in .dot{transform:translate(-50%,-50%) scale(1)}
+.ev.in .stem{transform:scaleY(1)}
+.ev.in .lab{opacity:1}
+.ev.sr .dot{width:18px;height:18px;background:var(--gold);box-shadow:0 0 0 5px rgba(255,200,61,.22),0 0 20px rgba(255,200,61,.6)}
+.ev.sr .lab{color:var(--gold);font-size:32px}
+.ev.sr .lab small{color:var(--gold-2)}
+.ev.ms .dot{background:var(--night);border:2.5px solid #fff;box-shadow:none}
+.ev:hover .dot,.ev.on .dot{transform:translate(-50%,-50%) scale(1.5)}
+.ev.on .stem{background:#fff}
+.ev:focus-visible{outline:none}
+.ev:focus-visible .dot{outline:2px solid #fff;outline-offset:4px}
+.tl-legend{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--txt-d);margin-top:22px}
+.tl-legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+.tl-detail{margin-top:30px;display:grid;grid-template-columns:auto 1fr auto;gap:30px;align-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:26px 30px;backdrop-filter:blur(6px)}
+.tl-detail .big{font-family:Anton;font-size:76px;line-height:.9;min-width:150px}
+.tl-detail.sr .big{color:var(--gold)}
+.tl-detail .chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(127,182,255,.18);color:var(--sky);margin-bottom:8px}
+.tl-detail.sr .chip{background:rgba(255,200,61,.2);color:var(--gold)}
+.tl-detail h3{font-size:22px;font-weight:800;line-height:1.2}
+.tl-detail p{color:var(--txt-d);font-size:15px;margin-top:4px}
+.tl-nav{display:flex;gap:8px}
+.tl-nav button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:none;color:#fff;font-size:18px;transition:.2s}
+.tl-nav button:hover{background:#fff;color:var(--night)}
+.swipe-hint{display:none;font-size:12px;color:var(--txt-d);margin-top:10px}
+
+/* ---------- Bento ---------- */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(220px,auto);gap:16px;margin-top:40px}
+.tile{border-radius:var(--r);padding:28px;position:relative;overflow:hidden;border:1px solid var(--line-d);background:var(--night-2);display:flex;flex-direction:column;transition:transform .35s var(--ease),border-color .3s}
+.tile:hover{transform:translateY(-4px);border-color:rgba(127,182,255,.35)}
+.tile .tk{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--sky)}
+.tile h3{font-family:Anton;font-weight:400;text-transform:uppercase;font-size:38px;line-height:1;margin:10px 0}
+.tile p{color:var(--txt-d);font-size:14.5px}
+.tile .go{margin-top:auto;padding-top:18px;font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px}
+.t-match{grid-column:span 2;background:linear-gradient(135deg,var(--blue),var(--navy));border:0}
+.t-match .vs{display:flex;align-items:center;gap:18px;margin:18px 0;flex-wrap:wrap}
+.crest{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;font-family:Anton;font-size:22px;background:#fff;color:var(--navy)}
+.crest.away{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+.vs .v{font-family:Anton;font-size:28px;opacity:.5}
+.vs .meta b{display:block;font-size:20px}
+.vs .meta span{font-size:14px;color:#d6e2ff}
+.cd{display:flex;gap:10px;margin-top:auto}
+.cd div{flex:1;max-width:96px;background:rgba(5,11,28,.35);border-radius:14px;padding:12px 6px;text-align:center}
+.cd b{font-family:Anton;font-weight:400;font-size:40px;line-height:1;display:block}
+.cd span{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#cfdcff}
+.t-lotto{grid-row:span 2;background:radial-gradient(circle at 30% 0%,#3a2a00,var(--night-2) 70%);border-color:rgba(255,200,61,.25)}
+.t-lotto .tk{color:var(--gold)}
+.t-lotto .jack{font-family:Anton;font-size:clamp(76px,9vw,116px);line-height:.9;color:var(--gold);margin:14px 0 6px;text-shadow:0 0 50px rgba(255,200,61,.35)}
+.balls{display:flex;gap:8px;margin:14px 0}
+.ball{width:44px;height:44px;border-radius:50%;background:#fff;color:var(--night);display:grid;place-items:center;font-family:Anton;font-size:19px}
+.t-lotto dl{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 20px}
+.t-lotto dt{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--txt-d)}
+.t-lotto dd{font-weight:700;font-size:16px}
+.t-lotto .btn{margin-top:auto;justify-content:center}
+.t-allstars{background:linear-gradient(160deg,#123b8f,#0a1f55)}
+.t-allstars .big{font-family:Anton;font-size:64px;line-height:.9;margin:10px 0}
+.t-news .when{font-size:12px;color:var(--txt-d);margin-top:8px}
+.t-join{grid-column:span 3;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:var(--gold);color:var(--night);border:0;min-height:0}
+.t-join h3{font-size:clamp(36px,5vw,56px);margin:0}
+.t-join p{color:#4a3a00}
+
+.light .tile{border-color:transparent;box-shadow:0 12px 34px rgba(15,32,72,.10)}
+.light .tile:hover{border-color:transparent;box-shadow:0 18px 44px rgba(15,32,72,.16)}
+.t-match,.t-lotto{color:#fff}
+.t-news{background:#fff!important;color:var(--ink)}
+.t-news .tk{color:var(--blue)}
+.t-news p,.t-news .when{color:var(--muted)!important}
+.t-allstars{background:linear-gradient(160deg,#3b7bff,#1d4fc4)!important;color:#fff}
+.t-allstars .tk{color:#dce8ff}
+.t-allstars p{color:#e3ecff!important}
+
+/* ---------- Pathways ---------- */
+.paths{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;border-top:1px solid var(--line-l)}
+.path{background:none;border:0;border-bottom:3px solid transparent;text-align:left;padding:24px 20px 22px 0;color:var(--ink);transition:.25s}
+.path .n{font-family:Anton;font-size:15px;color:var(--muted)}
+.path h3{font-family:Anton;font-weight:400;text-transform:uppercase;font-size:32px;line-height:1;margin:8px 0 6px}
+.path p{font-size:14px;color:var(--muted)}
+.path:hover h3{color:var(--blue)}
+.path.on{border-bottom-color:var(--blue)}
+.path.on h3{color:var(--blue)}
+.panel{margin-top:28px;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start;background:#fff;border:1px solid var(--line-l);border-radius:var(--r);padding:36px;animation:up .45s var(--ease)}
+.panel h3{font-family:Anton;font-weight:400;text-transform:uppercase;font-size:44px;line-height:1;margin-bottom:12px}
+.panel p{color:var(--muted)}
+.panel ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.panel li{padding:12px 14px;background:var(--paper);border-radius:12px;font-size:14px;font-weight:600}
+.panel .acts{display:flex;flex-direction:column;gap:10px}
+.panel .acts .btn-line{border-color:var(--line-l);color:var(--ink)}
+.panel .acts .btn-line:hover{background:var(--ink);color:#fff}
+
+/* ---------- Fixtures ---------- */
+.fx-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.tabs{display:flex;gap:4px;padding:5px;border-radius:999px;background:#fff;border:1px solid var(--line-l);overflow-x:auto;max-width:100%}
+.tabs button{border:0;background:none;padding:9px 16px;border-radius:999px;font-weight:600;font-size:14px;color:var(--muted);white-space:nowrap}
+.tabs button.on{background:var(--ink);color:#fff}
+.fx-cols{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:34px}
+.fx-cols h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.fx{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:16px 18px;background:#fff;border:1px solid var(--line-l);border-radius:16px;margin-bottom:10px;transition:.25s var(--ease)}
+.fx:hover{transform:translateX(5px);border-color:var(--sky)}
+.fx .d{text-align:center;border-right:1px solid var(--line-l);padding-right:14px}
+.fx .d b{font-family:Anton;font-size:30px;line-height:1;display:block;color:var(--ink)}
+.fx .d span{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--blue)}
+.fx .t{font-weight:700}
+.fx .m{font-size:13px;color:var(--muted)}
+.fx .s{font-family:Anton;font-size:22px;text-align:right;line-height:1.1}
+.tag{font:700 10px Inter;padding:3px 8px;border-radius:6px;letter-spacing:.5px;display:inline-block}
+.W{background:#dcf7e6;color:#13703b}.L{background:#ffe1e1;color:#9b1c1c}.D{background:#eceff5;color:#555}
+.home{background:#e6efff;color:var(--blue)}
+.src{font-size:12px;color:var(--muted);margin-top:16px}
+
+/* ---------- Lotto picker ---------- */
+.lotto{background:radial-gradient(ellipse at 85% 0%,rgba(255,200,61,.12),transparent 50%),var(--night)}
+.lotto-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.picker{background:var(--night-2);border:1px solid var(--line-d);border-radius:var(--r);padding:30px}
+.picker h3{font-family:Anton;font-weight:400;text-transform:uppercase;font-size:34px}
+.picker .hint{font-size:13px;color:var(--txt-d);margin:4px 0 20px}
+.nums{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.nums button{aspect-ratio:1;border-radius:50%;border:1px solid var(--line-d);background:transparent;color:#fff;font-family:Anton;font-size:18px;transition:.18s var(--ease)}
+.nums button:hover{background:rgba(255,255,255,.08)}
+.nums button.sel{background:var(--gold);border-color:var(--gold);color:var(--night);transform:scale(1.1)}
+.pick-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.pick-foot span{font-size:14px;color:var(--txt-d)}
+.lotto-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-d);border-radius:16px;overflow:hidden;margin-top:30px}
+.lotto-facts div{background:var(--night);padding:18px}
+.lotto-facts b{font-family:Anton;font-weight:400;font-size:32px;display:block;color:var(--gold)}
+.lotto-facts span{font-size:12px;color:var(--txt-d)}
+
+/* ---------- Membership ---------- */
+.mem-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;margin-top:40px}
+.mem{background:#fff;border:1px solid var(--line-l);border-radius:var(--r);padding:8px 26px}
+.grp{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);padding:18px 0 4px}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line-l)}
+.row:last-child{border:0}
+.row .n{font-weight:600}.row .p{font-size:13px;color:var(--muted)}
+.step{display:flex;align-items:center;gap:10px}
+.step button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-l);background:var(--paper);font-size:18px;color:var(--ink);transition:.2s}
+.step button:hover{background:var(--ink);color:#fff}
+.step output{width:20px;text-align:center;font-weight:800}
+.total{background:var(--night);color:#fff;border-radius:var(--r);padding:34px;display:flex;flex-direction:column;position:sticky;top:96px;align-self:start}
+.total .lab{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--txt-d)}
+.total .amt{font-family:Anton;font-size:120px;line-height:1;color:var(--gold);margin:8px 0}
+.total .note{color:var(--txt-d);font-size:14px;min-height:22px;margin-bottom:24px}
+
+/* ---------- Sponsors ---------- */
+.sponsors{padding:60px 0;overflow:hidden;border-top:1px solid var(--line-d)}
+.marquee{display:flex;width:max-content;animation:tick 50s linear infinite}
+.marquee:hover{animation-play-state:paused}
+.sp{font-family:Anton;font-size:34px;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35);margin:0 28px;white-space:nowrap;transition:.25s}
+.sp:hover{color:#fff;-webkit-text-stroke-color:#fff}
+.sp+.dot{color:var(--gold)}
+
+/* ---------- Footer ---------- */
+footer{padding:70px 0 30px;border-top:1px solid var(--line-d);font-size:14px;color:var(--txt-d)}
+.f-big{font-family:Anton;font-size:clamp(56px,12vw,170px);line-height:.85;text-transform:uppercase;color:#fff;margin-bottom:50px}
+.f-big em{font-style:normal;color:var(--sky)}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}
+footer h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:12px}
+footer li{list-style:none;padding:4px 0}
+footer a:hover{color:var(--gold)}
+.socials{display:flex;gap:10px;margin-top:16px}
+.socials a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-d);display:grid;place-items:center;font-weight:700;color:#fff;font-size:13px}
+.socials a:hover{background:var(--blue);border-color:var(--blue)}
+.f-bottom{border-top:1px solid var(--line-d);margin-top:44px;padding-top:20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px}
+
+/* ---------- Reveal ---------- */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- Responsive ---------- */
+@media(max-width:960px){
+  nav{position:fixed;top:74px;left:0;right:0;background:rgba(15,32,72,.97);backdrop-filter:blur(14px);max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+  nav.open{max-height:520px;border-bottom:1px solid var(--line-d)}
+  nav ul{flex-direction:column;align-items:stretch;padding:12px 20px 22px}
+  nav a{font-family:Anton;font-size:30px;text-transform:uppercase;padding:10px 4px;font-weight:400}
+  nav .btn{margin:10px 0 0;justify-content:center;font-family:Inter;font-size:15px;font-weight:700}
+  .lang{align-self:flex-start;margin:12px 0 0}
+  .burger{display:block}
+  .bento{grid-template-columns:1fr 1fr}
+  .t-match{grid-column:span 2}.t-lotto{grid-row:span 1;grid-column:span 2}.t-join{grid-column:span 2}
+  .paths{grid-template-columns:1fr 1fr}
+  .panel,.lotto-grid,.mem-grid,.fx-cols{grid-template-columns:1fr}
+  .total{position:static}
+  .f-grid{grid-template-columns:1fr 1fr}
+  section{padding:80px 0}
+}
+@media(max-width:720px){
+  .swipe-hint{display:block}
+  .tally{gap:18px}.tally b{font-size:42px}
+  .tl{min-width:1150px}
+  .tl-detail{grid-template-columns:1fr;gap:12px;padding:22px}
+  .tl-detail .big{font-size:60px}
+  .tally b{font-size:44px}
+  .bento{grid-template-columns:1fr}
+  .t-match,.t-lotto,.t-join{grid-column:span 1}
+  .panel ul{grid-template-columns:1fr}
+  .panel{padding:24px}
+  .total .amt{font-size:88px}
+  .lotto-facts b{font-size:26px}
+  .f-grid{grid-template-columns:1fr}
+  .scroll-cue{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero-row,.hero-years{opacity:1;transform:none}.hero h1 span b{transform:none}}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap bar">
+    <a href="#top" class="brand">
+      <img src="https://images.squarespace-cdn.com/content/v1/61e8273a42b24347e6b24859/7e89d765-ca94-409e-8612-65d5340ac64f/Blessington+GAA+logo-2.png?format=300w" alt="Blessington GAA crest" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span class="cf"></span>
+      <span><b>Blessington</b><small>GAA &amp; LGFA · 1909</small></span>
+    </a>
+    <nav id="nav">
+      <ul>
+        <li><a href="#story" data-i18n="story">Our story</a></li>
+        <li><a href="#play" data-i18n="play">Play</a></li>
+        <li><a href="#fixtures" data-i18n="fixtures">Fixtures</a></li>
+        <li><a href="#lotto" data-i18n="lotto">Lotto</a></li>
+        <li><a href="#join" class="btn btn-gold" data-i18n="join">Join the club</a></li>
+        <li><button class="lang" id="lang" aria-label="Switch to Irish">GA</button></li>
+      </ul>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero grain" id="top">
+  <div class="hero-bg"></div>
+  <div class="wrap">
+    <div class="hero-years">1909 <i></i> 2026</div>
+    <h1 class="disp"><span><b>Where</b></span><span><b>we all</b></span><span><b>belong</b></span></h1>
+    <div class="hero-row">
+      <div>
+        <p>117 years. Four county senior titles. One town in blue. Gaelic football, ladies football, hurling and an All-Stars programme for every child.</p>
+        <div class="hero-ctas">
+          <a href="#story" class="btn btn-gold">Scroll our story <span class="ar">↓</span></a>
+          <a href="#play" class="btn btn-line">Find your team <span class="ar">→</span></a>
+        </div>
+      </div>
+      <a href="#story" class="scroll-cue">Scroll<i></i></a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+
+<!-- ================= STORY (zoomed-out chronology) ================= -->
+<section class="story grain" id="story">
+  <div class="wrap">
+    <div class="story-head">
+      <div>
+        <div class="kicker">Our story</div>
+        <h2 class="h2 disp">117 years<br>of blue</h2>
+      </div>
+      <div class="tally">
+        <div><b id="tYear">1909</b><span>Year</span></div>
+        <div><b class="g" id="tSenior">0</b><span>Senior titles</span></div>
+        <div><b id="tAll">0</b><span>County titles</span></div>
+      </div>
+    </div>
+    <div class="tl-scroll" id="tlScroll">
+      <div class="tl" id="tl"><div class="tl-axis"></div><div class="tl-draw" id="tlDraw"></div></div>
+    </div>
+    <div class="swipe-hint">Swipe the timeline →</div>
+    <div class="tl-legend">
+      <span><i style="background:var(--gold);box-shadow:0 0 10px rgba(255,200,61,.7)"></i>Wicklow senior title</span>
+      <span><i style="background:var(--sky)"></i>Intermediate / junior title</span>
+      <span><i style="border:2px solid #fff"></i>Club milestone</span>
+      <span style="opacity:.8">Tap any year for the story</span>
+    </div>
+    <div class="tl-detail" id="tlDetail"></div>
+  </div>
+</section>
+
+<!-- ================= THIS WEEK (bento) ================= -->
+<section id="week" class="light">
+  <div class="wrap">
+    <div class="kicker rv">This week at the club</div>
+    <h2 class="h2 disp rv">Right now</h2>
+    <div class="bento">
+      <a href="#fixtures" class="tile t-match rv">
+        <span class="tk">Next match <span class="sample">sample</span></span>
+        <div class="vs">
+          <div class="crest">BLS</div><div class="v">VS</div><div class="crest away">BAL</div>
+          <div class="meta"><b>Adult Men · League</b><span>Sun 8 Nov · 11:30 · Home</span></div>
+        </div>
+        <div class="cd" id="matchCd"><div><b>00</b><span>Days</span></div><div><b>00</b><span>Hrs</span></div><div><b>00</b><span>Min</span></div><div><b>00</b><span>Sec</span></div></div>
+      </a>
+      <a href="#lotto" class="tile t-lotto rv">
+        <span class="tk">Club Lotto · No winner</span>
+        <div class="jack" id="jackpot">€0</div>
+        <p>Jackpot for the next draw</p>
+        <div class="balls"><div class="ball">13</div><div class="ball">15</div><div class="ball">18</div><div class="ball">21</div></div>
+        <dl><div><dt>Last draw</dt><dd>27 Oct</dd></div><div><dt>Next draw</dt><dd>Tue 10 Nov</dd></div><div><dt>Draw day in</dt><dd id="lottoCd">—</dd></div><div><dt>Match 3</dt><dd>€300</dd></div></dl>
+        <span class="btn btn-gold">Pick your numbers <span class="ar">→</span></span>
+      </a>
+      <a href="#" class="tile t-news rv">
+        <span class="tk">Development</span>
+        <h3>New clubhouse gets the green light</h3>
+        <p>Planning granted by Wicklow County Council for a new clubhouse at Blessington Demesne.</p>
+        <span class="when">April 2026</span>
+        <span class="go">Read more <span class="ar">→</span></span>
+      </a>
+      <a href="#" class="tile t-allstars rv">
+        <span class="tk">Inclusion All-Stars</span>
+        <div class="big">Sundays<br>10–11am</div>
+        <p>Hail, rain or snow. Every child, every ability, plus a sensory cabin and garden.</p>
+        <span class="go">Learn more <span class="ar">→</span></span>
+      </a>
+      <div class="tile t-join rv">
+        <div><h3>2026 membership is open</h3><p>Players from €60 · families capped at €420</p></div>
+        <a href="#join" class="btn btn-dark">Work out your price <span class="ar">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PATHWAYS ================= -->
+<section class="light" id="play">
+  <div class="wrap">
+    <div class="kicker">Get involved</div>
+    <h2 class="h2 disp">Find your place</h2>
+    <p class="sub">Four or forty-four, playing or cheering. Pick the one that fits.</p>
+    <div class="paths" id="paths">
+      <button class="path on" data-p="kids"><span class="n">01</span><h3>My child</h3><p>Academy &amp; juvenile</p></button>
+      <button class="path" data-p="play"><span class="n">02</span><h3>I want to play</h3><p>Men, ladies, hurling, GFM&amp;O</p></button>
+      <button class="path" data-p="help"><span class="n">03</span><h3>Volunteer</h3><p>Coach, mentor, match days</p></button>
+      <button class="path" data-p="back"><span class="n">04</span><h3>Support</h3><p>Lotto, membership, sponsors</p></button>
+    </div>
+    <div class="panel" id="panel"></div>
+  </div>
+</section>
+
+<!-- ================= FIXTURES ================= -->
+<section class="light" id="fixtures" style="padding-top:0">
+  <div class="wrap">
+    <div class="fx-head">
+      <div>
+        <div class="kicker">Match centre</div>
+        <h2 class="h2 disp">Fixtures &amp; results <span class="sample">sample data</span></h2>
+        <p class="sub">Updated from the club's Google Sheet. Filter by team.</p>
+      </div>
+      <div class="tabs" id="fxTabs">
+        <button class="on" data-f="all">All</button><button data-f="men">Men</button><button data-f="ladies">Ladies</button><button data-f="juv">Juvenile</button><button data-f="hurl">Hurling</button>
+      </div>
+    </div>
+    <div class="fx-cols">
+      <div><h4>Upcoming</h4><div id="fxUp"></div></div>
+      <div><h4>Recent results</h4><div id="fxRes"></div></div>
+    </div>
+    <p class="src" id="fxSrc">Showing sample fixtures.</p>
+  </div>
+</section>
+
+<!-- ================= LOTTO ================= -->
+<section class="lotto grain" id="lotto">
+  <div class="wrap lotto-grid">
+    <div class="rv">
+      <div class="kicker" style="color:var(--gold)">Club Lotto</div>
+      <h2 class="h2 disp">Four numbers.<br>Two euro.</h2>
+      <p class="sub">Every second Tuesday. Pick four from 1–28: match all four to win the jackpot, match three to win €300. Every line funds pitches, coaching and the new clubhouse.</p>
+      <div class="lotto-facts">
+        <div><b>€8,200</b><span>Current jackpot</span></div>
+        <div><b>€2</b><span>Per line</span></div>
+        <div><b>1–28</b><span>Pick four</span></div>
+      </div>
+    </div>
+    <div class="picker rv">
+      <h3>Pick your lucky four</h3>
+      <p class="hint">Tap four numbers, or let us choose.</p>
+      <div class="nums" id="nums"></div>
+      <div class="pick-foot">
+        <span id="pickMsg">0 of 4 chosen</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-line" id="lucky" style="padding:11px 16px">Lucky dip</button>
+          <a class="btn btn-gold" href="https://play.clubforce.com/play_newa.asp?ll_id=646#Anchor" target="_blank" rel="noopener" style="padding:11px 18px">Play online <span class="ar">→</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MEMBERSHIP ================= -->
+<section class="light" id="join">
+  <div class="wrap">
+    <div class="kicker">2026 membership</div>
+    <h2 class="h2 disp">What will it cost<br>your family?</h2>
+    <p class="sub">Add everyone in your household. Family price is capped at €420.</p>
+    <div class="mem-grid">
+      <div class="mem" id="mem"></div>
+      <div class="total">
+        <div class="lab">Your total</div>
+        <div class="amt" id="memTotal">€0</div>
+        <div class="note" id="memNote">Add members to see your price</div>
+        <a href="https://blessingtongaa.clubforce.com/products/membership" target="_blank" rel="noopener" class="btn btn-gold" style="justify-content:center">Join on Clubforce <span class="ar">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPONSORS ================= -->
+<div class="sponsors">
+  <div class="wrap" style="margin-bottom:26px"><div class="kicker">Proudly supported by</div></div>
+  <div class="marquee" id="marquee"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="f-big">Where we<br>all <em>belong</em></div>
+    <div class="f-grid">
+      <div>
+        <h4>Blessington GAA &amp; LGFA</h4>
+        <p>Blessington Demesne, Blessington, Co. Wicklow.<br>Proudly part of the GAA family.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/blessingtongaa" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+          <a href="https://www.instagram.com/blessingtongaalgfa/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+        </div>
+      </div>
+      <div><h4>Play</h4><ul><li><a href="#">Academy</a></li><li><a href="#">Juvenile</a></li><li><a href="#">Adult men &amp; ladies</a></li><li><a href="#">Hurling</a></li><li><a href="#">GFM&amp;O</a></li></ul></div>
+      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#">Committee</a></li><li><a href="#">Facilities &amp; Astro</a></li><li><a href="#">Gaeilge &amp; Scór</a></li><li><a href="#">Welfare &amp; safeguarding</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li>PRO: Lisa Jackson</li><li><a href="tel:0863767534">086 376 7534</a></li><li><a href="mailto:pro.blessington.wicklow@gaa.ie">pro.blessington.wicklow@gaa.ie</a></li></ul></div>
+    </div>
+    <div class="f-bottom"><span>© 2026 Blessington GAA &amp; LGFA</span><span>Concept mockup · not the official site</span></div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   CLUB CONFIG — everything club-specific lives here, so the
+   same template can be reused for another club.
+   ========================================================= */
+const CLUB = {
+  lotto: { jackpot: 8200, nextDraw: '2026-11-10T00:00:00Z' },
+  nextMatch: '2026-11-08T11:30:00Z',
+  // Paste the "Publish to web → CSV" link for each sheet tab here.
+  // Left empty, the site uses the sample data below.
+  sheets: { fixtures: '' },
+  ticker: ['Lotto jackpot €8,200','2026 membership open','Volunteers wanted','New clubhouse approved','All-Stars every Sunday'],
+  sponsors: ['All In Fitness','Brew 21','MyCabin','Renault','Dacia','Grant Thornton','Credit Union','BD Safety','Kärcher','Sports Direct','Glenveagh','DAR'],
+  membership: [['Playing members'],['Academy child',60],['Child',130],['Adult',190],['Student',160],['Non-playing'],['Coach',60],['Supporter',60],['Parent',60],['OAP',35]],
+  familyCap: 420,
+  story: [
+    {y:'1909', l:'Founded', t:'A club is born in the Burgage', d:'Blessington GAA plays its first games on a field by the Burgage cemetery.'},
+    {y:'1915', l:'Senior title', sr:1, t:'County champions, six years in', d:'The first Wicklow Senior Football Championship comes to Blessington.'},
+    {y:'1928', l:'Intermediate', c:1, t:'Back on the roll of honour', d:'An intermediate county title, the first of four in the next 21 years.'},
+    {y:'1931', l:'Junior', c:1, t:'Junior champions', d:'The club adds a Wicklow junior title.'},
+    {y:'1936', l:'Intermediate', c:1, t:'Intermediate again', d:'A second intermediate county crown.'},
+    {y:'1940s', n:1942, l:'Our crest', t:'St. Mark’s Cross', d:'The valley is flooded for Poulaphouca reservoir. The high cross is moved to Burgage cemetery and later becomes the club crest.'},
+    {y:'1946', l:'Intermediate', c:1, t:'Third intermediate title', d:'Blessington are intermediate champions once more.'},
+    {y:'1949', l:'Intermediate', c:1, t:'And a fourth', d:'A fourth intermediate title closes out the decade.'},
+    {y:'1974', l:'Junior', c:1, t:'Junior champions', d:'A junior county title starts a new era.'},
+    {y:'1979', l:'Double', c:2, t:'Junior and intermediate double', d:'Two county titles in one year, and a stepping stone back to senior.'},
+    {y:'1983', l:'Senior title', sr:1, t:'Senior champions again', d:'The second Wicklow senior title, 68 years after the first.'},
+    {y:'2000', l:'Junior', c:1, t:'Junior champions', d:'A new generation brings home a junior title.'},
+    {y:'2002', l:'Junior', c:1, t:'And again', d:'Another junior county championship two years later.'},
+    {y:'2007', l:'New home', t:'A new home for the club', d:'The club buys its current grounds from the O’Leary family to make room to grow.'},
+    {y:'2020', l:'All-Stars', t:'Every child gets a game', d:'The Inclusion All-Stars programme begins, every Sunday morning.'},
+    {y:'2021', l:'Senior title', sr:1, t:'The 38-year wait ends', d:'Blessington win the county senior title and the town is a sea of blue.'},
+    {y:'2023', l:'Senior title', sr:1, t:'Champions again', d:'A fourth Wicklow senior football title.'},
+    {y:'2026', l:'Next chapter', t:'A new clubhouse approved', d:'Planning permission granted for a new clubhouse at Blessington Demesne. The next chapter is yours to help write.'}
+  ]
+};
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+
+/* ---------- ticker & sponsors ---------- */
+$('#ticker').innerHTML = [...CLUB.ticker,...CLUB.ticker].map(t=>`<span><em>●</em>${t}</span>`).join('');
+$('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(s=>`<span class="sp">${s}</span>`).join('');
+
+/* ---------- header & menu ---------- */
+addEventListener('scroll',()=>$('#hdr').classList.toggle('solid',scrollY>60),{passive:true});
+$('#burger').onclick=()=>{$('#burger').classList.toggle('open');$('#nav').classList.toggle('open')};
+$$('#nav a').forEach(a=>a.addEventListener('click',()=>{$('#burger').classList.remove('open');$('#nav').classList.remove('open')}));
+
+/* ---------- Irish toggle (needs native-speaker review) ---------- */
+const i18n={en:{story:'Our story',play:'Play',fixtures:'Fixtures',lotto:'Lotto',join:'Join the club'},
+            ga:{story:'Ár scéal',play:'Imir',fixtures:'Cluichí',lotto:'Crannchur',join:'Bí linn'}};
+let lang='en';
+$('#lang').onclick=()=>{lang=lang==='en'?'ga':'en';$('#lang').textContent=lang==='en'?'GA':'EN';$$('[data-i18n]').forEach(e=>e.textContent=i18n[lang][e.dataset.i18n])};
+
+/* ---------- story timeline (zoomed-out chronology) ---------- */
+const S = CLUB.story, tl = $('#tl'), FROM = 1900, TO = 2030;
+const yrNum = s => s.n || parseInt(s.y);
+const pos = s => (yrNum(s) - FROM) / (TO - FROM);
+const kind = s => s.sr ? 'sr' : s.c ? 'tt' : 'ms';
+const short = s => s.sr ? 'Senior' : ({Intermediate:'Inter.'}[s.l] || s.l);
+// decade scale + ticks
+for(let y=1910;y<=2020;y+=10){const x=(y-FROM)/(TO-FROM)*100;
+  tl.insertAdjacentHTML('beforeend',`<span class="tl-tick" style="left:${x}%"></span><span class="tl-dec" style="left:${x}%">${y}</span>`)}
+// events: alternate above/below, two stem heights so close years never collide
+S.forEach((s,i)=>{const side=i%2?'down':'up', lv=(i%4)>1?'lv2':'lv1';
+  tl.insertAdjacentHTML('beforeend',`<button class="ev ${side} ${lv} ${kind(s)}" data-i="${i}" style="left:${pos(s)*100}%" aria-label="${s.y}: ${s.t}">
+    <span class="stem"></span><span class="dot"></span><span class="lab">${s.y}<small>${short(s)}</small></span></button>`)});
+const evs=$$('.ev');
+let sr=0, all=0; const tallies=S.map(s=>{if(s.sr){sr++;all++} if(s.c) all+=s.c; return [sr,all]});
+let cur=-1;
+function select(i){cur=i;const s=S[i];
+  evs.forEach((e,k)=>e.classList.toggle('on',k===i));
+  const d=$('#tlDetail'); d.className='tl-detail'+(s.sr?' sr':'');
+  d.innerHTML=`<div class="big">${s.y}</div><div><span class="chip">${s.l}</span><h3>${s.t}</h3><p>${s.d}</p></div>
+    <div class="tl-nav"><button id="tlPrev" aria-label="Previous">←</button><button id="tlNext" aria-label="Next">→</button></div>`;
+  $('#tlPrev').onclick=()=>select((i-1+S.length)%S.length);
+  $('#tlNext').onclick=()=>select((i+1)%S.length);
+  setTally(i);
+  const sc=$('#tlScroll'); if(sc.scrollWidth>sc.clientWidth){const e=evs[i];sc.scrollTo({left:e.offsetLeft-sc.clientWidth/2,behavior:'smooth'})}
+}
+function setTally(i){$('#tYear').textContent=yrNum(S[i]);$('#tSenior').textContent=tallies[i][0];$('#tAll').textContent=tallies[i][1]}
+evs.forEach(e=>e.onclick=()=>select(+e.dataset.i));
+// play: the line draws left to right and each year pops in as it is reached
+let played=false;
+function playTimeline(){
+  if(played) return; played=true;
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, DUR=reduce?0:3400, sc=$('#tlScroll');
+  const t0=performance.now(), last=S.findLastIndex(s=>s.sr);
+  (function frame(t){const p=DUR?Math.min((t-t0)/DUR,1):1;
+    $('#tlDraw').style.transform=`scaleX(${p})`;
+    let reached=-1; S.forEach((s,i)=>{if(pos(s)<=p+0.001){evs[i].classList.add('in');reached=i}});
+    if(reached>=0) setTally(reached);
+    if(sc.scrollWidth>sc.clientWidth) sc.scrollLeft=p*(sc.scrollWidth-sc.clientWidth);
+    if(p<1) requestAnimationFrame(frame); else select(last);
+  })(t0);
+}
+new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){playTimeline();o.disconnect()}},{threshold:.35}).observe(tl);
+setTally(0);
+
+/* ---------- count-up & reveal ---------- */
+function countUp(el,to,pre='',dur=1600){const t0=performance.now();(function f(t){const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(to*e).toLocaleString('en-IE');if(p<1)requestAnimationFrame(f)})(t0)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');
+  if(e.target.classList.contains('t-lotto'))countUp($('#jackpot'),CLUB.lotto.jackpot,'€');io.unobserve(e.target)}),{threshold:.15});
+$$('.rv').forEach(el=>io.observe(el));
+
+/* ---------- countdowns ---------- */
+function cd(target,el,compact){const tick=()=>{const s=Math.max(0,(new Date(target)-Date.now())/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=Math.floor(s%60);
+  if(compact) el.textContent=d>0?`${d}d ${h}h`:`${h}h ${m}m`;
+  else [d,h,m,x].forEach((v,i)=>el.children[i].firstElementChild.textContent=String(v).padStart(2,'0'))};tick();setInterval(tick,1000)}
+cd(CLUB.nextMatch,$('#matchCd')); cd(CLUB.lotto.nextDraw,$('#lottoCd'),true);
+
+/* ---------- pathways ---------- */
+const paths={
+  kids:{t:'Your child, our club',d:'From first kicks in the Academy through juvenile boys and girls teams. Fun first, skills always.',l:['Academy for the youngest','Juvenile boys & girls','All-Stars, Sundays 10–11','Garda-vetted coaches'],a:[['Register your child','#join','btn-gold'],['Safeguarding info','#','btn-line']]},
+  play:{t:'Pull on the blue',d:'Adult men, adult ladies, hurling and Gaelic for Mothers & Others. Every standard welcome.',l:['Men’s & ladies’ football','Hurling, new players welcome','GFM&O, no experience needed','Injury cover with membership'],a:[['Join as a player','#join','btn-gold'],['Contact a manager','#','btn-line']]},
+  help:{t:'Clubs run on volunteers',d:'Coaching, mentoring, the gate, the grounds, events. Give an hour or a season. No experience needed.',l:['Coach or assist a team','Help on match days','Join a committee','Support Scór & Gaeilge'],a:[['I’d like to help','mailto:pro.blessington.wicklow@gaa.ie','btn-gold'],['See open roles','#','btn-line']]},
+  back:{t:'Back the club',d:'Every Lotto line, membership and sponsorship goes into pitches, coaching and the new clubhouse.',l:['Lotto, €2 a line','Supporter membership, €60','Become a sponsor','Club shop'],a:[['Play the Lotto','#lotto','btn-gold'],['Sponsorship enquiry','mailto:pro.blessington.wicklow@gaa.ie','btn-line']]}
+};
+function showPath(k){const p=paths[k];
+  $('#panel').innerHTML=`<div><h3>${p.t}</h3><p>${p.d}</p><ul>${p.l.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="acts">${p.a.map(([t,h,c])=>`<a class="btn ${c}" href="${h}" style="justify-content:center">${t} <span class="ar">→</span></a>`).join('')}</div>`;
+  $('#panel').style.animation='none';$('#panel').offsetHeight;$('#panel').style.animation='';
+  $$('.path').forEach(b=>b.classList.toggle('on',b.dataset.p===k))}
+$$('.path').forEach(b=>b.onclick=()=>showPath(b.dataset.p)); showPath('kids');
+
+/* ---------- fixtures: Google Sheet, with sample fallback ----------
+   Sheet columns: date | group (men/ladies/juv/hurl) | team | opponent | home (Y/N) | time | score | result (W/L/D)  */
+let fixtures=[
+  {date:'2026-11-08',group:'men',team:'Adult Men · League',opponent:'Baltinglass',home:'Y',time:'11:30'},
+  {date:'2026-11-07',group:'juv',team:'U14 Boys',opponent:'Kilbride',home:'N',time:'10:30'},
+  {date:'2026-11-07',group:'ladies',team:'Adult Ladies · Cup',opponent:'Rathnew',home:'Y',time:'14:00'},
+  {date:'2026-11-14',group:'juv',team:'U12 Girls · Blitz',opponent:'Valleyview',home:'Y',time:'10:00'},
+  {date:'2026-11-15',group:'hurl',team:'Hurling · Junior',opponent:'Carnew',home:'N',time:'12:00'},
+  {date:'2026-10-25',group:'men',team:'Adult Men · League',opponent:'Tinahely',home:'N',score:'2-11 v 1-09',result:'W'},
+  {date:'2026-10-24',group:'ladies',team:'Adult Ladies',opponent:'Hollywood',home:'Y',score:'1-08 v 1-08',result:'D'},
+  {date:'2026-10-24',group:'juv',team:'U16 Boys',opponent:'Bray Emmets',home:'Y',score:'0-10 v 2-07',result:'L'},
+  {date:'2026-10-18',group:'hurl',team:'Hurling · Junior',opponent:'Avondale',home:'Y',score:'1-14 v 0-12',result:'W'},
+  {date:'2026-10-17',group:'juv',team:'U14 Girls',opponent:'Donard-Glen',home:'N',score:'3-06 v 1-04',result:'W'}
+];
+function parseCSV(text){const rows=[];let row=[],f='',q=false;for(let i=0;i<text.length;i++){const c=text[i];
+  if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+  else if(c==='"')q=true;else if(c===','){row.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}else f+=c}
+  if(f||row.length){row.push(f);rows.push(row)}
+  const h=rows.shift().map(x=>x.trim().toLowerCase());return rows.filter(r=>r.some(x=>x.trim())).map(r=>Object.fromEntries(h.map((k,i)=>[k,(r[i]||'').trim()])))}
+async function loadFixtures(){
+  if(!CLUB.sheets.fixtures) return;
+  try{const res=await fetch(CLUB.sheets.fixtures,{cache:'no-store'});if(!res.ok)throw 0;
+    fixtures=parseCSV(await res.text());$('#fxSrc').textContent='Live from the club fixtures sheet.';$$('#fixtures .sample').forEach(e=>e.remove());renderFx(curF)}
+  catch(e){fixtures=[];renderFx(curF);$('#fxSrc').textContent='Fixtures are unavailable right now. Check the club Facebook page for this week’s games.'}}
+let curF='all';
+function renderFx(f){curF=f;const list=fixtures.filter(x=>f==='all'||x.group===f);
+  // Sheet text is escaped before it touches the page, so nothing typed in a cell can run as code.
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  const card=x0=>{const x=Object.fromEntries(Object.entries(x0).map(([k,v])=>[k,esc(v)]));
+    if(!/^[WLD]$/.test(x.result)) x.result=''; const d=new Date(x.date); if(isNaN(d)) return '';
+    return `<div class="fx"><div class="d"><b>${d.getDate()}</b><span>${d.toLocaleString('en-IE',{month:'short'})}</span></div>
+    <div><div class="t">${x.team}</div><div class="m">${/^y/i.test(x.home)?'<span class="tag home">HOME</span>':'Away'} vs ${x.opponent}${x.time?' · '+x.time:''}</div></div>
+    <div class="s">${x.score?`${x.score}<br><span class="tag ${x.result}">${({W:'WIN',L:'LOSS',D:'DRAW'})[x.result]||''}</span>`:''}</div></div>`};
+  const up=list.filter(x=>!x.score).sort((a,b)=>a.date.localeCompare(b.date)),res=list.filter(x=>x.score).sort((a,b)=>b.date.localeCompare(a.date));
+  $('#fxUp').innerHTML=up.map(card).join('')||'<p class="sub">No upcoming fixtures.</p>';
+  $('#fxRes').innerHTML=res.map(card).join('')||'<p class="sub">No recent results.</p>'}
+$$('#fxTabs button').forEach(b=>b.onclick=()=>{$$('#fxTabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderFx(b.dataset.f)});
+renderFx('all'); loadFixtures();
+
+/* ---------- lotto picker ---------- */
+const picks=new Set();
+$('#nums').innerHTML=Array.from({length:28},(_,i)=>`<button data-n="${i+1}">${i+1}</button>`).join('');
+function syncPicks(){$$('#nums button').forEach(b=>b.classList.toggle('sel',picks.has(+b.dataset.n)));
+  $('#pickMsg').textContent=picks.size<4?`${picks.size} of 4 chosen`:`Your line: ${[...picks].sort((a,b)=>a-b).join(' · ')}`}
+$('#nums').onclick=e=>{const n=+e.target.dataset.n;if(!n)return;picks.has(n)?picks.delete(n):picks.size<4&&picks.add(n);syncPicks()};
+$('#lucky').onclick=()=>{picks.clear();while(picks.size<4)picks.add(1+Math.floor(Math.random()*28));syncPicks()};
+
+/* ---------- membership calculator ---------- */
+const qty={}, key=n=>n.replace(/\W/g,'');
+$('#mem').innerHTML=CLUB.membership.map(([n,p])=>p===undefined?`<div class="grp">${n}</div>`:
+  `<div class="row"><div><div class="n">${n}</div><div class="p">€${p}</div></div><div class="step"><button data-k="${n}" data-d="-1" aria-label="Remove ${n}">−</button><output id="q-${key(n)}">0</output><button data-k="${n}" data-d="1" aria-label="Add ${n}">+</button></div></div>`).join('');
+$('#mem').onclick=e=>{const k=e.target.dataset.k;if(!k)return;qty[k]=Math.max(0,(qty[k]||0)+ +e.target.dataset.d);$('#q-'+key(k)).textContent=qty[k];
+  const raw=CLUB.membership.reduce((s,[n,p])=>s+(p?(qty[n]||0)*p:0),0),ppl=Object.values(qty).reduce((a,b)=>a+b,0),tot=ppl>1?Math.min(raw,CLUB.familyCap):raw;
+  $('#memTotal').textContent='€'+tot;
+  $('#memNote').textContent=raw>tot?`Family cap applied, you save €${raw-tot}`:ppl?`${ppl} member${ppl>1?'s':''}`:'Add members to see your price'};
+</script>
+</body>
+</html>
