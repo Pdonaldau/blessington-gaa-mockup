@@ -70,10 +70,11 @@ nav .btn{padding:10px 18px;margin-left:6px}
 .hero{min-height:100svh;padding:0;display:flex;align-items:flex-end;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 85% 15%,rgba(127,182,255,.28),transparent 60%),radial-gradient(ellipse 60% 70% at 10% 90%,rgba(47,107,255,.40),transparent 65%),linear-gradient(160deg,#1c3a85 0%,#12296a 45%,var(--night) 100%);transform:scale(1.12);animation:zoom 20s var(--ease) forwards}
 @keyframes zoom{to{transform:scale(1)}}
-/* Archive footage behind the title, washed in club blue by the gradient above it */
-.hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:luminosity;opacity:.55}
-.hero-bg::after{content:"";position:absolute;inset:0;background:inherit;mix-blend-mode:multiply;opacity:.6}
-.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,32,72,.15) 0%,rgba(15,32,72,.4) 45%,var(--night) 100%),radial-gradient(ellipse at 20% 100%,rgba(47,107,255,.35),transparent 60%)}
+/* Archive footage behind the title. The greyscale is baked into the file and the blue
+   comes from the gradient showing through, so the video carries no blend modes or
+   transforms: those stall video painting on some desktop GPUs. */
+.hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,32,72,.1) 0%,rgba(15,32,72,.25) 50%,var(--night) 100%),radial-gradient(ellipse at 20% 100%,rgba(47,107,255,.35),transparent 60%)}
 .hero .wrap{position:relative;z-index:2;width:100%;padding:110px 20px 56px}
 .hero-years{font-family:Anton;font-size:clamp(18px,2.4vw,26px);color:var(--gold);letter-spacing:4px;display:flex;align-items:center;gap:14px;opacity:0;animation:up .8s .2s var(--ease) forwards}
 .hero-years i{flex:0 0 60px;height:2px;background:var(--gold)}
@@ -604,7 +605,8 @@ footer{background:var(--night)}
 
 <!-- ================= HERO ================= -->
 <section class="hero grain" id="top">
-  <div class="hero-bg"><video class="hero-vid" src="media/hero-reel.mp4" poster="media/hero-reel.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+  <div class="hero-bg"></div>
+  <video class="hero-vid" src="media/hero-reel-v2.mp4" poster="media/hero-reel-v2.jpg" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
   <div class="wrap">
     <div class="hero-years"><span class="js-founded">1909</span> <i></i> <span class="js-year">2026</span></div>
     <h1 class="disp"><span><b>Where</b></span><span><b>we all</b></span><span><b>belong</b></span></h1>
@@ -1066,7 +1068,9 @@ $('#tlDetail').addEventListener('touchend',e=>{if(sx===null)return;const dx=e.ch
 // play: the line draws left to right and each year pops in as it is reached
 let played=false;
 // Reduced motion: hold the hero footage on its poster frame
-if(matchMedia('(prefers-reduced-motion: reduce)').matches){const v=document.querySelector('.hero-vid'); if(v){v.removeAttribute('autoplay'); v.pause();}}
+{const v=document.querySelector('.hero-vid');
+ if(v){ if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay'); v.pause();}
+        else {v.muted=true; v.play().catch(()=>{});} }}
 function playTimeline(){
   if(played) return; played=true;
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, DUR=reduce?0:3400, sc=$('#tlScroll');
