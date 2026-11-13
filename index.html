@@ -293,6 +293,34 @@ footer a:hover{color:var(--gold)}
 .socials a:hover{background:var(--blue);border-color:var(--blue)}
 .f-bottom{border-top:1px solid var(--line-d);margin-top:44px;padding-top:20px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px}
 
+/* ---------- Club pages (in-page panels) ---------- */
+.pg{border:1px solid rgba(255,255,255,.16);padding:0;background:#132a63;color:#fff;border-radius:var(--r);width:min(780px,calc(100% - 24px));max-height:min(88vh,920px);margin:auto;overflow:auto;overscroll-behavior:contain}
+.pg::backdrop{background:rgba(5,11,28,.74);backdrop-filter:blur(5px)}
+.pg-x{position:sticky;top:12px;display:block;margin:12px 12px -56px auto;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:#132a63;color:#fff;font-size:24px;line-height:1}
+.pg-x:hover{background:#fff;color:var(--night)}
+.pg-in{padding:40px 40px 34px}
+.pg h2{font-size:clamp(38px,7vw,64px);margin:12px 50px 16px 0}
+.pg h3{font-family:Anton;font-weight:400;text-transform:uppercase;font-size:26px;line-height:1.1;margin:28px 0 10px}
+.pg p{color:var(--txt-d);margin-bottom:10px;max-width:62ch}
+.pg dl{border-top:1px solid rgba(255,255,255,.12);margin-top:12px}
+.pg dl div{display:grid;grid-template-columns:minmax(120px,34%) 1fr;gap:14px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.pg dt{font-weight:700}
+.pg dd{color:var(--txt-d);overflow-wrap:anywhere}
+.pg dd a,.pg p a{color:var(--sky);text-decoration:underline;text-underline-offset:3px}
+.pg ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pg li{padding:11px 14px;background:rgba(255,255,255,.08);border-radius:12px;font-size:14px;font-weight:600}
+.todo{margin:14px 0;padding:14px 16px;border:1.5px dashed rgba(255,200,61,.6);border-radius:14px;background:rgba(255,200,61,.08);color:var(--gold-2);font-size:14.5px}
+.todo b{display:block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.pg-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.pg .pg-src{font-size:12px;opacity:.8;margin:22px 0 0}
+html.locked{overflow:hidden}
+@media(max-width:720px){
+  .pg-in{padding:26px 20px 24px}
+  .pg ul{grid-template-columns:1fr}
+  .pg dl div{grid-template-columns:1fr;gap:2px}
+  .pg-acts .btn{width:100%;justify-content:space-between;white-space:normal}
+}
+
 /* ---------- Reveal ---------- */
 .rv{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .rv.in{opacity:1;transform:none}
@@ -457,7 +485,9 @@ footer a:hover{color:var(--gold)}
 
   /* footer: tighter */
   .f-big{margin-bottom:30px}
-  .f-grid>div:nth-child(2),.f-grid>div:nth-child(3){display:none}
+  .f-grid{grid-template-columns:1fr 1fr;gap:26px 20px}
+  .f-grid>div:first-child,.f-grid>div:last-child{grid-column:1 / -1}
+  footer li{padding:7px 0}
 
   /* bottom quick bar */
   .mbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:10px;right:10px;bottom:10px;z-index:55;background:rgba(15,32,72,.92);backdrop-filter:blur(14px);border:1px solid var(--line-d);border-radius:18px;padding:6px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
@@ -764,13 +794,18 @@ footer{background:var(--night)}
           <a href="https://www.instagram.com/blessingtongaalgfa/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
         </div>
       </div>
-      <div><h4>Play</h4><ul><li><a href="#">Academy</a></li><li><a href="#">Juvenile</a></li><li><a href="#">Adult men &amp; ladies</a></li><li><a href="#">Hurling</a></li><li><a href="#">GFM&amp;O</a></li></ul></div>
-      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#">Committee</a></li><li><a href="#">Facilities &amp; Astro</a></li><li><a href="#">Gaeilge &amp; Scór</a></li><li><a href="#">Welfare &amp; safeguarding</a></li><li><a href="#shop">Club shop</a></li></ul></div>
+      <div><h4>Play</h4><ul><li><a href="#page-academy">Academy</a></li><li><a href="#page-juvenile">Juvenile</a></li><li><a href="#page-adult">Adult men &amp; ladies</a></li><li><a href="#page-hurling">Hurling</a></li><li><a href="#page-gfmo">GFM&amp;O</a></li><li><a href="#page-allstars">Inclusion All-Stars</a></li></ul></div>
+      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#page-committee">Committee</a></li><li><a href="#page-facilities">Facilities &amp; Astro</a></li><li><a href="#page-gaeilge">Gaeilge &amp; Scór</a></li><li><a href="#page-welfare">Welfare &amp; safeguarding</a></li><li><a href="#shop">Club shop</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>PRO: Lisa Jackson</li><li><a href="tel:0863767534">086 376 7534</a></li><li><a href="mailto:pro.blessington.wicklow@gaa.ie">pro.blessington.wicklow@gaa.ie</a></li></ul></div>
     </div>
     <div class="f-bottom"><span>© <span class="js-year">2026</span> Blessington GAA &amp; LGFA</span><span>Concept mockup · not the official site</span></div>
   </div>
 </footer>
+
+<dialog class="pg" id="pg" aria-labelledby="pgTitle">
+  <button class="pg-x" id="pgX" aria-label="Close">×</button>
+  <div class="pg-in" id="pgIn"></div>
+</dialog>
 
 <script>
 /* =========================================================
@@ -799,13 +834,84 @@ const CLUB = {
   social: { facebook: 'https://www.facebook.com/blessingtongaa', instagram: 'https://www.instagram.com/blessingtongaalgfa/' },
   // "Right now" shows the two newest News rows. These standing cards fill any gap.
   pinned: [
-    {tag:'Inclusion All-Stars', big:'Sundays 10–11am', text:'Every Sunday morning on the Astro. For children and teenagers with additional needs.', link:'', cta:'Learn more'},
+    {tag:'Inclusion All-Stars', big:'Sundays 10–11am', text:'Every Sunday morning on the Astro. For children and teenagers with additional needs.', link:'#page-allstars', cta:'Learn more'},
     {tag:'Volunteers', title:'Volunteers needed', text:'The club needs volunteers across all teams. No experience necessary.', link:'mailto:pro.blessington.wicklow@gaa.ie', cta:'Get in touch'}
   ],
   ticker: ['2026 membership open','Volunteers wanted','New clubhouse approved','All-Stars every Sunday'],
   sponsors: ['All In Fitness','Brew 21','MyCabin','Renault','Dacia','Grant Thornton','Credit Union','BD Safety','Kärcher','Sports Direct','Glenveagh','DAR'],
   membership: [['Playing members'],['Academy child',60],['Child',130],['Adult',190],['Student',160],['Non-playing'],['Coach',60],['Supporter',60],['Parent',60],['OAP',35]],
   familyCap: 420,
+  // In-page panels, opened by any link to #page-<key>.
+  // k = kicker, t = title, p = paragraphs, sec = sections (h heading, p text, rows, list), links = buttons.
+  // todo = a "Content to come from the club" slot. src = show the "from the current club site" note.
+  pages: {
+    academy: {k:'Play', t:'Academy', src:1,
+      p:['The Blesso Blues academy is for boys and girls from nearly four up to six years old. It teaches basic ball and motor skills in a safe, fun and pressure-free setting.',
+         'Parents are welcome to join in, with help from the coaches.'],
+      sec:[{h:'Contact', rows:[['Kevin Foster','087 413 1408']]}],
+      todo:['Academy day, time and start date for the coming season. The current site still shows 2025 times.'],
+      links:[['Register your child','#join']]},
+    juvenile: {k:'Play', t:'Juvenile', src:1,
+      p:['Boys teams from under 7 to under 17, and girls teams from under 8 to under 16. Contact the manager for your child’s age group.'],
+      sec:[{h:'Boys', rows:[['U17','Wes Callaghan 087 905 0216'],['U15','Alan Ellis 086 157 2918'],['U14','Kevin Foster 087 413 1408'],['U13','Declan Reape 087 051 3527'],['U12','JP Moran 087 238 8592'],['U11 and U10','Jonathan Daniels 085 273 4552'],['U9 and U8','Stephen Willoughby 087 217 2814']]},
+           {h:'Girls', rows:[['U16','David Greville 087 680 4422'],['U14','Lorna Flanagan 086 217 8969'],['U10','Aidan Maguire 087 939 3405']]}],
+      todo:['Contacts for U7 boys, U12 girls and U8 girls. The current site lists none.','Training days and times for each age group.'],
+      links:[['Register your child','#join'],['Welfare & safeguarding','#page-welfare']]},
+    adult: {k:'Play', t:'Adult men & ladies', src:1,
+      p:['Adult football for men and ladies, at senior and junior grades.'],
+      sec:[{h:'Men', rows:[['Senior','Manager Ronan Joyce. Admin Lisa Jackson 086 376 7534'],['Junior A','Manager Darren Behan 087 292 7928'],['Junior B','Manager Christie Brie 085 800 9043']]},
+           {h:'Ladies', rows:[['Senior','Manager Roisin Ellis'],['Junior','Manager Johnny Murphy 086 243 2374']]}],
+      todo:['Training days and times.'],
+      links:[['Join as a player','#join']]},
+    hurling: {k:'Play', t:'Hurling', src:1,
+      p:['Hurling is played with Western Gaels, a club for players from Blessington, Hollywood, Dunlavin, Donard, Valleymount, Lacken and Kilbride.',
+         'Western Gaels field teams from under 7 to under 17 and at adult level. New players are welcome at any age or skill level.'],
+      sec:[{h:'Training', rows:[['U7 and U9','Wednesday 6pm, Blessington GAA Astro'],['U10 and U11','Thursday 6:30pm, Blessington GAA'],['U13','Sunday 10:30am, Blessington GAA'],['U15 and U17','Tuesday 6:30, Hollywood GAA']]},
+           {h:'Contact', rows:[['Western Gaels secretary','secretary.westerngaels.wicklow@gaa.ie']]}],
+      todo:['Confirmation that these training times are current.']},
+    gfmo: {k:'Play', t:'Gaelic for Mothers & Others', src:1,
+      p:['The Blessington Gaelic for Mothers & Others team was formed over ten years ago. Players range from women who played football before to those who have never kicked a ball.',
+         'Sessions build basic skills in a safe and encouraging setting. New members are always welcome: come along any Wednesday evening.'],
+      sec:[{h:'Training', rows:[['Every Wednesday','7:30 to 8:30, Blessington GAA pitch']]},
+           {h:'Contact', rows:[['Seanna Pender','085 143 6066'],['Sinead Johnson','086 244 6510']]}]},
+    allstars: {k:'Play', t:'Inclusion All-Stars', src:1,
+      p:['All-Stars takes place every Sunday morning from 10am to 11am on the Astro. The sessions are mainly for children and teenagers with additional needs, so that the children and their families feel included in Blessington GAA.',
+         'Sessions are child-led and run like the academy, with basic football skills and fun. All volunteers have trained in autism in sport and in disability in sport through CARA. Newcomers are welcome from Blessington and the wider community.'],
+      sec:[{h:'Contact', rows:[['Karen Richardson','086 892 4292'],['Rachel O’Donovan','087 608 8246']]}]},
+    volunteer: {k:'Get involved', t:'Volunteer', src:1,
+      p:['Blessington GAA needs volunteers across all teams. No experience is necessary.'],
+      todo:['The list of open roles.'],
+      links:[['Email the PRO','mailto:pro.blessington.wicklow@gaa.ie']]},
+    committee: {k:'Club', t:'Committee', src:1,
+      p:['This is the executive committee for 2025, as listed on the current club site.'],
+      sec:[{h:'Officers', rows:[['Presidents','Arthur Hennessy, John Coogan, Michael Sargent'],['Chairperson','Kevin Foster'],['Vice-Chairperson','Barry O’Donovan'],['Secretary','Gillian Balfe'],['Assistant Secretary','Susan Caldwell'],['Treasurer','Nick Cantwell'],['Registrar','Darren White'],['PRO','Lisa Jackson'],['Irish Cultural Officer','Noreen Keegan Kavanagh'],['Men’s Player Rep','Eoin Keogh'],['Ladies Player Rep','Roisín Ellis']]},
+           {h:'Committee members', p:'Jess Brennan, Eoin Phibbs, Tony Pender, Barry Behan, Pat Brennan, Chris O’Connor, Stephen Wiloughby, Jamie O’Toole'}],
+      todo:['The current committee list, to replace the 2025 list above.','The Children’s Officer. The current site names two different people.']},
+    facilities: {k:'Club', t:'Facilities & Astro', src:1,
+      p:['The club grounds are at Blessington Demesne, Blessington, Co. Wicklow, W91 RW22.'],
+      sec:[{h:'Astro pitch', p:'The 80m x 40m astro pitch is fully secure and floodlit. Teams and individuals from the wider community can book a half pitch or the full pitch.',
+             rows:[['Half pitch','€50 per hour'],['Full pitch','€90 per hour'],['Discounts','Seasonal, repeat and block bookings'],['Bookings','Barry O’Donovan 087 670 9512']],
+             todo:['Confirmation that the astro prices are current.']},
+           {h:'Parties', p:'An astro booking for a birthday party covers use of the clubhouse and its kitchen.'}],
+      links:[['Clubhouse development','#page-development']]},
+    development: {k:'Club', t:'Clubhouse development', src:1,
+      p:['The club’s vision is a sustainable new clubhouse that meets the short, medium and long-term needs of Blessington GAA and the wider Blessington community.'],
+      sec:[{h:'What the plan provides', list:['New changing facilities','A club shop','Referee’s room','Public toilets','A sports hall','Upper floors: gym, meeting rooms, social spaces and a café']},
+           {h:'Phase 1', list:['Two large changing rooms with showers','Public toilet block','Referee’s room','Space for a temporary club shop','First floor: open area for a gym or social space','Meeting room with a covered balcony over the main pitch']}],
+      todo:['Planning status and timeline. The current site does not state them.']},
+    gaeilge: {k:'Club', t:'Gaeilge & Scór', src:1,
+      p:['The GAA supports the Irish language, traditional Irish dancing, music, song and other parts of Irish culture. In the club, the Cultural Officer and the Coiste Gaeilge agus Cultúr lead that work.',
+         'The Cultural Officer organises the club’s part in Scór na nÓg and Scór Sinsir each year.'],
+      sec:[{h:'Oifigeach Cultúrtha', rows:[['Cultural Officer','Noreen Keegan Kavanagh']]}],
+      todo:['Dates for Scór na nÓg, Scór Sinsir and Tráth na gCeist.','Irish-language events and classes.']},
+    welfare: {k:'Club', t:'Welfare & safeguarding', src:1,
+      p:['The Club Children’s Officer makes sure that young people can take part in Gaelic games in safe and enjoyable surroundings. Bring any concern about bullying or inappropriate behaviour to the Children’s Officer.'],
+      sec:[{h:'Children’s Officer', rows:[['Email','childrensofficer.blessington.wicklow@gaa.ie']],
+             todo:['Children’s Officer name and phone number. The current site names two different people.','Designated Liaison Person name and contact details.']}],
+      links:[['GAA child safeguarding guidance','https://www.gaa.ie/the-gaa/child-safeguarding-and-protection/'],
+             ['Children’s Officer summary (PDF)','https://www.blessingtongaa.ie/s/BlessingtonGAA-Childrensofficersummary.pdf'],
+             ['Safeguarding statement (PDF)','https://www.blessingtongaa.ie/s/RiskAssessmentSafeguardingStatement-Blessington-2026-06-23.pdf']]}
+  },
   story: [
     {y:'1909', l:'Founded', t:'A club is born in the Burgage', d:'Blessington GAA plays its first games on a field by the Burgage cemetery.'},
     {y:'1915', l:'Senior title', sr:1, t:'County champions, six years in', d:'The first Wicklow Senior Football Championship comes to Blessington.'},
@@ -987,9 +1093,9 @@ function tick(){const now=Date.now();
 
 /* ---------- pathways ---------- */
 const paths={
-  kids:{t:'Your child, our club',d:'From first kicks in the Academy through juvenile boys and girls teams. Fun first, skills always.',l:['Academy for the youngest','Juvenile boys & girls','All-Stars, Sundays 10–11','Garda-vetted coaches'],a:[['Register your child','#join','btn-gold'],['Safeguarding info','#','btn-line']]},
-  play:{t:'Pull on the blue',d:'Adult men, adult ladies, hurling and Gaelic for Mothers & Others. Every standard welcome.',l:['Men’s & ladies’ football','Hurling, new players welcome','GFM&O, no experience needed','Injury cover with membership'],a:[['Join as a player','#join','btn-gold'],['Contact a manager','#','btn-line']]},
-  help:{t:'Clubs run on volunteers',d:'Coaching, mentoring, the gate, the grounds, events. Give an hour or a season. No experience needed.',l:['Coach or assist a team','Help on match days','Join a committee','Support Scór & Gaeilge'],a:[['I’d like to help','mailto:pro.blessington.wicklow@gaa.ie','btn-gold'],['See open roles','#','btn-line']]},
+  kids:{t:'Your child, our club',d:'From first kicks in the Academy through juvenile boys and girls teams. Fun first, skills always.',l:['Academy for the youngest','Juvenile boys & girls','All-Stars, Sundays 10–11','Garda-vetted coaches'],a:[['Register your child','#join','btn-gold'],['Safeguarding info','#page-welfare','btn-line']]},
+  play:{t:'Pull on the blue',d:'Adult men, adult ladies, hurling and Gaelic for Mothers & Others. Every standard welcome.',l:['Men’s & ladies’ football','Hurling, new players welcome','GFM&O, no experience needed','Injury cover with membership'],a:[['Join as a player','#join','btn-gold'],['Contact a manager','#page-adult','btn-line']]},
+  help:{t:'Clubs run on volunteers',d:'Coaching, mentoring, the gate, the grounds, events. Give an hour or a season. No experience needed.',l:['Coach or assist a team','Help on match days','Join a committee','Support Scór & Gaeilge'],a:[['I’d like to help','mailto:pro.blessington.wicklow@gaa.ie','btn-gold'],['See open roles','#page-volunteer','btn-line']]},
   back:{t:'Back the club',d:'Every Lotto line, membership and sponsorship goes into pitches, coaching and the new clubhouse.',l:['Lotto, €2 a line','Supporter membership, €60','Become a sponsor','Club shop'],a:[['Play the Lotto','#lotto','btn-gold'],['Sponsorship enquiry','mailto:pro.blessington.wicklow@gaa.ie','btn-line']]}
 };
 function showPath(k){const p=paths[k];
@@ -1031,7 +1137,7 @@ function loadLive(){const s=CLUB.sheets;
 const safeLink = v => {const s=String(v??'').trim();return /^https?:\/\/[^\s"'<>]+$/i.test(s)||/^#[\w-]+$/.test(s)?s:''};
 function normNews(r){const d=parseDate(r.date);
   return {d, when:d?`${fmtShort(d)} ${d.getFullYear()}`:String(r.date??''), tag:r.tag||'Club news', title:String(r.title??''), text:String(r.text??''), link:safeLink(r.link)}}
-const SAMPLE_NEWS=[{date:iso(addDays(today(),-9)),tag:'Development',title:'New clubhouse gets the green light',text:'Planning granted by Wicklow County Council for a new clubhouse at Blessington Demesne.',link:''}];
+const SAMPLE_NEWS=[{date:iso(addDays(today(),-9)),tag:'Development',title:'New clubhouse gets the green light',text:'Planning granted by Wicklow County Council for a new clubhouse at Blessington Demesne.',link:'#page-development'}];
 let news=SAMPLE_NEWS.map(normNews), newsState='sample';   // 'sample' | 'live' | 'down'
 function paintNews(){
   const cards=[...news].sort((a,b)=>(b.d||0)-(a.d||0)).slice(0,2).map(n=>({...n,sample:newsState==='sample'}));
@@ -1102,6 +1208,29 @@ $$('.fx-col .more').forEach(b=>b.onclick=()=>{const c=b.parentElement;c.classLis
 // collapse toggles (phone)
 function toggler(btn,target,cls='open'){btn.onclick=()=>{const o=target.classList.toggle(cls);btn.setAttribute('aria-expanded',o)}}
 toggler($('#pickToggle'),$('#picker')); toggler($('#memToggle'),$('#memGrid'));
+
+/* ---------- club pages: in-page panels, opened by any link to #page-<key> ---------- */
+const linkify = s => esc(s).replace(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g,m=>`<a href="mailto:${m}">${m}</a>`)
+  .replace(/\b0\d{2} \d{3} \d{4}\b/g,m=>`<a href="tel:${m.replace(/ /g,'')}">${m}</a>`);
+const todoHTML = l => (l||[]).map(x=>`<div class="todo"><b>Content to come from the club</b>${esc(x)}</div>`).join('');
+function pageHTML(p){
+  return `<div class="kicker">${esc(p.k)}</div><h2 class="disp" id="pgTitle">${esc(p.t)}</h2>`
+    +(p.p||[]).map(x=>`<p>${linkify(x)}</p>`).join('')
+    +(p.sec||[]).map(s=>`<h3>${esc(s.h)}</h3>${s.p?`<p>${linkify(s.p)}</p>`:''}`
+      +(s.rows?`<dl>${s.rows.map(([a,b])=>`<div><dt>${esc(a)}</dt><dd>${linkify(b)}</dd></div>`).join('')}</dl>`:'')
+      +(s.list?`<ul>${s.list.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'')+todoHTML(s.todo)).join('')
+    +todoHTML(p.todo)
+    +(p.links?`<div class="pg-acts">${p.links.map(([t,h],i)=>`<a class="btn ${i?'btn-line':'btn-gold'}" href="${esc(h)}"${/^https?:/.test(h)?' target="_blank" rel="noopener"':''}>${esc(t)} <span class="ar">→</span></a>`).join('')}</div>`:'')
+    +(p.src?'<p class="pg-src">Details are from the current club site, blessingtongaa.ie. The club confirms them before launch.</p>':'')}
+const pg=$('#pg'), isPage=()=>location.hash.startsWith('#page-');
+function route(){const p=isPage()&&CLUB.pages[location.hash.slice(6)];
+  if(p){$('#pgIn').innerHTML=pageHTML(p);if(!pg.open)pg.showModal();pg.scrollTop=0;document.documentElement.classList.add('locked')}
+  else if(pg.open) pg.close()}
+// Closing clears the #page-… address without moving the page underneath.
+pg.addEventListener('close',()=>{document.documentElement.classList.remove('locked');if(isPage())history.replaceState(null,'',location.pathname+location.search)});
+pg.addEventListener('click',e=>{if(e.target===pg)pg.close()});   // a click on the backdrop
+$('#pgX').onclick=()=>pg.close();
+addEventListener('hashchange',route); route();
 
 /* ---------- lotto picker ---------- */
 const picks=new Set();
