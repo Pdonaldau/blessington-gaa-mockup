@@ -273,6 +273,9 @@ nav .btn{padding:10px 18px;margin-left:6px}
 .shop-row{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
 .shop-row .h2{margin-bottom:12px}
 .shop-btns{display:flex;gap:10px;flex-wrap:wrap}
+.shop-note{max-width:560px;margin-top:14px;padding:12px 16px;border-left:3px solid var(--gold);background:rgba(255,255,255,.06);border-radius:0 12px 12px 0;font-size:14px;color:var(--txt-d)}
+.shop-note b{color:#fff}
+.shop-note:empty{display:none}
 
 /* ---------- Sponsors ---------- */
 .sponsors{padding:60px 0;overflow:hidden;border-top:1px solid var(--line-d)}
@@ -767,6 +770,7 @@ footer{background:var(--night)}
       <div class="kicker">Club shop</div>
       <h2 class="h2 disp">Wear the blue</h2>
       <p class="sub">Club gear for training, playing and supporting. Each shop opens in a new tab.</p>
+      <p class="shop-note" id="shopNote"></p>
     </div>
     <div class="shop-btns" id="shopBtns"></div>
   </div>
@@ -835,6 +839,8 @@ const CLUB = {
     ['DS Sports', 'https://www.dssports.ie/collections/clubshop-gaa-blessington-gaa'],
     ['McKeever', 'https://www.mckeeversports.ie/collections/blessington-gaa']
   ],
+  // Shown under the shop buttons. Leave empty to hide.
+  shopNote: 'Team jersey designs and colours must be approved by Barry Behan and Alannah McMahon. Every team order also needs committee purchase-order approval.',
   social: { facebook: 'https://www.facebook.com/blessingtongaa', instagram: 'https://www.instagram.com/blessingtongaalgfa/' },
   // "Right now" shows the two newest News rows. These standing cards fill any gap.
   pinned: [
@@ -997,7 +1003,8 @@ function paintTicker(){
   const items=[...(lottoState==='live'&&lotto&&lotto.jackpot?['Lotto jackpot '+eur(lotto.jackpot)]:[]),...CLUB.ticker];
   $('#ticker').innerHTML=[...items,...items].map(t=>`<span><em>●</em>${esc(t)}</span>`).join('')}
 $('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(s=>`<span class="sp">${esc(s)}</span>`).join('');
-$('#shopBtns').innerHTML = CLUB.shops.map(([n,u],i)=>`<a class="btn ${i?'btn-line':'btn-gold'}" href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} <span class="ar">→</span></a>`).join('');
+$('#shopNote').innerHTML = CLUB.shopNote ? `<b>Coaches ordering team kit:</b> ${esc(CLUB.shopNote)}` : '';
+$('#shopBtns').innerHTML =CLUB.shops.map(([n,u],i)=>`<a class="btn ${i?'btn-line':'btn-gold'}" href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} <span class="ar">→</span></a>`).join('');
 
 /* ---------- header & menu ---------- */
 addEventListener('scroll',()=>$('#hdr').classList.toggle('solid',scrollY>60),{passive:true});
