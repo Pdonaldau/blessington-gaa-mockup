@@ -797,7 +797,7 @@ footer{background:var(--night)}
         </div>
       </div>
       <div><h4>Play</h4><ul><li><a href="#page-academy">Academy</a></li><li><a href="#page-juvenile">Juvenile</a></li><li><a href="#page-adult">Adult men &amp; ladies</a></li><li><a href="#page-hurling">Hurling</a></li><li><a href="#page-gfmo">GFM&amp;O</a></li><li><a href="#page-allstars">Inclusion All-Stars</a></li><li><a href="#page-insurance">Player insurance</a></li></ul></div>
-      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#page-committee">Committee</a></li><li><a href="#page-facilities">Facilities &amp; Astro</a></li><li><a href="#page-gaeilge">Gaeilge &amp; Scór</a></li><li><a href="#page-welfare">Welfare &amp; safeguarding</a></li><li><a href="#shop">Club shop</a></li></ul></div>
+      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#page-committee">Committee</a></li><li><a href="#page-facilities">Facilities &amp; Astro</a></li><li><a href="#page-gaeilge">Gaeilge &amp; Scór</a></li><li><a href="#page-welfare">Welfare &amp; safeguarding</a></li><li><a href="#page-mental">Mental health</a></li><li><a href="#shop">Club shop</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>PRO: Lisa Jackson</li><li><a href="tel:0863767534">086 376 7534</a></li><li><a href="mailto:pro.blessington.wicklow@gaa.ie">pro.blessington.wicklow@gaa.ie</a></li></ul></div>
     </div>
     <div class="f-bottom"><span>© <span class="js-year">2026</span> Blessington GAA &amp; LGFA</span><span>Concept mockup · not the official site</span></div>
@@ -915,12 +915,20 @@ const CLUB = {
          'The Cultural Officer organises the club’s part in Scór na nÓg and Scór Sinsir each year.'],
       sec:[{h:'Oifigeach Cultúrtha', rows:[['Cultural Officer','Noreen Keegan Kavanagh']]}],
       todo:['Dates for Scór na nÓg, Scór Sinsir and Tráth na gCeist.','Irish-language events and classes.']},
+    mental: {k:'Club', t:'Mental health', src:1,
+      p:['The club follows the GAA Mental Health Charter. It describes a club that is respectful, encouraging, supportive, positive, enabling, considerate and tolerant, so that every member can look after their mental health.',
+         'It’s OK not to feel OK. If you need to talk to someone, these free services can help.'],
+      sec:[{h:'Free support', rows:[['Pieta','1800 247 247. Suicide and self-harm support, 24 hours a day'],['Childline','1800 66 66 66. For under-18s, 24 hours a day'],['Emergency','Call 112 or 999 if someone is in immediate danger']],
+             todo:['Any local support contacts the club wants to list. The current site’s list is out of date: several of its 1890 numbers no longer work, and some of its links point to another club’s website.']}],
+      links:[['GAA Mental Health Charter (PDF)','https://www.gaa.ie/api/pdfs/image/upload/sff3xn0iuy7gaqqdvtwo.pdf'],
+             ['GAA mental health poster (PDF)','https://www.gaa.ie/api/pdfs/image/upload/c2ug3srrcw08yswxs9qq.pdf']]},
     welfare: {k:'Club', t:'Welfare & safeguarding', src:1,
       p:['The Club Children’s Officer makes sure that young people can take part in Gaelic games in safe and enjoyable surroundings. Bring any concern about bullying or inappropriate behaviour to the Children’s Officer.'],
       sec:[{h:'Children’s Officer', rows:[['Email','childrensofficer.blessington.wicklow@gaa.ie']],
              todo:['Children’s Officer name and phone number. The current site names two different people.','Designated Liaison Person name and contact details.']}],
       links:[['GAA child safeguarding guidance','https://www.gaa.ie/the-gaa/child-safeguarding-and-protection/'],
              ['Player insurance','#page-insurance'],
+             ['Mental health','#page-mental'],
              ['Children’s Officer summary (PDF)','https://www.blessingtongaa.ie/s/BlessingtonGAA-Childrensofficersummary.pdf'],
              ['Safeguarding statement (PDF)','https://www.blessingtongaa.ie/s/RiskAssessmentSafeguardingStatement-Blessington-2026-06-23.pdf']]}
   },
@@ -1223,7 +1231,7 @@ toggler($('#pickToggle'),$('#picker')); toggler($('#memToggle'),$('#memGrid'));
 
 /* ---------- club pages: in-page panels, opened by any link to #page-<key> ---------- */
 const linkify = s => esc(s).replace(/[\w.+-]+@[\w-]+(\.[\w-]+)+/g,m=>`<a href="mailto:${m}">${m}</a>`)
-  .replace(/\b0\d{2} \d{3} \d{4}\b/g,m=>`<a href="tel:${m.replace(/ /g,'')}">${m}</a>`);
+  .replace(/\b(0\d{2} \d{3} \d{4}|1800( \d{2,3}){2,3})\b/g,m=>`<a href="tel:${m.replace(/ /g,'')}">${m}</a>`);
 const todoHTML = l => (l||[]).map(x=>`<div class="todo"><b>Content to come from the club</b>${esc(x)}</div>`).join('');
 function pageHTML(p){
   return `<div class="kicker">${esc(p.k)}</div><h2 class="disp" id="pgTitle">${esc(p.t)}</h2>`
