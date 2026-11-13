@@ -178,7 +178,9 @@ nav .btn{padding:10px 18px;margin-left:6px}
 .t-lotto .btn{margin-top:auto;justify-content:center}
 .t-allstars{background:linear-gradient(160deg,#123b8f,#0a1f55)}
 .t-allstars .big{font-family:Anton;font-size:64px;line-height:.9;margin:10px 0}
-.t-news .when{font-size:12px;color:var(--txt-d);margin-top:8px}
+.tile h3{overflow-wrap:anywhere}
+.tile .when{font-size:12px;margin-top:8px;opacity:.85}
+.t-news .when{color:var(--txt-d)}
 .t-join{grid-column:span 3;flex-direction:row;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:var(--gold);color:var(--night);border:0;min-height:0}
 .t-join h3{font-size:clamp(36px,5vw,56px);margin:0}
 .t-join p{color:#4a3a00}
@@ -393,7 +395,7 @@ footer a:hover{color:var(--gold)}
   /* news and all-stars stack on the right */
   .t-news p,.t-news .when{display:none}
   .t-allstars .big{font-size:30px;margin:8px 0 4px}
-  .t-allstars p{display:none}
+  .t-allstars p,.t-allstars .when{display:none}
   /* membership strip: full width */
   .t-join{grid-column:1 / -1!important;flex-direction:row!important;align-items:center;padding:16px 18px!important}
   .t-join h3{font-size:24px!important}
@@ -617,19 +619,8 @@ footer{background:var(--night)}
         <dl><div><dt>Last draw</dt><dd id="lotLast">—</dd></div><div><dt>Next draw</dt><dd id="lotNext">—</dd></div><div><dt>Draw day in</dt><dd id="lottoCd">—</dd></div><div><dt>Match 3</dt><dd id="lotM3">—</dd></div></dl>
         <span class="btn btn-gold">Pick your numbers <span class="ar">→</span></span>
       </a>
-      <a href="#" class="tile t-news rv">
-        <span class="tk">Development</span>
-        <h3>New clubhouse gets the green light</h3>
-        <p>Planning granted by Wicklow County Council for a new clubhouse at Blessington Demesne.</p>
-        <span class="when">April 2026</span>
-        <span class="go">Read more <span class="ar">→</span></span>
-      </a>
-      <a href="#" class="tile t-allstars rv">
-        <span class="tk">Inclusion All-Stars</span>
-        <div class="big">Sundays<br>10–11am</div>
-        <p>Hail, rain or snow. Every child, every ability, plus a sensory cabin and garden.</p>
-        <span class="go">Learn more <span class="ar">→</span></span>
-      </a>
+      <!-- Two cards: the newest rows of the News sheet, topped up from CLUB.pinned. -->
+      <div id="newsSlot" style="display:contents"></div>
       <div class="tile t-join rv">
         <div><h3>2026 membership is open</h3><p>Players from €60 · families capped at €420</p></div>
         <a href="#join" class="btn btn-dark">Work out your price <span class="ar">→</span></a>
@@ -661,7 +652,7 @@ footer{background:var(--night)}
       <div>
         <div class="kicker">Match centre</div>
         <h2 class="h2 disp">Fixtures &amp; results <span class="sample">sample data</span></h2>
-        <p class="sub">Updated from the club's Google Sheet. Filter by team.</p>
+        <p class="sub">Updated from the club’s Google Sheet. Filter by team.</p>
       </div>
       <div class="tabs" id="fxTabs">
         <button class="on" data-f="all">All</button><button data-f="men">Men</button><button data-f="ladies">Ladies</button><button data-f="juv">Juvenile</button><button data-f="hurl">Hurling</button>
@@ -773,9 +764,15 @@ const CLUB = {
     // Shown only while there is no live lotto data, and labelled "sample" on the page.
     sample: { date: '2026-10-27', numbers: '13 15 18 21', jackpot: 8200, result: 'No winner' }
   },
-  // Paste the "Publish to web → CSV" link for each sheet tab here.
-  // Left empty, the site uses the sample data below.
-  sheets: { fixtures: '' },
+  // Paste the "Publish to web → CSV" link for each sheet tab here. See SHEET-SETUP.md.
+  // A link left empty shows sample data, labelled "sample". A link that fails shows a "check Facebook" message.
+  sheets: { fixtures: '', news: '', lotto: '' },
+  social: { facebook: 'https://www.facebook.com/blessingtongaa', instagram: 'https://www.instagram.com/blessingtongaalgfa/' },
+  // "Right now" shows the two newest News rows. These standing cards fill any gap.
+  pinned: [
+    {tag:'Inclusion All-Stars', big:'Sundays 10–11am', text:'Every Sunday morning on the Astro. For children and teenagers with additional needs.', link:'', cta:'Learn more'},
+    {tag:'Volunteers', title:'Volunteers needed', text:'The club needs volunteers across all teams. No experience necessary.', link:'mailto:pro.blessington.wicklow@gaa.ie', cta:'Get in touch'}
+  ],
   ticker: ['2026 membership open','Volunteers wanted','New clubhouse approved','All-Stars every Sunday'],
   sponsors: ['All In Fitness','Brew 21','MyCabin','Renault','Dacia','Grant Thornton','Credit Union','BD Safety','Kärcher','Sports Direct','Glenveagh','DAR'],
   membership: [['Playing members'],['Academy child',60],['Child',130],['Adult',190],['Student',160],['Non-playing'],['Coach',60],['Supporter',60],['Parent',60],['OAP',35]],
@@ -940,6 +937,7 @@ function paintLotto(){const L=CLUB.lotto, d=lotto, first=parseDate(L.firstDraw);
   $('#lotLast').textContent=d&&d.d?fmtShort(d.d):'—';
   $('#lotM3').textContent=$('#lotM3b').textContent=eur(L.match3);
   $('#jackpot2').textContent=d&&d.jackpot?eur(d.jackpot):'—';
+  $('#lotNote').textContent=lottoState==='down'?'Lotto results are unavailable right now. Check the club Facebook page.':'Jackpot for the next draw';
   if(!(d&&d.jackpot)) {$('#jackpot')._run=-1;$('#jackpot').textContent='—'}
   else if($('.t-lotto').classList.contains('in')) countUp($('#jackpot'),d.jackpot,'€');
   if(first) $('#lotRule').textContent=({7:'Every ',14:'Every second '}[L.everyDays]||`Every ${L.everyDays} days, on a `)+part(first,{weekday:'long'});
@@ -970,9 +968,55 @@ function showPath(k){const p=paths[k];
   $$('.path').forEach(b=>b.classList.toggle('on',b.dataset.p===k))}
 $$('.path').forEach(b=>b.onclick=()=>showPath(b.dataset.p)); showPath('kids');
 
-/* ---------- fixtures: Google Sheet, with sample fallback ----------
+/* ---------- Google Sheet: one published CSV link per tab ----------
+   Column headings are matched by name, in any order, ignoring capitals, spaces and punctuation. */
+const HEAD={section:'group',homeoraway:'home',homeaway:'home',venue:'home',drawdate:'date',nextjackpot:'jackpot',
+  nextdraw:'next',winner:'result',category:'tag',headline:'title',summary:'text',url:'link'};
+function parseCSV(text){const rows=[];let row=[],f='',q=false;for(let i=0;i<text.length;i++){const c=text[i];
+  if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+  else if(c==='"')q=true;else if(c===','){row.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}else f+=c}
+  if(f||row.length){row.push(f);rows.push(row)}
+  if(!rows.length) return {head:[],rows:[]};
+  const head=rows.shift().map(x=>{const n=x.toLowerCase().replace(/[^a-z0-9]/g,'');return HEAD[n]||n});
+  return {head,rows:rows.filter(r=>r.some(x=>x.trim())).map(r=>Object.fromEntries(head.map((k,i)=>[k,(r[i]||'').trim()])))}}
+// Fetches one tab. Fails on a slow or broken link, and on a page that is not the expected sheet
+// (for example the Sheet's edit link pasted in place of the published CSV link).
+async function loadSheet(url,need){const ctl=new AbortController(), timer=setTimeout(()=>ctl.abort(),8000);
+  try{const res=await fetch(url,{cache:'no-store',signal:ctl.signal});if(!res.ok)throw new Error('HTTP '+res.status);
+    const {head,rows}=parseCSV((await res.text()).replace(/^﻿/,''));
+    if(!need.every(k=>head.includes(k)))throw new Error('Not the expected sheet');
+    return rows}
+  finally{clearTimeout(timer)}}
+function loadLive(){const s=CLUB.sheets;
+  if(s.fixtures) loadSheet(s.fixtures,['date','team','opponent'])
+    .then(r=>{fixtures=r.map(normFx).filter(Boolean);fxState='live'},()=>{fixtures=[];fxState='down'}).then(()=>renderFx(curF));
+  if(s.lotto) loadSheet(s.lotto,['date','jackpot'])
+    .then(r=>{const d=r.map(normLotto).filter(x=>x.d).sort((a,b)=>b.d-a.d)[0];if(!d)throw new Error('No draws');lotto=d;lottoState='live'})
+    .catch(()=>{lotto=null;lottoState='down'}).then(paintLotto);
+  if(s.news) loadSheet(s.news,['title'])
+    .then(r=>{news=r.map(normNews).filter(x=>x.title);newsState='live'},()=>{news=[];newsState='down'}).then(paintNews)}
+
+/* ---------- news: the "Right now" cards ---------- */
+// A Sheet link is only used if it is a plain web address or an in-page #anchor.
+const safeLink = v => {const s=String(v??'').trim();return /^https?:\/\/[^\s"'<>]+$/i.test(s)||/^#[\w-]+$/.test(s)?s:''};
+function normNews(r){const d=parseDate(r.date);
+  return {d, when:d?`${fmtShort(d)} ${d.getFullYear()}`:String(r.date??''), tag:r.tag||'Club news', title:String(r.title??''), text:String(r.text??''), link:safeLink(r.link)}}
+const SAMPLE_NEWS=[{date:iso(addDays(today(),-9)),tag:'Development',title:'New clubhouse gets the green light',text:'Planning granted by Wicklow County Council for a new clubhouse at Blessington Demesne.',link:''}];
+let news=SAMPLE_NEWS.map(normNews), newsState='sample';   // 'sample' | 'live' | 'down'
+function paintNews(){
+  const cards=[...news].sort((a,b)=>(b.d||0)-(a.d||0)).slice(0,2).map(n=>({...n,sample:newsState==='sample'}));
+  if(newsState==='down') cards.push({tag:'Club news',title:'News is unavailable right now',text:'Check the club Facebook page for the latest.',link:CLUB.social.facebook,cta:'Open Facebook'});
+  for(const p of CLUB.pinned){if(cards.length>=2)break;cards.push(p)}
+  $('#newsSlot').innerHTML=cards.map((c,i)=>{const ext=/^https?:/i.test(c.link||''), el=c.link?'a':'div';
+    return `<${el} class="tile ${i?'t-allstars':'t-news'}"${c.link?` href="${esc(c.link)}"${ext?' target="_blank" rel="noopener"':''}`:''}>
+      <span class="tk">${esc(c.tag)}${c.sample?' <span class="sample">sample</span>':''}</span>
+      ${c.big?`<div class="big">${esc(c.big)}</div>`:`<h3>${esc(c.title)}</h3>`}
+      <p>${esc(c.text)}</p>${c.when?`<span class="when">${esc(c.when)}</span>`:''}
+      ${c.link?`<span class="go">${esc(c.cta||'Read more')} <span class="ar">→</span></span>`:''}</${el}>`}).join('')}
+
+/* ---------- fixtures & results ----------
    One row per game. A row with a score is a result; a row without one is a fixture.
-   Sheet columns: date | time | section | team | opponent | home or away | score | result (W/L/D)  */
+   Sheet columns: Date | Time | Section | Team | Opponent | Home or Away | Score | Result (W/L/D)  */
 // Sample fixtures sit on the weekends either side of today, so the demo never goes stale.
 const sat = w => {const d=today();return addDays(d,6-d.getDay()+7*w)}, sun = w => addDays(sat(w),1);
 const SAMPLE_FIXTURES=[
@@ -995,17 +1039,6 @@ function normFx(r){const d=parseDate(r.date);if(!d)return null;const t=parseTime
     team:String(r.team??''), opponent:String(r.opponent??''), home:/^(y|h)/i.test(String(r.home??'').trim()),
     score:String(r.score??'').trim(), result:/^[WLD]$/.test(res)?res:''}}
 let fixtures=SAMPLE_FIXTURES.map(normFx).filter(Boolean), fxState='sample';   // 'sample' | 'live' | 'down'
-function parseCSV(text){const rows=[];let row=[],f='',q=false;for(let i=0;i<text.length;i++){const c=text[i];
-  if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
-  else if(c==='"')q=true;else if(c===','){row.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}else f+=c}
-  if(f||row.length){row.push(f);rows.push(row)}
-  const h=rows.shift().map(x=>x.trim().toLowerCase());return rows.filter(r=>r.some(x=>x.trim())).map(r=>Object.fromEntries(h.map((k,i)=>[k,(r[i]||'').trim()])))}
-async function loadFixtures(){
-  if(!CLUB.sheets.fixtures) return;
-  try{const res=await fetch(CLUB.sheets.fixtures,{cache:'no-store'});if(!res.ok)throw 0;
-    fixtures=parseCSV(await res.text()).map(normFx).filter(Boolean);fxState='live'}
-  catch(e){fixtures=[];fxState='down'}
-  renderFx(curF)}
 // A game counts as upcoming until its day is over. After that it is a result, with or without a score.
 function splitFx(f){const t0=today(), list=fixtures.filter(x=>f==='all'||x.group===f);
   return {up:list.filter(x=>!x.score&&x.d>=t0).sort((a,b)=>(a.when||a.d)-(b.when||b.d)),
@@ -1024,15 +1057,16 @@ function renderFx(f){curF=f;const {up,res}=splitFx(f);
   const card=x=>`<div class="fx"><div class="d"><b>${x.d.getDate()}</b><span>${part(x.d,{month:'short'})}</span></div>
     <div><div class="t">${esc(x.team)}</div><div class="m">${x.home?'<span class="tag home">HOME</span>':'Away'} vs ${esc(x.opponent)}${x.time?' · '+x.time:''}</div></div>
     <div class="s">${x.score?`${esc(x.score)}${x.result?`<br><span class="tag ${x.result}">${({W:'WIN',L:'LOSS',D:'DRAW'})[x.result]}</span>`:''}`:x.d<today()?'<span class="tag D">RESULT TO COME</span>':''}</div></div>`;
-  $('#fxUp').innerHTML=up.map(card).join('')||'<p class="sub">No upcoming fixtures.</p>';
-  $('#fxRes').innerHTML=res.map(card).join('')||'<p class="sub">No recent results.</p>';
+  const down=fxState==='down';
+  $('#fxUp').innerHTML=up.map(card).join('')||`<p class="sub">${down?'Fixtures are unavailable right now.':'No upcoming fixtures.'}</p>`;
+  $('#fxRes').innerHTML=res.map(card).join('')||`<p class="sub">${down?'Results are unavailable right now.':'No recent results.'}</p>`;
   [['#fxUp',up],['#fxRes',res]].forEach(([id,l])=>{const m=$(id).parentElement.querySelector('.more');if(m)m.hidden=l.length<=3});
   $$('#fixtures .sample').forEach(e=>e.hidden=fxState!=='sample');
   $('#fxSrc').textContent=fxState==='live'?'Live from the club fixtures sheet.':fxState==='down'?'Fixtures are unavailable right now. Check the club Facebook page for this week’s games.':'Showing sample fixtures.';
   renderNext(); tick()}
 $$('#fxTabs button').forEach(b=>b.onclick=()=>{$$('#fxTabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderFx(b.dataset.f)});
 lotto=normLotto(CLUB.lotto.sample); paintLotto();
-renderFx('all'); loadFixtures(); setInterval(tick,1000);
+paintNews(); renderFx('all'); loadLive(); setInterval(tick,1000);
 $$('#fxSeg button').forEach(b=>b.onclick=()=>{$$('#fxSeg button').forEach(x=>x.classList.toggle('on',x===b));$$('.fx-col').forEach(c=>c.classList.toggle('on',c.dataset.c===b.dataset.c))});
 $$('.fx-col .more').forEach(b=>b.onclick=()=>{const c=b.parentElement;c.classList.toggle('all');b.textContent=c.classList.contains('all')?'Show fewer':'Show all'});
 // collapse toggles (phone)
