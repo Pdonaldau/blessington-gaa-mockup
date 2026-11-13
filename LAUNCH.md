@@ -36,7 +36,15 @@ The current site is on Squarespace. Anything still loaded from it breaks when th
 
 - [ ] **Club crest.** The header loads the crest from `images.squarespace-cdn.com`. Save the image into this repo, for example as `assets/crest.png`, and point the `<img>` in the header at it.
 - [ ] **Safeguarding documents.** The Welfare panel links to two PDFs on `blessingtongaa.ie/s/`. Copy them into this repo and update the links in `CLUB.pages.welfare`.
-- [ ] **Other downloads.** The current site also hosts the club constitution and the injury claim forms. Decide which of them the new site needs.
+- [ ] **Injury claim forms.** The Player insurance panel links to four PDFs on `blessingtongaa.ie/s/`. Copy them into this repo and update the links in `CLUB.pages.insurance`.
+- [ ] **Other downloads.** The current site also hosts the club constitution. Decide whether the new site needs it.
+- [ ] **Forms.** The current site has forms built into Squarespace. They stop working when the plan is cancelled, and this site can't hold a form because it has no server. Rebuild each one in Google Forms, owned by a club Google account, and link to it from the site:
+  - [ ] **Contact form.** The home page tells volunteers to use it. Until it is rebuilt, the site sends people to the PRO's email.
+  - [ ] **Claims and expenses form** for coaches.
+  - [ ] **LGFA challenge match request form.** Permission is needed so players and coaches are covered by the LGFA injury fund, so this one must work on launch day.
+  - [ ] **Camp registration form**, if camps still use it. The Easter camp page already sends people to Clubforce.
+  - [ ] Each form sends its answers to the right club officer, not to a personal account.
+  - [ ] Each form that asks for names, phone numbers or children's details says who sees the answers and how long they are kept.
 - [ ] **Old addresses.** List the current site's page addresses that people have bookmarked or shared, for example `/lotto` and `/membership`. GitHub Pages can't redirect them, so tell the club which ones will stop working.
 
 ## 5. Connect the club's domain
