@@ -68,12 +68,15 @@ nav .btn{padding:10px 18px;margin-left:6px}
 
 /* ---------- Hero ---------- */
 .hero{min-height:100svh;padding:0;display:flex;align-items:flex-end;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 85% 15%,rgba(127,182,255,.28),transparent 60%),radial-gradient(ellipse 60% 70% at 10% 90%,rgba(47,107,255,.40),transparent 65%),linear-gradient(160deg,#1c3a85 0%,#12296a 45%,var(--night) 100%);transform:scale(1.12);animation:zoom 20s var(--ease) forwards}
+/* The banner background and footage are fixed to the window, under everything (negative
+   z-index), so the rest of the page slides up over them like a curtain. Every section
+   after the hero must keep a solid background, or the footage shows through. */
+.hero-bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse 70% 60% at 85% 15%,rgba(127,182,255,.28),transparent 60%),radial-gradient(ellipse 60% 70% at 10% 90%,rgba(47,107,255,.40),transparent 65%),linear-gradient(160deg,#1c3a85 0%,#12296a 45%,var(--night) 100%);transform:scale(1.12);animation:zoom 20s var(--ease) forwards}
 @keyframes zoom{to{transform:scale(1)}}
 /* Archive footage behind the title. The greyscale is baked into the file and the blue
    comes from the gradient showing through, so the video carries no blend modes or
    transforms: those stall video painting on some desktop GPUs. */
-.hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.6}
+.hero-vid{position:fixed;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;opacity:.6}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,32,72,.1) 0%,rgba(15,32,72,.25) 50%,var(--night) 100%),radial-gradient(ellipse at 20% 100%,rgba(47,107,255,.35),transparent 60%)}
 .hero .wrap{position:relative;z-index:2;width:100%;padding:110px 20px 56px}
 .hero-years{font-family:Anton;font-size:clamp(18px,2.4vw,26px);color:var(--gold);letter-spacing:4px;display:flex;align-items:center;gap:14px;opacity:0;animation:up .8s .2s var(--ease) forwards}
@@ -1070,7 +1073,11 @@ let played=false;
 // Reduced motion: hold the hero footage on its poster frame
 {const v=document.querySelector('.hero-vid');
  if(v){ if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay'); v.pause();}
-        else {v.muted=true; v.play().catch(()=>{});} }}
+        else {
+          v.muted=true; v.play().catch(()=>{});
+          // The page covers the footage once the hero scrolls away, so pause it there to save battery
+          if('IntersectionObserver' in window) new IntersectionObserver(([e])=>{ e.isIntersecting ? v.play().catch(()=>{}) : v.pause(); }).observe(document.querySelector('.hero'));
+        } }}
 function playTimeline(){
   if(played) return; played=true;
   const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches, DUR=reduce?0:3400, sc=$('#tlScroll');

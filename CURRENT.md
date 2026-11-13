@@ -16,6 +16,7 @@ The PRO has seen the concept and liked it. The committee sees it next.
 ## State
 
 The six tasks in the 2026-11-13 to-do list are done and pushed.
+The hero now has archive footage of club players as a fixed backdrop. Patrick confirmed it plays on his PC and his phone.
 The site runs on labelled sample data until Patrick pastes the Sheet links.
 
 ## Next step
@@ -39,6 +40,9 @@ Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 - A Sheet link that fails shows the "check Facebook" message, never broken or stale data.
 - Never invent club facts. A gap is shown as "Content to come from the club" (a `todo:` entry in `CLUB.pages`).
 - Sample data is always labelled "sample" on the page.
+- The hero footage (`media/hero-reel-v2.mp4`) is fixed behind the whole page, and the page scrolls over it. Every section after the hero needs a solid background, or the footage shows through.
+- Encode any new reel as H.264 Main profile, `yuv420p`. The first encode came out as 4:4:4, and desktop Chrome and Edge showed only the poster frame. Give a re-encoded reel a new file name, so browsers can't reuse a cached copy.
+- Put no blend modes, filters or transforms on the hero `<video>`. Those stopped the video painting on a desktop PC. The greyscale is baked into the file. The raw clips in `vid_assets/` are git-ignored.
 
 ## Decisions in force
 
