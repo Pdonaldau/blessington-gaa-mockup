@@ -40,7 +40,7 @@ Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 - A Sheet link that fails shows the "check Facebook" message, never broken or stale data.
 - Never invent club facts. A gap is shown as "Content to come from the club" (a `todo:` entry in `CLUB.pages`).
 - Sample data is always labelled "sample" on the page.
-- The hero footage (`media/hero-reel-v2.mp4`) is fixed behind the whole page, and the page scrolls over it. Every section after the hero needs a solid background, or the footage shows through.
+- The hero footage (`media/hero-reel-v2.mp4`) is the fixed background of the whole page. Sections use one see-through blue tint, `rgba(15,32,72,.6)`, so the footage shows between blocks. Cards, panels and strips are solid. Rules are in the FOOTAGE BACKDROP block at the end of the styles. A new section uses the same tint, and a new card needs a solid background.
 - Encode any new reel as H.264 Main profile, `yuv420p`. The first encode came out as 4:4:4, and desktop Chrome and Edge showed only the poster frame. Give a re-encoded reel a new file name, so browsers can't reuse a cached copy.
 - Put no blend modes, filters or transforms on the hero `<video>`. Those stopped the video painting on a desktop PC. The greyscale is baked into the file. The raw clips in `vid_assets/` are git-ignored.
 

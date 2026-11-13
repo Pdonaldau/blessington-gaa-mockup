@@ -38,7 +38,7 @@ section{padding:110px 0;position:relative}
 .btn:hover .ar{transform:translateX(4px)}
 .btn-gold{background:var(--gold);color:var(--night)}
 .btn-gold:hover{background:var(--gold-2)}
-.btn-line{border-color:rgba(255,255,255,.35);color:#fff}
+.btn-line{border-color:rgba(255,255,255,.35);color:#fff;background:transparent}
 .btn-line:hover{background:#fff;color:var(--night)}
 .btn-dark{background:var(--night);color:#fff}
 .btn-dark:hover{background:var(--blue)}
@@ -69,15 +69,15 @@ nav .btn{padding:10px 18px;margin-left:6px}
 /* ---------- Hero ---------- */
 .hero{min-height:100svh;padding:0;display:flex;align-items:flex-end;overflow:hidden}
 /* The banner background and footage are fixed to the window, under everything (negative
-   z-index), so the rest of the page slides up over them like a curtain. Every section
-   after the hero must keep a solid background, or the footage shows through. */
+   z-index), as the background of the whole page. See FOOTAGE BACKDROP at the end of the
+   styles: sections are see-through and cards are solid. */
 .hero-bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse 70% 60% at 85% 15%,rgba(127,182,255,.28),transparent 60%),radial-gradient(ellipse 60% 70% at 10% 90%,rgba(47,107,255,.40),transparent 65%),linear-gradient(160deg,#1c3a85 0%,#12296a 45%,var(--night) 100%);transform:scale(1.12);animation:zoom 20s var(--ease) forwards}
 @keyframes zoom{to{transform:scale(1)}}
 /* Archive footage behind the title. The greyscale is baked into the file and the blue
    comes from the gradient showing through, so the video carries no blend modes or
    transforms: those stall video painting on some desktop GPUs. */
 .hero-vid{position:fixed;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;opacity:.6}
-.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,32,72,.1) 0%,rgba(15,32,72,.25) 50%,var(--night) 100%),radial-gradient(ellipse at 20% 100%,rgba(47,107,255,.35),transparent 60%)}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,32,72,.1) 0%,rgba(15,32,72,.25) 50%,rgba(15,32,72,.6) 100%),radial-gradient(ellipse at 20% 100%,rgba(47,107,255,.35),transparent 60%)}
 .hero .wrap{position:relative;z-index:2;width:100%;padding:110px 20px 56px}
 .hero-years{font-family:Anton;font-size:clamp(18px,2.4vw,26px);color:var(--gold);letter-spacing:4px;display:flex;align-items:center;gap:14px;opacity:0;animation:up .8s .2s var(--ease) forwards}
 .hero-years i{flex:0 0 60px;height:2px;background:var(--gold)}
@@ -580,6 +580,22 @@ footer{background:var(--night)}
   .light .more{border-color:rgba(255,255,255,.25);color:var(--sky)}
   .m-light{background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.15)!important}
 }
+
+/* =========================================================
+   FOOTAGE BACKDROP: the archive reel is the background of the whole page.
+   Sections are see-through, so the footage shows between blocks.
+   Cards, panels and strips are solid, so their text stays readable.
+   (Overrides the section and glass-card backgrounds above.)
+   ========================================================= */
+/* One even blue tint over the footage, so text outside cards stays readable */
+.story,.lotto,#week,#play,#fixtures,#join,#shop{background:rgba(15,32,72,.6)}
+/* Plain tiles go solid; the coloured tiles (match, All-Stars, lotto, join) keep their own colours */
+.light .tile{background:var(--night-2)}
+.light .panel,.light .fx,.light .mem,.light .tabs,.t-news,.tl-detail,.shop-note,.m-toggle{background:var(--night-2)!important;backdrop-filter:none}
+@media(max-width:720px){
+  .light .path,.light .seg{background:var(--night-2)}
+  .m-light{background:var(--night-2)!important}
+}
 </style>
 </head>
 <body>
@@ -1075,8 +1091,6 @@ let played=false;
  if(v){ if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay'); v.pause();}
         else {
           v.muted=true; v.play().catch(()=>{});
-          // The page covers the footage once the hero scrolls away, so pause it there to save battery
-          if('IntersectionObserver' in window) new IntersectionObserver(([e])=>{ e.isIntersecting ? v.play().catch(()=>{}) : v.pause(); }).observe(document.querySelector('.hero'));
         } }}
 function playTimeline(){
   if(played) return; played=true;
