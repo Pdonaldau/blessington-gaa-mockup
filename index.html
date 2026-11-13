@@ -266,6 +266,12 @@ nav .btn{padding:10px 18px;margin-left:6px}
 .total .amt{font-family:Anton;font-size:120px;line-height:1;color:var(--gold);margin:8px 0}
 .total .note{color:var(--txt-d);font-size:14px;min-height:22px;margin-bottom:24px}
 
+/* ---------- Shop ---------- */
+#shop{padding-top:0}
+.shop-row{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.shop-row .h2{margin-bottom:12px}
+.shop-btns{display:flex;gap:10px;flex-wrap:wrap}
+
 /* ---------- Sponsors ---------- */
 .sponsors{padding:60px 0;overflow:hidden;border-top:1px solid var(--line-d)}
 .marquee{display:flex;width:max-content;animation:tick 50s linear infinite}
@@ -294,7 +300,7 @@ footer a:hover{color:var(--gold)}
 /* ---------- Responsive ---------- */
 @media(max-width:960px){
   nav{position:fixed;top:74px;left:0;right:0;background:rgba(15,32,72,.97);backdrop-filter:blur(14px);max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
-  nav.open{max-height:520px;border-bottom:1px solid var(--line-d)}
+  nav.open{max-height:620px;border-bottom:1px solid var(--line-d)}
   nav ul{flex-direction:column;align-items:stretch;padding:12px 20px 22px}
   nav a{font-family:Anton;font-size:30px;text-transform:uppercase;padding:10px 4px;font-weight:400}
   nav .btn{margin:10px 0 0;justify-content:center;font-family:Inter;font-size:15px;font-weight:700}
@@ -445,6 +451,10 @@ footer a:hover{color:var(--gold)}
   .mem-grid{display:none;margin-top:14px}
   .mem-grid.open{display:grid}
 
+  /* shop: full-width buttons */
+  .shop-btns{width:100%;flex-direction:column}
+  .shop-btns .btn{justify-content:space-between}
+
   /* footer: tighter */
   .f-big{margin-bottom:30px}
   .f-grid>div:nth-child(2),.f-grid>div:nth-child(3){display:none}
@@ -469,6 +479,7 @@ footer a:hover{color:var(--gold)}
 #play{background:linear-gradient(180deg,#16306f 0%,#132a63 100%)}
 #fixtures{background:linear-gradient(180deg,#132a63 0%,var(--night) 100%)}
 #join{background:linear-gradient(180deg,var(--night) 0%,#16306f 100%)}
+#shop{background:#16306f}
 .sponsors,footer{background:linear-gradient(180deg,#16306f 0%,var(--night) 100%)}
 footer{background:var(--night)}
 
@@ -543,6 +554,7 @@ footer{background:var(--night)}
         <li><a href="#play" data-i18n="play">Play</a></li>
         <li><a href="#fixtures" data-i18n="fixtures">Fixtures</a></li>
         <li><a href="#lotto" data-i18n="lotto">Lotto</a></li>
+        <li><a href="#shop" data-i18n="shop">Shop</a></li>
         <li><a href="#join" class="btn btn-gold" data-i18n="join">Join the club</a></li>
         <li><button class="lang" id="lang" aria-label="Switch to Irish">GA</button></li>
       </ul>
@@ -715,6 +727,18 @@ footer{background:var(--night)}
   </div>
 </section>
 
+<!-- ================= SHOP ================= -->
+<section class="light" id="shop">
+  <div class="wrap shop-row">
+    <div>
+      <div class="kicker">Club shop</div>
+      <h2 class="h2 disp">Wear the blue</h2>
+      <p class="sub">Club gear for training, playing and supporting. Each shop opens in a new tab.</p>
+    </div>
+    <div class="shop-btns" id="shopBtns"></div>
+  </div>
+</section>
+
 <!-- ================= SPONSORS ================= -->
 <div class="sponsors">
   <div class="wrap" style="margin-bottom:26px"><div class="kicker">Proudly supported by</div></div>
@@ -741,7 +765,7 @@ footer{background:var(--night)}
         </div>
       </div>
       <div><h4>Play</h4><ul><li><a href="#">Academy</a></li><li><a href="#">Juvenile</a></li><li><a href="#">Adult men &amp; ladies</a></li><li><a href="#">Hurling</a></li><li><a href="#">GFM&amp;O</a></li></ul></div>
-      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#">Committee</a></li><li><a href="#">Facilities &amp; Astro</a></li><li><a href="#">Gaeilge &amp; Scór</a></li><li><a href="#">Welfare &amp; safeguarding</a></li></ul></div>
+      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#">Committee</a></li><li><a href="#">Facilities &amp; Astro</a></li><li><a href="#">Gaeilge &amp; Scór</a></li><li><a href="#">Welfare &amp; safeguarding</a></li><li><a href="#shop">Club shop</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>PRO: Lisa Jackson</li><li><a href="tel:0863767534">086 376 7534</a></li><li><a href="mailto:pro.blessington.wicklow@gaa.ie">pro.blessington.wicklow@gaa.ie</a></li></ul></div>
     </div>
     <div class="f-bottom"><span>© <span class="js-year">2026</span> Blessington GAA &amp; LGFA</span><span>Concept mockup · not the official site</span></div>
@@ -767,6 +791,11 @@ const CLUB = {
   // Paste the "Publish to web → CSV" link for each sheet tab here. See SHEET-SETUP.md.
   // A link left empty shows sample data, labelled "sample". A link that fails shows a "check Facebook" message.
   sheets: { fixtures: '', news: '', lotto: '' },
+  shops: [
+    ['O’Neills', 'https://www.oneills.com/shop-by-team/gaa/ireland/blessington-gaa.html'],
+    ['DS Sports', 'https://www.dssports.ie/collections/clubshop-gaa-blessington-gaa'],
+    ['McKeever', 'https://www.mckeeversports.ie/collections/blessington-gaa']
+  ],
   social: { facebook: 'https://www.facebook.com/blessingtongaa', instagram: 'https://www.instagram.com/blessingtongaalgfa/' },
   // "Right now" shows the two newest News rows. These standing cards fill any gap.
   pinned: [
@@ -840,6 +869,7 @@ function paintTicker(){
   const items=[...(lottoState==='live'&&lotto&&lotto.jackpot?['Lotto jackpot '+eur(lotto.jackpot)]:[]),...CLUB.ticker];
   $('#ticker').innerHTML=[...items,...items].map(t=>`<span><em>●</em>${esc(t)}</span>`).join('')}
 $('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(s=>`<span class="sp">${esc(s)}</span>`).join('');
+$('#shopBtns').innerHTML = CLUB.shops.map(([n,u],i)=>`<a class="btn ${i?'btn-line':'btn-gold'}" href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} <span class="ar">→</span></a>`).join('');
 
 /* ---------- header & menu ---------- */
 addEventListener('scroll',()=>$('#hdr').classList.toggle('solid',scrollY>60),{passive:true});
@@ -847,8 +877,8 @@ $('#burger').onclick=()=>{$('#burger').classList.toggle('open');$('#nav').classL
 $$('#nav a').forEach(a=>a.addEventListener('click',()=>{$('#burger').classList.remove('open');$('#nav').classList.remove('open')}));
 
 /* ---------- Irish toggle (needs native-speaker review) ---------- */
-const i18n={en:{story:'Our story',play:'Play',fixtures:'Fixtures',lotto:'Lotto',join:'Join the club'},
-            ga:{story:'Ár scéal',play:'Imir',fixtures:'Cluichí',lotto:'Crannchur',join:'Bí linn'}};
+const i18n={en:{story:'Our story',play:'Play',fixtures:'Fixtures',lotto:'Lotto',shop:'Shop',join:'Join the club'},
+            ga:{story:'Ár scéal',play:'Imir',fixtures:'Cluichí',lotto:'Crannchur',shop:'Siopa',join:'Bí linn'}};
 let lang='en';
 $('#lang').onclick=()=>{lang=lang==='en'?'ga':'en';$('#lang').textContent=lang==='en'?'GA':'EN';$$('[data-i18n]').forEach(e=>e.textContent=i18n[lang][e.dataset.i18n])};
 
