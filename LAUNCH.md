@@ -72,7 +72,7 @@ These claims are on the page but could not be matched to the current club site o
 | Story timeline, 2026 | Planning permission granted for the new clubhouse | The Development page describes the plan but gives no planning status |
 | Ticker | "New clubhouse approved" | Same as above |
 | Sample news card | "Planning granted by Wicklow County Council" | Same as above. The card is labelled "sample" and goes when the News sheet is live |
-| Story timeline, 2020 | Inclusion All-Stars began in 2020 | The All Stars page gives no start year |
+| Story timeline, 2020 | Inclusion All-Stars began in 2020 | The Healthy Club page says All-Stars started during the club's Healthy Club Project, which began in December 2019 and ran 18 months. So 2020 or 2021 |
 | Story timeline, 1940s | St. Mark's Cross was moved when the valley was flooded | The Our Club page confirms the story but gives no date |
 | Pathways, "My child" | "Garda-vetted coaches" | The Child Protection page says the Children's Officer oversees vetting. It does not say that every coach is vetted |
 | Lotto section | The draw is on Tuesdays | The Lotto page says "bi-weekly". Tuesday comes from the two draw dates shown, 27 October and 10 November 2026 |
