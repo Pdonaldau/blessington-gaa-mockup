@@ -22,6 +22,7 @@ body{font-family:Inter,system-ui,sans-serif;background:#14296a;color:#fff;line-h
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
 button{font:inherit;cursor:pointer}
+[hidden]{display:none!important}
 .disp{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.5px;line-height:.92}
 .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
 .kicker{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--sky);display:flex;align-items:center;gap:10px}
@@ -552,11 +553,11 @@ footer{background:var(--night)}
 <section class="hero grain" id="top">
   <div class="hero-bg"></div>
   <div class="wrap">
-    <div class="hero-years">1909 <i></i> 2026</div>
+    <div class="hero-years"><span class="js-founded">1909</span> <i></i> <span class="js-year">2026</span></div>
     <h1 class="disp"><span><b>Where</b></span><span><b>we all</b></span><span><b>belong</b></span></h1>
     <div class="hero-row">
       <div>
-        <p>117 years. Four county senior titles. One town in blue. Gaelic football, ladies football, hurling and an All-Stars programme for every child.</p>
+        <p><span class="js-years">117</span> years. Four county senior titles. One town in blue. Gaelic football, ladies football, hurling and an All-Stars programme for every child.</p>
         <div class="hero-ctas">
           <a href="#story" class="btn btn-gold">Scroll our story <span class="ar">↓</span></a>
           <a href="#play" class="btn btn-line">Find your team <span class="ar">→</span></a>
@@ -575,7 +576,7 @@ footer{background:var(--night)}
     <div class="story-head">
       <div>
         <div class="kicker">Our story</div>
-        <h2 class="h2 disp">117 years<br>of blue</h2>
+        <h2 class="h2 disp"><span class="js-years">117</span> years<br>of blue</h2>
       </div>
       <div class="tally">
         <div><b id="tYear">1909</b><span>Year</span></div>
@@ -604,19 +605,16 @@ footer{background:var(--night)}
     <h2 class="h2 disp rv">Right now</h2>
     <div class="bento">
       <a href="#fixtures" class="tile t-match rv">
-        <span class="tk">Next match <span class="sample">sample</span></span>
-        <div class="vs">
-          <div class="crest">BLS</div><div class="v">VS</div><div class="crest away">BAL</div>
-          <div class="meta"><b>Adult Men · League</b><span>Sun 8 Nov · 11:30 · Home</span></div>
-        </div>
+        <span class="tk">Next match <span class="sample" id="nmSample">sample</span></span>
+        <div class="vs" id="nmVs"></div>
         <div class="cd" id="matchCd"><div><b>00</b><span>Days</span></div><div><b>00</b><span>Hrs</span></div><div><b>00</b><span>Min</span></div><div><b>00</b><span>Sec</span></div></div>
       </a>
       <a href="#lotto" class="tile t-lotto rv">
-        <span class="tk">Club Lotto · No winner</span>
+        <span class="tk">Club Lotto<span id="lotRes"></span> <span class="sample lot-sample">sample</span></span>
         <div class="jack" id="jackpot">€0</div>
-        <p>Jackpot for the next draw</p>
-        <div class="balls"><div class="ball">13</div><div class="ball">15</div><div class="ball">18</div><div class="ball">21</div></div>
-        <dl><div><dt>Last draw</dt><dd>27 Oct</dd></div><div><dt>Next draw</dt><dd>Tue 10 Nov</dd></div><div><dt>Draw day in</dt><dd id="lottoCd">—</dd></div><div><dt>Match 3</dt><dd>€300</dd></div></dl>
+        <p id="lotNote">Jackpot for the next draw</p>
+        <div class="balls" id="lotBalls"></div>
+        <dl><div><dt>Last draw</dt><dd id="lotLast">—</dd></div><div><dt>Next draw</dt><dd id="lotNext">—</dd></div><div><dt>Draw day in</dt><dd id="lottoCd">—</dd></div><div><dt>Match 3</dt><dd id="lotM3">—</dd></div></dl>
         <span class="btn btn-gold">Pick your numbers <span class="ar">→</span></span>
       </a>
       <a href="#" class="tile t-news rv">
@@ -684,9 +682,9 @@ footer{background:var(--night)}
     <div class="rv">
       <div class="kicker" style="color:var(--gold)">Club Lotto</div>
       <h2 class="h2 disp">Four numbers.<br>Two euro.</h2>
-      <p class="sub">Every second Tuesday. Pick four from 1–28: match all four to win the jackpot, match three to win €300. Every line funds pitches, coaching and the new clubhouse.</p>
+      <p class="sub"><span id="lotRule">Every second Tuesday</span>. Pick four from 1–28: match all four to win the jackpot, match three to win <span id="lotM3b">€300</span>. Every line funds pitches, coaching and the new clubhouse.</p>
       <div class="lotto-facts">
-        <div><b>€8,200</b><span>Current jackpot</span></div>
+        <div><b id="jackpot2">—</b><span>Current jackpot <span class="sample lot-sample">sample</span></span></div>
         <div><b>€2</b><span>Per line</span></div>
         <div><b>1–28</b><span>Pick four</span></div>
       </div>
@@ -755,7 +753,7 @@ footer{background:var(--night)}
       <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#">Committee</a></li><li><a href="#">Facilities &amp; Astro</a></li><li><a href="#">Gaeilge &amp; Scór</a></li><li><a href="#">Welfare &amp; safeguarding</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>PRO: Lisa Jackson</li><li><a href="tel:0863767534">086 376 7534</a></li><li><a href="mailto:pro.blessington.wicklow@gaa.ie">pro.blessington.wicklow@gaa.ie</a></li></ul></div>
     </div>
-    <div class="f-bottom"><span>© 2026 Blessington GAA &amp; LGFA</span><span>Concept mockup · not the official site</span></div>
+    <div class="f-bottom"><span>© <span class="js-year">2026</span> Blessington GAA &amp; LGFA</span><span>Concept mockup · not the official site</span></div>
   </div>
 </footer>
 
@@ -765,12 +763,20 @@ footer{background:var(--night)}
    same template can be reused for another club.
    ========================================================= */
 const CLUB = {
-  lotto: { jackpot: 8200, nextDraw: '2026-11-10T00:00:00Z' },
-  nextMatch: '2026-11-08T11:30:00Z',
+  short: 'BLS',            // three letters for the match crest
+  founded: 1909,
+  lotto: {
+    // Draw rule: one known draw date, then a draw every `everyDays` days. No date is typed by hand.
+    firstDraw: '2026-10-27', everyDays: 14,
+    drawTime: '',          // 'HH:MM' once the club confirms it. Empty = count down to the draw day.
+    match3: 300,
+    // Shown only while there is no live lotto data, and labelled "sample" on the page.
+    sample: { date: '2026-10-27', numbers: '13 15 18 21', jackpot: 8200, result: 'No winner' }
+  },
   // Paste the "Publish to web → CSV" link for each sheet tab here.
   // Left empty, the site uses the sample data below.
   sheets: { fixtures: '' },
-  ticker: ['Lotto jackpot €8,200','2026 membership open','Volunteers wanted','New clubhouse approved','All-Stars every Sunday'],
+  ticker: ['2026 membership open','Volunteers wanted','New clubhouse approved','All-Stars every Sunday'],
   sponsors: ['All In Fitness','Brew 21','MyCabin','Renault','Dacia','Grant Thornton','Credit Union','BD Safety','Kärcher','Sports Direct','Glenveagh','DAR'],
   membership: [['Playing members'],['Academy child',60],['Child',130],['Adult',190],['Student',160],['Non-playing'],['Coach',60],['Supporter',60],['Parent',60],['OAP',35]],
   familyCap: 420,
@@ -799,10 +805,44 @@ const CLUB = {
 /* ---------- helpers ---------- */
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const clamp = (v,a,b) => Math.max(a,Math.min(b,v));
+// Text is escaped before it touches the page, so nothing typed in a Sheet cell can run as code.
+const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+const eur = n => '€'+Math.round(n).toLocaleString('en-IE');
+
+/* ---------- dates: always the visitor's local clock, never a typed "next" date ---------- */
+const DAY = 864e5, pad = n => String(n).padStart(2,'0');
+const mkDate = (y,m,d) => {const x=new Date(y,m-1,d);return x.getFullYear()===y&&x.getMonth()===m-1&&x.getDate()===d?x:null};
+const today = () => {const d=new Date();d.setHours(0,0,0,0);return d};
+const addDays = (d,n) => new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const atTime = (d,t) => new Date(d.getFullYear(),d.getMonth(),d.getDate(),t[0],t[1]);
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const part = (d,o) => d.toLocaleString('en-IE',o);
+const fmtShort = d => `${d.getDate()} ${part(d,{month:'short'})}`;
+const fmtDay = d => `${part(d,{weekday:'short'})} ${fmtShort(d)}`;
+// Accepts 2026-11-08, 08/11/2026 or 8-11-26 (day first, the Irish way) and "8 Nov 2026".
+function parseDate(v){const s=String(v??'').trim();let m;
+  if(m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/)) return mkDate(+m[1],+m[2],+m[3]);
+  if(m=s.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2}|\d{4})$/)) return mkDate(+m[3]<100?2000+ +m[3]:+m[3],+m[2],+m[1]);
+  if(/[a-z]{3}/i.test(s)&&/\d{4}/.test(s)){const t=new Date(s);if(!isNaN(t)) return mkDate(t.getFullYear(),t.getMonth()+1,t.getDate())}
+  return null}
+// Accepts 11:30, 11.30, 14:00:00, 2pm and 2:30 pm.
+function parseTime(v){const m=String(v??'').trim().match(/^(\d{1,2})(?:[:.](\d{2}))?(?::\d{2})?\s*(am|pm)?$/i);if(!m)return null;
+  let h=+m[1];const mi=+(m[2]||0);
+  if(m[3]){if(/pm/i.test(m[3])&&h<12)h+=12;if(/am/i.test(m[3])&&h===12)h=0}
+  return h<24&&mi<60?[h,mi]:null}
+
+/* ---------- years: worked out, so the page never shows last year ---------- */
+const YEAR = new Date().getFullYear();
+$$('.js-year').forEach(e=>e.textContent=YEAR);
+$$('.js-founded').forEach(e=>e.textContent=CLUB.founded);
+$$('.js-years').forEach(e=>e.textContent=YEAR-CLUB.founded);
 
 /* ---------- ticker & sponsors ---------- */
-$('#ticker').innerHTML = [...CLUB.ticker,...CLUB.ticker].map(t=>`<span><em>●</em>${t}</span>`).join('');
-$('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(s=>`<span class="sp">${s}</span>`).join('');
+function paintTicker(){
+  // The jackpot joins the ticker only when it is live data, never the sample figure.
+  const items=[...(lottoState==='live'&&lotto&&lotto.jackpot?['Lotto jackpot '+eur(lotto.jackpot)]:[]),...CLUB.ticker];
+  $('#ticker').innerHTML=[...items,...items].map(t=>`<span><em>●</em>${esc(t)}</span>`).join('')}
+$('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(s=>`<span class="sp">${esc(s)}</span>`).join('');
 
 /* ---------- header & menu ---------- */
 addEventListener('scroll',()=>$('#hdr').classList.toggle('solid',scrollY>60),{passive:true});
@@ -876,16 +916,46 @@ new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){playTimeline();o.disc
 setTally(0);
 
 /* ---------- count-up & reveal ---------- */
-function countUp(el,to,pre='',dur=1600){const t0=performance.now();(function f(t){const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(to*e).toLocaleString('en-IE');if(p<1)requestAnimationFrame(f)})(t0)}
+function countUp(el,to,pre='',dur=1600){const t0=performance.now(),run=el._run=(el._run||0)+1;(function f(t){if(el._run!==run)return;const p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=pre+Math.round(to*e).toLocaleString('en-IE');if(p<1)requestAnimationFrame(f)})(t0)}
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add('in');
-  if(e.target.classList.contains('t-lotto'))countUp($('#jackpot'),CLUB.lotto.jackpot,'€');io.unobserve(e.target)}),{threshold:.15});
+  if(e.target.classList.contains('t-lotto')&&lotto&&lotto.jackpot)countUp($('#jackpot'),lotto.jackpot,'€');io.unobserve(e.target)}),{threshold:.15});
 $$('.rv').forEach(el=>io.observe(el));
 
-/* ---------- countdowns ---------- */
-function cd(target,el,compact){const tick=()=>{const s=Math.max(0,(new Date(target)-Date.now())/1000),d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60),x=Math.floor(s%60);
-  if(compact) el.textContent=d>0?`${d}d ${h}h`:`${h}h ${m}m`;
-  else [d,h,m,x].forEach((v,i)=>el.children[i].firstElementChild.textContent=String(v).padStart(2,'0'))};tick();setInterval(tick,1000)}
-cd(CLUB.nextMatch,$('#matchCd')); cd(CLUB.lotto.nextDraw,$('#lottoCd'),true);
+/* ---------- lotto: last draw from data, next draw from the rule in CLUB.lotto ---------- */
+let lotto=null, lottoState='sample';   // 'sample' | 'live' | 'down'
+function normLotto(r){const d=parseDate(r.date), j=Math.round(parseFloat(String(r.jackpot??'').replace(/[^\d.]/g,'')))||0;
+  return {d, jackpot:j, result:String(r.result??'').trim(), next:parseDate(r.next),
+    numbers:(String(r.numbers??'').match(/\d+/g)||[]).map(Number).filter(n=>n>0&&n<100).slice(0,8)}}
+// First draw day that has not passed. A future "next draw" date in the data wins over the rule.
+function nextDraw(){const L=CLUB.lotto, first=parseDate(L.firstDraw), t=parseTime(L.drawTime), step=L.everyDays||7, now=new Date();
+  if(lotto&&lotto.next&&lotto.next>=today()) return {d:lotto.next, when:t?atTime(lotto.next,t):null};
+  if(!first) return null;
+  let d=addDays(first,Math.max(0,Math.ceil(Math.round((today()-first)/DAY)/step))*step);
+  if(t&&atTime(d,t)<=now) d=addDays(d,step);
+  return {d, when:t?atTime(d,t):null}}
+function paintLotto(){const L=CLUB.lotto, d=lotto, first=parseDate(L.firstDraw);
+  $$('.lot-sample').forEach(e=>e.hidden=lottoState!=='sample');
+  $('#lotRes').textContent=d&&d.result?' · '+d.result:'';
+  $('#lotBalls').innerHTML=d?d.numbers.map(n=>`<div class="ball">${n}</div>`).join(''):'';
+  $('#lotLast').textContent=d&&d.d?fmtShort(d.d):'—';
+  $('#lotM3').textContent=$('#lotM3b').textContent=eur(L.match3);
+  $('#jackpot2').textContent=d&&d.jackpot?eur(d.jackpot):'—';
+  if(!(d&&d.jackpot)) {$('#jackpot')._run=-1;$('#jackpot').textContent='—'}
+  else if($('.t-lotto').classList.contains('in')) countUp($('#jackpot'),d.jackpot,'€');
+  if(first) $('#lotRule').textContent=({7:'Every ',14:'Every second '}[L.everyDays]||`Every ${L.everyDays} days, on a `)+part(first,{weekday:'long'});
+  paintTicker(); tick()}
+
+/* ---------- countdowns: one clock, targets worked out fresh each second ---------- */
+let nm=null;   // the next fixture, set by renderNext()
+function tick(){const now=Date.now();
+  if(nm&&now>=(nm.when?+nm.when:+nm.d+DAY)) renderNext();   // kick-off has passed: move to the following fixture
+  if(nm){const s=Math.max(0,(+(nm.when||nm.d)-now)/1000);
+    [Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),Math.floor(s%60)].forEach((v,i)=>$('#matchCd').children[i].firstElementChild.textContent=pad(v))}
+  const nd=nextDraw();
+  $('#lotNext').textContent=nd?fmtDay(nd.d):'—';
+  if(!nd) $('#lottoCd').textContent='—';
+  else{const s=(+(nd.when||nd.d)-now)/1000,d=Math.floor(s/86400),h=Math.floor(s%86400/3600),m=Math.floor(s%3600/60);
+    $('#lottoCd').textContent=s<=0?'Today':d>0?`${d}d ${h}h`:`${h}h ${m}m`}}
 
 /* ---------- pathways ---------- */
 const paths={
@@ -901,19 +971,30 @@ function showPath(k){const p=paths[k];
 $$('.path').forEach(b=>b.onclick=()=>showPath(b.dataset.p)); showPath('kids');
 
 /* ---------- fixtures: Google Sheet, with sample fallback ----------
-   Sheet columns: date | group (men/ladies/juv/hurl) | team | opponent | home (Y/N) | time | score | result (W/L/D)  */
-let fixtures=[
-  {date:'2026-11-08',group:'men',team:'Adult Men · League',opponent:'Baltinglass',home:'Y',time:'11:30'},
-  {date:'2026-11-07',group:'juv',team:'U14 Boys',opponent:'Kilbride',home:'N',time:'10:30'},
-  {date:'2026-11-07',group:'ladies',team:'Adult Ladies · Cup',opponent:'Rathnew',home:'Y',time:'14:00'},
-  {date:'2026-11-14',group:'juv',team:'U12 Girls · Blitz',opponent:'Valleyview',home:'Y',time:'10:00'},
-  {date:'2026-11-15',group:'hurl',team:'Hurling · Junior',opponent:'Carnew',home:'N',time:'12:00'},
-  {date:'2026-10-25',group:'men',team:'Adult Men · League',opponent:'Tinahely',home:'N',score:'2-11 v 1-09',result:'W'},
-  {date:'2026-10-24',group:'ladies',team:'Adult Ladies',opponent:'Hollywood',home:'Y',score:'1-08 v 1-08',result:'D'},
-  {date:'2026-10-24',group:'juv',team:'U16 Boys',opponent:'Bray Emmets',home:'Y',score:'0-10 v 2-07',result:'L'},
-  {date:'2026-10-18',group:'hurl',team:'Hurling · Junior',opponent:'Avondale',home:'Y',score:'1-14 v 0-12',result:'W'},
-  {date:'2026-10-17',group:'juv',team:'U14 Girls',opponent:'Donard-Glen',home:'N',score:'3-06 v 1-04',result:'W'}
+   One row per game. A row with a score is a result; a row without one is a fixture.
+   Sheet columns: date | time | section | team | opponent | home or away | score | result (W/L/D)  */
+// Sample fixtures sit on the weekends either side of today, so the demo never goes stale.
+const sat = w => {const d=today();return addDays(d,6-d.getDay()+7*w)}, sun = w => addDays(sat(w),1);
+const SAMPLE_FIXTURES=[
+  {date:iso(sun(0)),group:'Men',team:'Adult Men · League',opponent:'Baltinglass',home:'Home',time:'11:30'},
+  {date:iso(sat(0)),group:'Juvenile',team:'U14 Boys',opponent:'Kilbride',home:'Away',time:'10:30'},
+  {date:iso(sat(0)),group:'Ladies',team:'Adult Ladies · Cup',opponent:'Rathnew',home:'Home',time:'14:00'},
+  {date:iso(sat(1)),group:'Juvenile',team:'U12 Girls · Blitz',opponent:'Valleymount',home:'Home',time:'10:00'},
+  {date:iso(sun(1)),group:'Hurling',team:'Hurling · Junior',opponent:'Carnew',home:'Away',time:'12:00'},
+  {date:iso(sun(-1)),group:'Men',team:'Adult Men · League',opponent:'Tinahely',home:'Away',score:'2-11 v 1-09',result:'W'},
+  {date:iso(sat(-1)),group:'Ladies',team:'Adult Ladies',opponent:'Hollywood',home:'Home',score:'1-08 v 1-08',result:'D'},
+  {date:iso(sat(-1)),group:'Juvenile',team:'U16 Boys',opponent:'Bray Emmets',home:'Home',score:'0-10 v 2-07',result:'L'},
+  {date:iso(sun(-2)),group:'Hurling',team:'Hurling · Junior',opponent:'Avondale',home:'Home',score:'1-14 v 0-12',result:'W'},
+  {date:iso(sat(-2)),group:'Juvenile',team:'U14 Girls',opponent:'Donard-Glen',home:'Away',score:'3-06 v 1-04',result:'W'}
 ];
+// Turns one row (sample or Sheet) into a fixture. A row with no readable date is dropped.
+function normFx(r){const d=parseDate(r.date);if(!d)return null;const t=parseTime(r.time), g=String(r.group??'').toLowerCase();
+  const res=String(r.result??'').trim().toUpperCase().charAt(0);
+  return {d, when:t?atTime(d,t):null, time:t?`${pad(t[0])}:${pad(t[1])}`:'',
+    group:/lad|women|lgfa/.test(g)?'ladies':/hurl|camog/.test(g)?'hurl':/juv|under|^u\d|boys|girls|academy/.test(g)?'juv':/men|adult/.test(g)?'men':'',
+    team:String(r.team??''), opponent:String(r.opponent??''), home:/^(y|h)/i.test(String(r.home??'').trim()),
+    score:String(r.score??'').trim(), result:/^[WLD]$/.test(res)?res:''}}
+let fixtures=SAMPLE_FIXTURES.map(normFx).filter(Boolean), fxState='sample';   // 'sample' | 'live' | 'down'
 function parseCSV(text){const rows=[];let row=[],f='',q=false;for(let i=0;i<text.length;i++){const c=text[i];
   if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
   else if(c==='"')q=true;else if(c===','){row.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}else f+=c}
@@ -922,23 +1003,36 @@ function parseCSV(text){const rows=[];let row=[],f='',q=false;for(let i=0;i<text
 async function loadFixtures(){
   if(!CLUB.sheets.fixtures) return;
   try{const res=await fetch(CLUB.sheets.fixtures,{cache:'no-store'});if(!res.ok)throw 0;
-    fixtures=parseCSV(await res.text());$('#fxSrc').textContent='Live from the club fixtures sheet.';$$('#fixtures .sample').forEach(e=>e.remove());renderFx(curF)}
-  catch(e){fixtures=[];renderFx(curF);$('#fxSrc').textContent='Fixtures are unavailable right now. Check the club Facebook page for this week’s games.'}}
+    fixtures=parseCSV(await res.text()).map(normFx).filter(Boolean);fxState='live'}
+  catch(e){fixtures=[];fxState='down'}
+  renderFx(curF)}
+// A game counts as upcoming until its day is over. After that it is a result, with or without a score.
+function splitFx(f){const t0=today(), list=fixtures.filter(x=>f==='all'||x.group===f);
+  return {up:list.filter(x=>!x.score&&x.d>=t0).sort((a,b)=>(a.when||a.d)-(b.when||b.d)),
+          res:list.filter(x=>x.score||x.d<t0).sort((a,b)=>b.d-a.d)}}
+// "Next match" is the earliest upcoming fixture that has not kicked off. None left: the countdown hides.
+function renderNext(){const now=Date.now();
+  nm=splitFx('all').up.find(x=>(x.when?+x.when:+x.d+DAY)>now)||null;
+  $('#nmSample').hidden=fxState!=='sample'; $('#matchCd').hidden=!nm;
+  const abbr=s=>esc(s.replace(/[^A-Za-zÀ-ÿ]/g,'').slice(0,3).toUpperCase());
+  $('#nmVs').innerHTML=nm?`<div class="crest">${esc(CLUB.short)}</div><div class="v">VS</div><div class="crest away">${abbr(nm.opponent)}</div>
+    <div class="meta"><b>${esc(nm.team)}</b><span>${fmtDay(nm.d)}${nm.time?' · '+nm.time:''} · ${nm.home?'Home':'Away'}</span></div>`
+    :fxState==='down'?'<div class="meta"><b>Fixtures unavailable</b><span>Check the club Facebook page for this week’s games</span></div>'
+    :'<div class="meta"><b>No fixture scheduled</b><span>See the latest results below</span></div>'}
 let curF='all';
-function renderFx(f){curF=f;const list=fixtures.filter(x=>f==='all'||x.group===f);
-  // Sheet text is escaped before it touches the page, so nothing typed in a cell can run as code.
-  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
-  const card=x0=>{const x=Object.fromEntries(Object.entries(x0).map(([k,v])=>[k,esc(v)]));
-    if(!/^[WLD]$/.test(x.result)) x.result=''; const d=new Date(x.date); if(isNaN(d)) return '';
-    return `<div class="fx"><div class="d"><b>${d.getDate()}</b><span>${d.toLocaleString('en-IE',{month:'short'})}</span></div>
-    <div><div class="t">${x.team}</div><div class="m">${/^y/i.test(x.home)?'<span class="tag home">HOME</span>':'Away'} vs ${x.opponent}${x.time?' · '+x.time:''}</div></div>
-    <div class="s">${x.score?`${x.score}<br><span class="tag ${x.result}">${({W:'WIN',L:'LOSS',D:'DRAW'})[x.result]||''}</span>`:''}</div></div>`};
-  const up=list.filter(x=>!x.score).sort((a,b)=>a.date.localeCompare(b.date)),res=list.filter(x=>x.score).sort((a,b)=>b.date.localeCompare(a.date));
+function renderFx(f){curF=f;const {up,res}=splitFx(f);
+  const card=x=>`<div class="fx"><div class="d"><b>${x.d.getDate()}</b><span>${part(x.d,{month:'short'})}</span></div>
+    <div><div class="t">${esc(x.team)}</div><div class="m">${x.home?'<span class="tag home">HOME</span>':'Away'} vs ${esc(x.opponent)}${x.time?' · '+x.time:''}</div></div>
+    <div class="s">${x.score?`${esc(x.score)}${x.result?`<br><span class="tag ${x.result}">${({W:'WIN',L:'LOSS',D:'DRAW'})[x.result]}</span>`:''}`:x.d<today()?'<span class="tag D">RESULT TO COME</span>':''}</div></div>`;
   $('#fxUp').innerHTML=up.map(card).join('')||'<p class="sub">No upcoming fixtures.</p>';
   $('#fxRes').innerHTML=res.map(card).join('')||'<p class="sub">No recent results.</p>';
-  [['#fxUp',up],['#fxRes',res]].forEach(([id,l])=>{const m=$(id).parentElement.querySelector('.more');if(m)m.hidden=l.length<=3})}
+  [['#fxUp',up],['#fxRes',res]].forEach(([id,l])=>{const m=$(id).parentElement.querySelector('.more');if(m)m.hidden=l.length<=3});
+  $$('#fixtures .sample').forEach(e=>e.hidden=fxState!=='sample');
+  $('#fxSrc').textContent=fxState==='live'?'Live from the club fixtures sheet.':fxState==='down'?'Fixtures are unavailable right now. Check the club Facebook page for this week’s games.':'Showing sample fixtures.';
+  renderNext(); tick()}
 $$('#fxTabs button').forEach(b=>b.onclick=()=>{$$('#fxTabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderFx(b.dataset.f)});
-renderFx('all'); loadFixtures();
+lotto=normLotto(CLUB.lotto.sample); paintLotto();
+renderFx('all'); loadFixtures(); setInterval(tick,1000);
 $$('#fxSeg button').forEach(b=>b.onclick=()=>{$$('#fxSeg button').forEach(x=>x.classList.toggle('on',x===b));$$('.fx-col').forEach(c=>c.classList.toggle('on',c.dataset.c===b.dataset.c))});
 $$('.fx-col .more').forEach(b=>b.onclick=()=>{const c=b.parentElement;c.classList.toggle('all');b.textContent=c.classList.contains('all')?'Show fewer':'Show all'});
 // collapse toggles (phone)
