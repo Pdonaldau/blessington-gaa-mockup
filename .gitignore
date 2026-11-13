@@ -1,2 +1,5 @@
 # Local logs from the test browser
 .gstack/
+
+# Raw archive clips; the site uses the encoded reel in media/
+vid_assets/
