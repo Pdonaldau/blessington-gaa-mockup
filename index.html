@@ -328,38 +328,66 @@ footer a:hover{color:var(--gold)}
 .pg .pg-src{font-size:12px;opacity:.8;margin:22px 0 0}
 html.locked{overflow:hidden}
 
-/* ---------- Business directory (the #page-directory panel) ---------- */
-.pg.wide{width:min(1040px,calc(100% - 24px))}
-.dir-tools{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 4px}
-.dir-q{flex:1 1 240px;min-width:0;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:15px}
+/* ---------- Business directory (the #page-directory panel) ----------
+   Compact cards, so a phone shows six or more at once. Tapping a card opens its details in place. */
+.pg.wide{width:min(1320px,calc(100% - 32px));max-height:calc(100dvh - 32px)}
+.pg.wide .pg-in{padding:30px 36px 30px}
+.pg.wide h2{font-size:clamp(34px,5vw,54px);margin:8px 50px 8px 0}
+.pg .dir-lead{margin:0 0 4px;font-size:14.5px;max-width:none}
+.dir-tools{display:flex;gap:10px;margin:16px 0 4px}
+.dir-q{flex:1;min-width:0;padding:12px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:15px}
 .dir-q::placeholder{color:var(--txt-d)}
 .dir-q:focus{outline:2px solid var(--sky);outline-offset:2px}
-.dir-cats{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 20px}
-.dir-cats button{border:1px solid rgba(255,255,255,.22);background:none;color:var(--txt-d);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600}
+.dir-tools .btn{flex:none;padding:12px 20px}
+.dir-tools .short{display:none}
+.dir-cats{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+.dir-cats button{flex:none;border:1px solid rgba(255,255,255,.22);background:none;color:var(--txt-d);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600;white-space:nowrap}
 .dir-cats button:hover{border-color:#fff;color:#fff}
 .dir-cats button.on{background:#fff;color:var(--night);border-color:#fff}
-.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
-.biz{background:var(--night-2);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
-.biz.t1{grid-column:1/-1;border-color:rgba(255,200,61,.55);background:linear-gradient(135deg,#1d3a80,var(--night-2))}
-.biz-top{display:flex;gap:14px;align-items:center}
-.biz-logo{position:relative;width:56px;height:56px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden;flex:none;color:var(--night);font-family:Anton;font-size:21px}
-.biz.t1 .biz-logo{width:72px;height:72px;font-size:26px}
-.biz-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:4px}
-.biz .tier{font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);font-weight:700}
-.biz h4{font-size:18px;line-height:1.2;color:#fff;margin:2px 0}
-.biz .cat{font-size:12.5px;color:var(--sky)}
-.pg .biz p{font-size:14px;margin:0}
-.pg .biz .addr{font-size:13px;opacity:.85}
-.biz-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
-.biz-acts a{font-size:13px;font-weight:600;padding:8px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.25);color:#fff}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:10px;align-items:start}
+.biz{background:var(--night-2);border:1px solid rgba(255,255,255,.13);border-radius:14px;transition:border-color .2s}
+.biz:hover,.biz.open{border-color:rgba(127,182,255,.55)}
+.biz.t1{border-color:rgba(255,200,61,.6);background:linear-gradient(135deg,#1d3a80,var(--night-2))}
+.biz-head{display:flex;gap:12px;align-items:center;width:100%;padding:11px 12px;background:none;border:0;color:inherit;text-align:left;font:inherit;cursor:pointer;border-radius:14px}
+.biz-head:focus-visible{outline:2px solid var(--sky);outline-offset:-2px}
+.biz-logo{position:relative;width:44px;height:44px;border-radius:10px;background:#fff;display:grid;place-items:center;overflow:hidden;flex:none;color:var(--night);font-family:Anton;font-size:17px}
+.biz-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:3px}
+.biz-id{flex:1;min-width:0}
+.biz .nm{display:block;font-weight:700;font-size:15.5px;line-height:1.2;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.biz .meta{display:block;font-size:12px;color:var(--sky);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.biz .tier{color:var(--gold);font-weight:700}
+.biz-chev{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(255,255,255,.2);color:var(--txt-d);font-size:14px;transition:transform .25s var(--ease)}
+.biz.open .biz-chev{transform:rotate(180deg);color:#fff;border-color:#fff}
+.biz-more{display:none;padding:0 14px 14px}
+.biz.open .biz-more{display:block}
+.pg .biz-more p{font-size:14px;margin:0 0 8px}
+.pg .biz-more .addr{font-size:13px;opacity:.85}
+.biz-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.biz-acts a{font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.25);color:#fff}
 .biz-acts a:hover{background:#fff;color:var(--night)}
 .biz-acts a.call{background:var(--gold);border-color:var(--gold);color:var(--night)}
 .pg .dir-none{grid-column:1/-1;padding:18px;border:1px dashed rgba(255,255,255,.25);border-radius:14px}
+@media(max-width:720px){
+  .pg.wide{width:calc(100% - 16px);max-height:calc(100dvh - 16px)}
+  .pg.wide .pg-in{padding:18px 14px 20px}
+  .pg.wide .pg-x{width:38px;height:38px;font-size:20px;margin:10px 10px -48px auto}
+  .pg.wide h2{font-size:30px;margin:6px 46px 4px 0}
+  .pg .dir-lead{display:none}
+  .dir-tools{margin-top:10px;gap:8px}
+  .dir-q{padding:10px 14px;font-size:15px}
+  .dir-tools .btn{padding:10px 14px;font-size:13.5px}
+  .dir-tools .long{display:none}
+  .dir-tools .short{display:inline}
+  .dir-cats{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:8px -14px 10px;padding:0 14px}
+  .dir-cats::-webkit-scrollbar{display:none}
+  .dir-grid{gap:6px}
+  .biz-head{padding:8px 10px;gap:10px}
+  .biz-logo{width:40px;height:40px;font-size:15px}
+}
 .spon-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
 a.sp{cursor:pointer}
 @media(max-width:720px){
   .pg-in{padding:26px 20px 24px}
-  .dir-tools .btn{width:100%;justify-content:space-between}
   .pg ul{grid-template-columns:1fr}
   .pg dl div{grid-template-columns:1fr;gap:2px}
   .pg-acts .btn{width:100%;justify-content:space-between;white-space:normal}
@@ -518,7 +546,7 @@ a.sp{cursor:pointer}
   /* shared collapse button */
   .m-toggle{display:flex;width:100%;justify-content:space-between;align-items:center;padding:16px 18px;border-radius:14px;border:1px solid var(--line-d);background:rgba(255,255,255,.06);color:#fff;font-family:Anton;font-size:21px;text-transform:uppercase;text-align:left;line-height:1.1}
   .m-toggle span{font-family:Inter;font-size:24px;transition:transform .3s}
-  [aria-expanded="true"] span{transform:rotate(45deg)}
+  .m-toggle[aria-expanded="true"] span{transform:rotate(45deg)}
   .m-light{background:var(--ink);border:0;margin-top:20px}
   .mem-grid{display:none;margin-top:14px}
   .mem-grid.open{display:grid}
@@ -1253,16 +1281,20 @@ function paintNews(){
 
 /* ---------- business directory: the #page-directory panel ----------
    Sheet columns: Name | Category | Tier | Description | Phone | Email | Website | Address | Logo | Facebook | Instagram
-   Tier: "Main sponsor", "Sponsor" or "Member". Main sponsors get a full-width card at the top. */
+   Tier: "Main sponsor", "Sponsor" or "Member". Main sponsors come first, with a gold border. */
 // Made-up businesses for the demo. The panel heading labels them "sample listings".
 // 01 000 0000 is not a real number, so a test tap on "Call" rings nobody.
 const SAMPLE_BIZ=[
-  {name:'Sample Motors',tag:'Motoring',tier:'Main sponsor',text:'Example listing. A main sponsor gets a full-width card with a large logo, at the top of the directory.',phone:'01 000 0000',website:'https://example.com',address:'Blessington, Co. Wicklow',facebook:'https://www.facebook.com/'},
+  {name:'Sample Motors',tag:'Motoring',tier:'Main sponsor',text:'Example listing. A main sponsor is listed first, with a gold border.',phone:'01 000 0000',website:'https://example.com',address:'Blessington, Co. Wicklow',facebook:'https://www.facebook.com/'},
   {name:'Sample Café',tag:'Food & drink',tier:'Sponsor',text:'Example listing. Coffee, lunches and match-day treats.',phone:'01 000 0000',email:'hello@example.com',address:'Blessington, Co. Wicklow'},
   {name:'Sample Physio',tag:'Health & fitness',tier:'Sponsor',text:'Example listing. Sports injuries and rehab.',phone:'01 000 0000',website:'https://example.com'},
   {name:'Sample Builders',tag:'Trades & construction',tier:'Member',text:'Example listing. Extensions, renovations and repairs.',phone:'01 000 0000',email:'hello@example.com'},
   {name:'Sample Accountants',tag:'Professional services',tier:'Member',text:'Example listing. Tax returns and bookkeeping for local businesses.',website:'https://example.com',email:'hello@example.com'},
-  {name:'Sample Pharmacy',tag:'Health & fitness',tier:'Member',text:'Example listing. Open seven days.',phone:'01 000 0000',address:'Blessington, Co. Wicklow'}
+  {name:'Sample Pharmacy',tag:'Health & fitness',tier:'Member',text:'Example listing. Open seven days.',phone:'01 000 0000',address:'Blessington, Co. Wicklow'},
+  {name:'Sample Hardware',tag:'Home & garden',tier:'Member',text:'Example listing. Tools, paint and garden supplies.',phone:'01 000 0000',website:'https://example.com'},
+  {name:'Sample Hair Studio',tag:'Health & fitness',tier:'Member',text:'Example listing. Cuts and colour, walk-ins welcome.',phone:'01 000 0000'},
+  {name:'Sample Solicitors',tag:'Professional services',tier:'Member',text:'Example listing. Conveyancing, wills and probate.',email:'hello@example.com'},
+  {name:'Sample Garden Centre',tag:'Home & garden',tier:'Sponsor',text:'Example listing. Plants, trees and landscaping.',website:'https://example.com',address:'Blessington, Co. Wicklow'}
 ];
 const TIER=['','Main sponsor','Club sponsor','Member business'];
 const tierOf = v => /main|head|title|premier/i.test(v)?1:/spons/i.test(v)?2:3;
@@ -1274,21 +1306,26 @@ function normBiz(r){const phone=String(r.phone??'').trim(), tel=phone.replace(/[
     addr:String(r.address??'').trim(), logo:/^https:/i.test(logo)?logo:'', fb:webLink(r.facebook), ig:webLink(r.instagram)}}
 let biz=SAMPLE_BIZ.map(normBiz), bizState='sample', dirCat='all', dirQ='';   // bizState: 'sample' | 'live' | 'down'
 const initials = n => n.split(/\s+/).filter(w=>/^[A-Za-zÀ-ÿ0-9]/.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'•';
-function bizCard(b){
+// Each card is a compact row: logo, name, tier and category. A tap opens the details in place.
+const openBiz=new Set();
+function bizCard(b,i){
   const a=(h,t,c='')=>`<a${c?` class="${c}"`:''} href="${esc(h)}"${/^https?:/.test(h)?' target="_blank" rel="noopener"':''}>${t}</a>`;
-  const map=b.addr?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.addr):'';
-  return `<article class="biz t${b.tier}">
-    <div class="biz-top"><div class="biz-logo" aria-hidden="true"><span>${esc(initials(b.name))}</span>${b.logo?`<img src="${esc(b.logo)}" alt="" loading="lazy" onerror="this.remove()">`:''}</div>
-      <div><div class="tier">${TIER[b.tier]}</div><h4>${esc(b.name)}</h4><div class="cat">${esc(b.cat)}</div></div></div>
-    ${b.text?`<p>${esc(b.text)}</p>`:''}${b.addr?`<p class="addr">${esc(b.addr)}</p>`:''}
-    <div class="biz-acts">${b.phone?a('tel:'+b.tel,'Call '+esc(b.phone),'call'):''}${b.web?a(b.web,'Website'):''}${b.email?a('mailto:'+b.email,'Email'):''}${map?a(map,'Map'):''}${b.fb?a(b.fb,'Facebook'):''}${b.ig?a(b.ig,'Instagram'):''}</div>
+  const map=b.addr?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.addr):'', open=openBiz.has(b.name);
+  return `<article class="biz t${b.tier}${open?' open':''}">
+    <button type="button" class="biz-head" data-n="${esc(b.name)}" aria-expanded="${open}" aria-controls="biz${i}">
+      <span class="biz-logo" aria-hidden="true"><span>${esc(initials(b.name))}</span>${b.logo?`<img src="${esc(b.logo)}" alt="" loading="lazy" onerror="this.remove()">`:''}</span>
+      <span class="biz-id"><span class="nm">${esc(b.name)}</span><span class="meta">${b.tier<3?`<span class="tier">${TIER[b.tier]}</span> · `:''}${esc(b.cat)}</span></span>
+      <span class="biz-chev" aria-hidden="true">▾</span></button>
+    <div class="biz-more" id="biz${i}">
+      ${b.text?`<p>${esc(b.text)}</p>`:''}${b.addr?`<p class="addr">${esc(b.addr)}</p>`:''}
+      <div class="biz-acts">${b.phone?a('tel:'+b.tel,'Call '+esc(b.phone),'call'):''}${b.web?a(b.web,'Website'):''}${b.email?a('mailto:'+b.email,'Email'):''}${map?a(map,'Map'):''}${b.fb?a(b.fb,'Facebook'):''}${b.ig?a(b.ig,'Instagram'):''}</div>
+    </div>
   </article>`}
 function dirHTML(){const D=CLUB.directory;
-  return `<div class="kicker">Our sponsors &amp; local businesses</div><h2 class="disp" id="pgTitle">Business directory</h2>
-    ${bizState==='sample'?'<p><span class="sample">sample listings</span> These are made-up businesses that show how the directory works.</p>':''}
-    <p>${esc(D.intro)}</p>
+  return `<div class="kicker">Our sponsors &amp; local businesses</div><h2 class="disp" id="pgTitle">Business directory${bizState==='sample'?' <span class="sample">sample listings</span>':''}</h2>
+    <p class="dir-lead">${bizState==='sample'?'These are made-up businesses that show how the directory works. ':''}${esc(D.intro)} Tap a business for its details.</p>
     <div class="dir-tools"><input class="dir-q" id="dirQ" type="search" placeholder="Search businesses" aria-label="Search businesses">
-      <a class="btn btn-gold" href="${esc(D.join)}">List your business <span class="ar">→</span></a></div>
+      <a class="btn btn-gold" href="${esc(D.join)}"><span class="long">List your business</span><span class="short">Get listed</span> <span class="ar">→</span></a></div>
     <div class="dir-cats" id="dirCats" role="group" aria-label="Filter by category"></div>
     <div class="dir-grid" id="dirGrid" aria-live="polite"></div>${todoHTML(D.todo)}`}
 function paintDir(){const g=$('#dirGrid');if(!g)return;
@@ -1303,6 +1340,9 @@ function paintDir(){const g=$('#dirGrid');if(!g)return;
   g.innerHTML=list.map(bizCard).join('')||`<p class="dir-none">${biz.length?'No businesses match. Try another word or category.':'No businesses are listed yet.'}</p>`}
 function wireDir(){const q=$('#dirQ');q.value=dirQ;q.oninput=()=>{dirQ=q.value;paintDir()};
   $('#dirCats').onclick=e=>{const c=e.target.closest('button');if(c){dirCat=c.dataset.c;paintDir()}};
+  // Open or close one card without repainting the list, so the page doesn't jump.
+  $('#dirGrid').onclick=e=>{const h=e.target.closest('.biz-head');if(!h)return;const n=h.dataset.n, o=!openBiz.has(n);
+    o?openBiz.add(n):openBiz.delete(n);h.parentElement.classList.toggle('open',o);h.setAttribute('aria-expanded',o)};
   paintDir()}
 
 /* ---------- fixtures & results ----------

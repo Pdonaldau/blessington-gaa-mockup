@@ -53,7 +53,7 @@ Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 - **No "next" date is typed.** Next match is the earliest upcoming fixture. Next lotto draw comes from `CLUB.lotto.firstDraw` plus `everyDays` (14). A "Next draw" cell in the Lotto sheet overrides the rule.
 - **Sample fixtures are dated relative to today**, so the demo never goes stale.
 - **"Right now" shows the two newest News rows.** `CLUB.pinned` cards fill any gap.
-- **The business directory is a panel, fed from the Directory sheet tab.** Not a WordPress directory like the Listry example. Columns: Name, Category, Tier, Description, Phone, Email, Website, Address, Logo, Facebook, Instagram. Main sponsors get a full-width card at the top. Sample listings are made-up businesses named "Sample …" with the dead number 01 000 0000, never real local businesses. Sponsor names in the marquee link to the panel.
+- **The business directory is a panel, fed from the Directory sheet tab.** Not a WordPress directory like the Listry example. Columns: Name, Category, Tier, Description, Phone, Email, Website, Address, Logo, Facebook, Instagram. Cards are compact rows (logo, name, tier, category); a tap opens the description and Call/Website/Map buttons in place. Main sponsors come first, with a gold border. Sample listings are made-up businesses named "Sample …" with the dead number 01 000 0000, never real local businesses. Sponsor names in the marquee link to the panel.
 - **The Welfare panel names no Children's Officer.** The current site names two different people. Only the role email is shown.
 
 ## How to test

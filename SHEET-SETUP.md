@@ -113,7 +113,7 @@ Changes show on the website within about five minutes. Visitors may need to refr
 
 - Add one row for each business. **Name** and **Category** are needed. Every other cell is optional.
 - **Category** is free text, for example `Food & drink`. Each different category becomes a filter button, so spell each one the same way every time.
-- **Tier** decides the order. A `Main sponsor` gets a full-width card at the top. A `Sponsor` comes next, then a `Member` business.
+- **Tier** decides the order. A `Main sponsor` comes first, with a gold border. A `Sponsor` comes next, then a `Member` business.
 - **Phone** shows a "Call" button. Type it the way people read it, for example `045 123 456`.
 - **Website**, **Facebook** and **Instagram** are full web addresses. `www.example.ie` also works.
 - **Address** shows a "Map" button that opens Google Maps.
