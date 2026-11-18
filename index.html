@@ -104,11 +104,11 @@ nav .btn{padding:10px 18px;margin-left:6px}
 /* Slim sponsor logo strip under the news ticker. Solid background, per the FOOTAGE BACKDROP rules. */
 .logo-strip{display:flex;align-items:stretch;background:#0b1838;border-bottom:1px solid var(--line-d);overflow:hidden}
 .ls-lab{flex:none;position:relative;z-index:1;display:flex;align-items:center;padding:0 18px 0 22px;background:#0b1838;box-shadow:14px 0 16px #0b1838;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--gold);white-space:nowrap}
-.ls-track{display:flex;width:max-content;padding:8px 0;animation:tick 70s linear infinite}
+.ls-track{display:flex;width:max-content;padding:8px 0;animation:tick 17.5s linear infinite;will-change:transform;backface-visibility:hidden}
 .logo-strip:hover .ls-track{animation-play-state:paused}
 .ls-track img{display:block;flex:none;height:30px;width:auto;margin-right:10px;border-radius:5px}
 .ls-track img.tile{box-sizing:border-box;background:#fff;padding:6px 10px}
-@media(max-width:720px){.ls-lab{padding:0 12px 0 14px;font-size:9.5px;letter-spacing:1.2px}.ls-track{padding:6px 0;animation-duration:55s}.ls-track img{height:26px;margin-right:8px}}
+@media(max-width:720px){.ls-lab{padding:0 12px 0 14px;font-size:9.5px;letter-spacing:1.2px}.ls-track{padding:6px 0;animation-duration:14s}.ls-track img{height:26px;margin-right:8px}}
 @media(prefers-reduced-motion:reduce){.logo-strip{overflow-x:auto}}
 
 /* ---------- Story timeline ---------- */
