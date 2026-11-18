@@ -30,4 +30,4 @@ All In Fitness, Renault, Dacia, Grant Thornton, BD Safety, Kärcher, Sports Dire
 
 ## When confirmed
 
-Edit the `sponsors` list in the `CLUB` object at the top of the script in `index.html`. Then delete this file.
+Edit the `sponsors` list in the `CLUB` object at the top of the script in `index.html`. Each entry is a name and a logo file name, for example `['Renault','renault']`. Put a new logo in `media/sponsors/` as a `.webp` file. A sponsor with no logo yet can be listed by name only, for example `['Infinity Motors']`: it scrolls in the name strip and is left out of the logo strip. Then delete this file.

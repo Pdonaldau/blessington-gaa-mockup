@@ -101,6 +101,15 @@ nav .btn{padding:10px 18px;margin-left:6px}
 .ticker span{font-family:Anton;font-size:22px;text-transform:uppercase;letter-spacing:1px;margin:0 22px;color:#fff}
 .ticker span em{font-style:normal;color:var(--gold);margin-right:22px}
 @keyframes tick{to{transform:translateX(-50%)}}
+/* Slim sponsor logo strip under the news ticker. Solid background, per the FOOTAGE BACKDROP rules. */
+.logo-strip{display:flex;align-items:stretch;background:#0b1838;border-bottom:1px solid var(--line-d);overflow:hidden}
+.ls-lab{flex:none;position:relative;z-index:1;display:flex;align-items:center;padding:0 18px 0 22px;background:#0b1838;box-shadow:14px 0 16px #0b1838;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:var(--gold);white-space:nowrap}
+.ls-track{display:flex;width:max-content;padding:8px 0;animation:tick 70s linear infinite}
+.logo-strip:hover .ls-track{animation-play-state:paused}
+.ls-track img{display:block;flex:none;height:30px;width:auto;margin-right:10px;border-radius:5px}
+.ls-track img.tile{box-sizing:border-box;background:#fff;padding:6px 10px}
+@media(max-width:720px){.ls-lab{padding:0 12px 0 14px;font-size:9.5px;letter-spacing:1.2px}.ls-track{padding:6px 0;animation-duration:55s}.ls-track img{height:26px;margin-right:8px}}
+@media(prefers-reduced-motion:reduce){.logo-strip{overflow-x:auto}}
 
 /* ---------- Story timeline ---------- */
 .story{background:linear-gradient(180deg,var(--night) 0%,#1a3778 100%);overflow:hidden}
@@ -703,6 +712,7 @@ footer{background:var(--night)}
 </section>
 
 <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
+<a class="logo-strip" href="#page-directory" aria-label="Our sponsors. Open the business directory"><span class="ls-lab">Our sponsors</span><span class="ls-track" id="logoStrip"></span></a>
 
 <!-- ================= STORY (zoomed-out chronology) ================= -->
 <section class="story grain" id="story">
@@ -938,7 +948,12 @@ const CLUB = {
     {tag:'Volunteers', title:'Volunteers needed', text:'The club needs volunteers across all teams. No experience necessary.', link:'mailto:pro.blessington.wicklow@gaa.ie', cta:'Get in touch'}
   ],
   ticker: ['2026 membership open','Volunteers wanted','New clubhouse approved','All-Stars every Sunday'],
-  sponsors: ['All In Fitness','Brew 21','MyCabin','Renault','Dacia','Grant Thornton','Blessington Credit Union','BD Safety','Kärcher','Sports Direct','Glenveagh','DAR Golf Construction','Hearts.ie'],
+  // Sponsor names and logos. The logos are copies from blessingtongaa.ie, kept in media/sponsors/.
+  // They show in the slim logo strip under the hero; the names scroll in the strip above the footer.
+  // A 1 after the file name puts a see-through logo on a white tile, so dark lettering stays readable.
+  sponsors: [['All In Fitness','all-in-fitness'],['Brew 21','brew-21'],['MyCabin','mycabin',1],['Renault','renault'],['Dacia','dacia'],
+    ['Grant Thornton','grant-thornton'],['Blessington Credit Union','credit-union'],['BD Safety','bd-safety'],['Kärcher','karcher'],
+    ['Sports Direct','sports-direct'],['Glenveagh','glenveagh'],['DAR Golf Construction','dar-golf'],['Hearts.ie','hearts-ie']],
   membership: [['Playing members'],['Academy child',60],['Child',130],['Adult',190],['Student',160],['Non-playing'],['Coach',60],['Supporter',60],['Parent',60],['OAP',35]],
   familyCap: 420,
   // In-page panels, opened by any link to #page-<key>.
@@ -1092,7 +1107,9 @@ function paintTicker(){
   // The jackpot joins the ticker only when it is live data, never the sample figure.
   const items=[...(lottoState==='live'&&lotto&&lotto.jackpot?['Lotto jackpot '+eur(lotto.jackpot)]:[]),...CLUB.ticker];
   $('#ticker').innerHTML=[...items,...items].map(t=>`<span><em>●</em>${esc(t)}</span>`).join('')}
-$('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(s=>`<a class="sp" href="#page-directory">${esc(s)}</a>`).join('');
+$('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(([n])=>`<a class="sp" href="#page-directory">${esc(n)}</a>`).join('');
+// Logo strip: the list twice, so the scroll loops without a gap. The second copy is hidden from screen readers.
+$('#logoStrip').innerHTML = [0,1].map(k=>CLUB.sponsors.filter(s=>s[1]).map(([n,f,w])=>`<img${w?' class="tile"':''} src="media/sponsors/${esc(f)}.webp" alt="${k?'':esc(n)}"${k?' aria-hidden="true"':''} height="30" loading="lazy" onerror="this.remove()">`).join('')).join('');
 $('#shopNote').innerHTML = CLUB.shopNote ? `<b>Coaches ordering team kit:</b> ${esc(CLUB.shopNote)}` : '';
 $('#shopBtns').innerHTML =CLUB.shops.map(([n,u],i)=>`<a class="btn ${i?'btn-line':'btn-gold'}" href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} <span class="ar">→</span></a>`).join('');
 
