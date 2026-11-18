@@ -645,6 +645,7 @@ footer{background:var(--night)}
         <li><a href="#fixtures" data-i18n="fixtures">Fixtures</a></li>
         <li><a href="#lotto" data-i18n="lotto">Lotto</a></li>
         <li><a href="#shop" data-i18n="shop">Shop</a></li>
+        <li><a href="#page-directory" data-i18n="sponsors">Sponsors</a></li>
         <li><a href="#join" class="btn btn-gold" data-i18n="join">Join the club</a></li>
         <li><button class="lang" id="lang" aria-label="Switch to Irish">GA</button></li>
       </ul>
@@ -1073,8 +1074,8 @@ $('#burger').onclick=()=>{$('#burger').classList.toggle('open');$('#nav').classL
 $$('#nav a').forEach(a=>a.addEventListener('click',()=>{$('#burger').classList.remove('open');$('#nav').classList.remove('open')}));
 
 /* ---------- Irish toggle (needs native-speaker review) ---------- */
-const i18n={en:{story:'Our story',play:'Play',fixtures:'Fixtures',lotto:'Lotto',shop:'Shop',join:'Join the club'},
-            ga:{story:'Ár scéal',play:'Imir',fixtures:'Cluichí',lotto:'Crannchur',shop:'Siopa',join:'Bí linn'}};
+const i18n={en:{story:'Our story',play:'Play',fixtures:'Fixtures',lotto:'Lotto',shop:'Shop',sponsors:'Sponsors',join:'Join the club'},
+            ga:{story:'Ár scéal',play:'Imir',fixtures:'Cluichí',lotto:'Crannchur',shop:'Siopa',sponsors:'Urraitheoirí',join:'Bí linn'}};
 let lang='en';
 $('#lang').onclick=()=>{lang=lang==='en'?'ga':'en';$('#lang').textContent=lang==='en'?'GA':'EN';$$('[data-i18n]').forEach(e=>e.textContent=i18n[lang][e.dataset.i18n])};
 
@@ -1283,7 +1284,7 @@ function bizCard(b){
     <div class="biz-acts">${b.phone?a('tel:'+b.tel,'Call '+esc(b.phone),'call'):''}${b.web?a(b.web,'Website'):''}${b.email?a('mailto:'+b.email,'Email'):''}${map?a(map,'Map'):''}${b.fb?a(b.fb,'Facebook'):''}${b.ig?a(b.ig,'Instagram'):''}</div>
   </article>`}
 function dirHTML(){const D=CLUB.directory;
-  return `<div class="kicker">Support local</div><h2 class="disp" id="pgTitle">Business directory</h2>
+  return `<div class="kicker">Our sponsors &amp; local businesses</div><h2 class="disp" id="pgTitle">Business directory</h2>
     ${bizState==='sample'?'<p><span class="sample">sample listings</span> These are made-up businesses that show how the directory works.</p>':''}
     <p>${esc(D.intro)}</p>
     <div class="dir-tools"><input class="dir-q" id="dirQ" type="search" placeholder="Search businesses" aria-label="Search businesses">
