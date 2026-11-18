@@ -10,6 +10,7 @@ All settings named below are in `index.html`. Club settings are in the `CLUB` ob
 - [ ] Every "Content to come from the club" slot is filled. Search `index.html` for `todo:` to find them all.
 - [ ] The club has confirmed the facts listed under [Facts to confirm](#facts-to-confirm).
 - [ ] The sponsor list is confirmed and `SPONSORS-CHECK.md` is deleted.
+- [ ] The club has set the business directory listing fee and tiers, replacing the `todo` in `CLUB.directory`. Every business in the Directory tab has agreed to its listing.
 - [ ] A native Irish speaker has checked the Irish menu text. It is in the `i18n` object in the script.
 - [ ] The PRO and every person named in a panel agree to their name and phone number being on the site.
 - [ ] `CLUB.membership`, `CLUB.familyCap` and the "2026 membership" wording match the season on sale.
@@ -28,7 +29,7 @@ All settings named below are in `index.html`. Club settings are in the `CLUB` ob
 - [ ] Delete the robots line from the `<head>`: `<meta name="robots" content="noindex, nofollow">`.
 - [ ] Delete the footer note: `<span>Concept mockup · not the official site</span>`.
 - [ ] Rewrite `README.md`. It says the site is a concept and not the official club site.
-- [ ] Decide what happens to the sample data. With all three Sheet links set it never shows, so it can stay as a safety net or be deleted: `SAMPLE_FIXTURES`, `SAMPLE_NEWS` and `CLUB.lotto.sample`.
+- [ ] Decide what happens to the sample data. With all four Sheet links set it never shows, so it can stay as a safety net or be deleted: `SAMPLE_FIXTURES`, `SAMPLE_NEWS`, `SAMPLE_BIZ` and `CLUB.lotto.sample`.
 
 ## 4. Move everything off Squarespace
 

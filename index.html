@@ -327,8 +327,39 @@ footer a:hover{color:var(--gold)}
 .pg-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
 .pg .pg-src{font-size:12px;opacity:.8;margin:22px 0 0}
 html.locked{overflow:hidden}
+
+/* ---------- Business directory (the #page-directory panel) ---------- */
+.pg.wide{width:min(1040px,calc(100% - 24px))}
+.dir-tools{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 4px}
+.dir-q{flex:1 1 240px;min-width:0;padding:13px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:15px}
+.dir-q::placeholder{color:var(--txt-d)}
+.dir-q:focus{outline:2px solid var(--sky);outline-offset:2px}
+.dir-cats{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 20px}
+.dir-cats button{border:1px solid rgba(255,255,255,.22);background:none;color:var(--txt-d);border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600}
+.dir-cats button:hover{border-color:#fff;color:#fff}
+.dir-cats button.on{background:#fff;color:var(--night);border-color:#fff}
+.dir-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.biz{background:var(--night-2);border:1px solid rgba(255,255,255,.13);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.biz.t1{grid-column:1/-1;border-color:rgba(255,200,61,.55);background:linear-gradient(135deg,#1d3a80,var(--night-2))}
+.biz-top{display:flex;gap:14px;align-items:center}
+.biz-logo{position:relative;width:56px;height:56px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden;flex:none;color:var(--night);font-family:Anton;font-size:21px}
+.biz.t1 .biz-logo{width:72px;height:72px;font-size:26px}
+.biz-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:4px}
+.biz .tier{font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);font-weight:700}
+.biz h4{font-size:18px;line-height:1.2;color:#fff;margin:2px 0}
+.biz .cat{font-size:12.5px;color:var(--sky)}
+.pg .biz p{font-size:14px;margin:0}
+.pg .biz .addr{font-size:13px;opacity:.85}
+.biz-acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
+.biz-acts a{font-size:13px;font-weight:600;padding:8px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.25);color:#fff}
+.biz-acts a:hover{background:#fff;color:var(--night)}
+.biz-acts a.call{background:var(--gold);border-color:var(--gold);color:var(--night)}
+.pg .dir-none{grid-column:1/-1;padding:18px;border:1px dashed rgba(255,255,255,.25);border-radius:14px}
+.spon-head{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+a.sp{cursor:pointer}
 @media(max-width:720px){
   .pg-in{padding:26px 20px 24px}
+  .dir-tools .btn{width:100%;justify-content:space-between}
   .pg ul{grid-template-columns:1fr}
   .pg dl div{grid-template-columns:1fr;gap:2px}
   .pg-acts .btn{width:100%;justify-content:space-between;white-space:normal}
@@ -802,7 +833,7 @@ footer{background:var(--night)}
 
 <!-- ================= SPONSORS ================= -->
 <div class="sponsors">
-  <div class="wrap" style="margin-bottom:26px"><div class="kicker">Proudly supported by</div></div>
+  <div class="wrap spon-head"><div class="kicker">Proudly supported by</div><a href="#page-directory" class="btn btn-line">Club business directory <span class="ar">→</span></a></div>
   <div class="marquee" id="marquee"></div>
 </div>
 
@@ -827,7 +858,7 @@ footer{background:var(--night)}
         </div>
       </div>
       <div><h4>Play</h4><ul><li><a href="#page-academy">Academy</a></li><li><a href="#page-juvenile">Juvenile</a></li><li><a href="#page-adult">Adult men &amp; ladies</a></li><li><a href="#page-hurling">Hurling</a></li><li><a href="#page-gfmo">GFM&amp;O</a></li><li><a href="#page-allstars">Inclusion All-Stars</a></li><li><a href="#page-insurance">Player insurance</a></li></ul></div>
-      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#page-committee">Committee</a></li><li><a href="#page-facilities">Facilities &amp; Astro</a></li><li><a href="#page-gaeilge">Gaeilge &amp; Scór</a></li><li><a href="#page-welfare">Welfare &amp; safeguarding</a></li><li><a href="#page-mental">Mental health</a></li><li><a href="#shop">Club shop</a></li></ul></div>
+      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#page-committee">Committee</a></li><li><a href="#page-facilities">Facilities &amp; Astro</a></li><li><a href="#page-gaeilge">Gaeilge &amp; Scór</a></li><li><a href="#page-welfare">Welfare &amp; safeguarding</a></li><li><a href="#page-mental">Mental health</a></li><li><a href="#shop">Club shop</a></li><li><a href="#page-directory">Business directory</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>PRO: Lisa Jackson</li><li><a href="tel:0863767534">086 376 7534</a></li><li><a href="mailto:pro.blessington.wicklow@gaa.ie">pro.blessington.wicklow@gaa.ie</a></li></ul></div>
     </div>
     <div class="f-bottom"><span>© <span class="js-year">2026</span> Blessington GAA &amp; LGFA</span><span>Concept mockup · not the official site</span></div>
@@ -857,7 +888,13 @@ const CLUB = {
   },
   // Paste the "Publish to web → CSV" link for each sheet tab here. See SHEET-SETUP.md.
   // A link left empty shows sample data, labelled "sample". A link that fails shows a "check Facebook" message.
-  sheets: { fixtures: '', news: '', lotto: '' },
+  sheets: { fixtures: '', news: '', lotto: '', directory: '' },
+  // The business directory panel, opened by any link to #page-directory. Listings come from the Directory sheet tab.
+  directory: {
+    intro: 'Local businesses that back Blessington GAA. Support them and you support the club.',
+    join: 'mailto:pro.blessington.wicklow@gaa.ie?subject=Business%20directory%20listing',
+    todo: ['The listing fee, and what each tier includes: main sponsor, club sponsor and member business.']
+  },
   shops: [
     ['O’Neills', 'https://www.oneills.com/shop-by-team/gaa/ireland/blessington-gaa.html'],
     ['DS Sports', 'https://www.dssports.ie/collections/clubshop-gaa-blessington-gaa'],
@@ -1026,7 +1063,7 @@ function paintTicker(){
   // The jackpot joins the ticker only when it is live data, never the sample figure.
   const items=[...(lottoState==='live'&&lotto&&lotto.jackpot?['Lotto jackpot '+eur(lotto.jackpot)]:[]),...CLUB.ticker];
   $('#ticker').innerHTML=[...items,...items].map(t=>`<span><em>●</em>${esc(t)}</span>`).join('')}
-$('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(s=>`<span class="sp">${esc(s)}</span>`).join('');
+$('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(s=>`<a class="sp" href="#page-directory">${esc(s)}</a>`).join('');
 $('#shopNote').innerHTML = CLUB.shopNote ? `<b>Coaches ordering team kit:</b> ${esc(CLUB.shopNote)}` : '';
 $('#shopBtns').innerHTML =CLUB.shops.map(([n,u],i)=>`<a class="btn ${i?'btn-line':'btn-gold'}" href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} <span class="ar">→</span></a>`).join('');
 
@@ -1155,7 +1192,7 @@ const paths={
   kids:{t:'Your child, our club',d:'From first kicks in the Academy through juvenile boys and girls teams. Fun first, skills always.',l:['Academy for the youngest','Juvenile boys & girls','All-Stars, Sundays 10–11','Garda-vetted coaches'],a:[['Register your child','#join','btn-gold'],['Safeguarding info','#page-welfare','btn-line']]},
   play:{t:'Pull on the blue',d:'Adult men, adult ladies, hurling and Gaelic for Mothers & Others. Every standard welcome.',l:['Men’s & ladies’ football','Hurling, new players welcome','GFM&O, no experience needed','Injury cover with membership'],a:[['Join as a player','#join','btn-gold'],['Contact a manager','#page-adult','btn-line']]},
   help:{t:'Clubs run on volunteers',d:'Coaching, mentoring, the gate, the grounds, events. Give an hour or a season. No experience needed.',l:['Coach or assist a team','Help on match days','Join a committee','Support Scór & Gaeilge'],a:[['I’d like to help','mailto:pro.blessington.wicklow@gaa.ie','btn-gold'],['See open roles','#page-volunteer','btn-line']]},
-  back:{t:'Back the club',d:'Every Lotto line, membership and sponsorship goes into pitches, coaching and the new clubhouse.',l:['Lotto, €2 a line','Supporter membership, €60','Become a sponsor','Club shop'],a:[['Play the Lotto','#lotto','btn-gold'],['Sponsorship enquiry','mailto:pro.blessington.wicklow@gaa.ie','btn-line']]}
+  back:{t:'Back the club',d:'Every Lotto line, membership and sponsorship goes into pitches, coaching and the new clubhouse.',l:['Lotto, €2 a line','Supporter membership, €60','Become a sponsor','Club shop'],a:[['Play the Lotto','#lotto','btn-gold'],['Business directory','#page-directory','btn-line'],['Sponsorship enquiry','mailto:pro.blessington.wicklow@gaa.ie','btn-line']]}
 };
 function showPath(k){const p=paths[k];
   $('#panel').innerHTML=`<div><h3>${p.t}</h3><p>${p.d}</p><ul>${p.l.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="acts">${p.a.map(([t,h,c])=>`<a class="btn ${c}" href="${h}" style="justify-content:center">${t} <span class="ar">→</span></a>`).join('')}</div>`;
@@ -1166,7 +1203,8 @@ $$('.path').forEach(b=>b.onclick=()=>showPath(b.dataset.p)); showPath('kids');
 /* ---------- Google Sheet: one published CSV link per tab ----------
    Column headings are matched by name, in any order, ignoring capitals, spaces and punctuation. */
 const HEAD={section:'group',homeoraway:'home',homeaway:'home',venue:'home',drawdate:'date',nextjackpot:'jackpot',
-  nextdraw:'next',winner:'result',category:'tag',headline:'title',summary:'text',url:'link'};
+  nextdraw:'next',winner:'result',category:'tag',headline:'title',summary:'text',url:'link',
+  business:'name',businessname:'name',description:'text',level:'tier',web:'website',email:'email',emailaddress:'email',phonenumber:'phone'};
 function parseCSV(text){const rows=[];let row=[],f='',q=false;for(let i=0;i<text.length;i++){const c=text[i];
   if(q){if(c==='"'){if(text[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
   else if(c==='"')q=true;else if(c===','){row.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(f);rows.push(row);row=[];f=''}else f+=c}
@@ -1189,7 +1227,10 @@ function loadLive(){const s=CLUB.sheets;
     .then(r=>{const d=r.map(normLotto).filter(x=>x.d).sort((a,b)=>b.d-a.d)[0];if(!d)throw new Error('No draws');lotto=d;lottoState='live'})
     .catch(()=>{lotto=null;lottoState='down'}).then(paintLotto);
   if(s.news) loadSheet(s.news,['title'])
-    .then(r=>{news=r.map(normNews).filter(x=>x.title);newsState='live'},()=>{news=[];newsState='down'}).then(paintNews)}
+    .then(r=>{news=r.map(normNews).filter(x=>x.title);newsState='live'},()=>{news=[];newsState='down'}).then(paintNews);
+  if(s.directory) loadSheet(s.directory,['name','tag'])
+    .then(r=>{biz=r.map(normBiz).filter(b=>b.name);bizState='live'},()=>{biz=[];bizState='down'})
+    .then(()=>{if(pg.open&&location.hash==='#page-directory')route()})}
 
 /* ---------- news: the "Right now" cards ---------- */
 // A Sheet link is only used if it is a plain web address or an in-page #anchor.
@@ -1208,6 +1249,60 @@ function paintNews(){
       ${c.big?`<div class="big">${c.big.split(' ').map(w=>`<span>${esc(w)}</span>`).join(' ')}</div>`:`<h3>${esc(c.title)}</h3>`}
       <p>${esc(c.text)}</p>${c.when?`<span class="when">${esc(c.when)}</span>`:''}
       ${c.link?`<span class="go">${esc(c.cta||'Read more')} <span class="ar">→</span></span>`:''}</${el}>`}).join('')}
+
+/* ---------- business directory: the #page-directory panel ----------
+   Sheet columns: Name | Category | Tier | Description | Phone | Email | Website | Address | Logo | Facebook | Instagram
+   Tier: "Main sponsor", "Sponsor" or "Member". Main sponsors get a full-width card at the top. */
+// Made-up businesses for the demo. The panel heading labels them "sample listings".
+// 01 000 0000 is not a real number, so a test tap on "Call" rings nobody.
+const SAMPLE_BIZ=[
+  {name:'Sample Motors',tag:'Motoring',tier:'Main sponsor',text:'Example listing. A main sponsor gets a full-width card with a large logo, at the top of the directory.',phone:'01 000 0000',website:'https://example.com',address:'Blessington, Co. Wicklow',facebook:'https://www.facebook.com/'},
+  {name:'Sample Café',tag:'Food & drink',tier:'Sponsor',text:'Example listing. Coffee, lunches and match-day treats.',phone:'01 000 0000',email:'hello@example.com',address:'Blessington, Co. Wicklow'},
+  {name:'Sample Physio',tag:'Health & fitness',tier:'Sponsor',text:'Example listing. Sports injuries and rehab.',phone:'01 000 0000',website:'https://example.com'},
+  {name:'Sample Builders',tag:'Trades & construction',tier:'Member',text:'Example listing. Extensions, renovations and repairs.',phone:'01 000 0000',email:'hello@example.com'},
+  {name:'Sample Accountants',tag:'Professional services',tier:'Member',text:'Example listing. Tax returns and bookkeeping for local businesses.',website:'https://example.com',email:'hello@example.com'},
+  {name:'Sample Pharmacy',tag:'Health & fitness',tier:'Member',text:'Example listing. Open seven days.',phone:'01 000 0000',address:'Blessington, Co. Wicklow'}
+];
+const TIER=['','Main sponsor','Club sponsor','Member business'];
+const tierOf = v => /main|head|title|premier/i.test(v)?1:/spons/i.test(v)?2:3;
+// A website typed without https:// (for example www.example.ie) still works.
+const webLink = v => {let s=String(v??'').trim();if(/^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(s))s='https://'+s;s=safeLink(s);return /^https?:/i.test(s)?s:''};
+function normBiz(r){const phone=String(r.phone??'').trim(), tel=phone.replace(/[^\d+]/g,''), mail=String(r.email??'').trim(), logo=webLink(r.logo);
+  return {name:String(r.name??'').trim(), cat:String(r.tag??'').trim()||'Other', tier:tierOf(String(r.tier??'')), text:String(r.text??'').trim(),
+    phone:tel.length>=7?phone:'', tel, email:/^[^\s@<>"'?&]+@[\w-]+(\.[\w-]+)+$/.test(mail)?mail:'', web:webLink(r.website),
+    addr:String(r.address??'').trim(), logo:/^https:/i.test(logo)?logo:'', fb:webLink(r.facebook), ig:webLink(r.instagram)}}
+let biz=SAMPLE_BIZ.map(normBiz), bizState='sample', dirCat='all', dirQ='';   // bizState: 'sample' | 'live' | 'down'
+const initials = n => n.split(/\s+/).filter(w=>/^[A-Za-zÀ-ÿ0-9]/.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase()||'•';
+function bizCard(b){
+  const a=(h,t,c='')=>`<a${c?` class="${c}"`:''} href="${esc(h)}"${/^https?:/.test(h)?' target="_blank" rel="noopener"':''}>${t}</a>`;
+  const map=b.addr?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.addr):'';
+  return `<article class="biz t${b.tier}">
+    <div class="biz-top"><div class="biz-logo" aria-hidden="true"><span>${esc(initials(b.name))}</span>${b.logo?`<img src="${esc(b.logo)}" alt="" loading="lazy" onerror="this.remove()">`:''}</div>
+      <div><div class="tier">${TIER[b.tier]}</div><h4>${esc(b.name)}</h4><div class="cat">${esc(b.cat)}</div></div></div>
+    ${b.text?`<p>${esc(b.text)}</p>`:''}${b.addr?`<p class="addr">${esc(b.addr)}</p>`:''}
+    <div class="biz-acts">${b.phone?a('tel:'+b.tel,'Call '+esc(b.phone),'call'):''}${b.web?a(b.web,'Website'):''}${b.email?a('mailto:'+b.email,'Email'):''}${map?a(map,'Map'):''}${b.fb?a(b.fb,'Facebook'):''}${b.ig?a(b.ig,'Instagram'):''}</div>
+  </article>`}
+function dirHTML(){const D=CLUB.directory;
+  return `<div class="kicker">Support local</div><h2 class="disp" id="pgTitle">Business directory</h2>
+    ${bizState==='sample'?'<p><span class="sample">sample listings</span> These are made-up businesses that show how the directory works.</p>':''}
+    <p>${esc(D.intro)}</p>
+    <div class="dir-tools"><input class="dir-q" id="dirQ" type="search" placeholder="Search businesses" aria-label="Search businesses">
+      <a class="btn btn-gold" href="${esc(D.join)}">List your business <span class="ar">→</span></a></div>
+    <div class="dir-cats" id="dirCats" role="group" aria-label="Filter by category"></div>
+    <div class="dir-grid" id="dirGrid" aria-live="polite"></div>${todoHTML(D.todo)}`}
+function paintDir(){const g=$('#dirGrid');if(!g)return;
+  if(bizState==='down'){$('#dirCats').innerHTML='';
+    g.innerHTML=`<p class="dir-none">The directory is unavailable right now. Check the club <a href="${esc(CLUB.social.facebook)}" target="_blank" rel="noopener">Facebook page</a>.</p>`;return}
+  const cats=[...new Set(biz.map(b=>b.cat))].sort();
+  if(!cats.includes(dirCat)) dirCat='all';
+  $('#dirCats').innerHTML=['all',...cats].map(c=>`<button type="button" data-c="${esc(c)}" aria-pressed="${c===dirCat}"${c===dirCat?' class="on"':''}>${c==='all'?'All':esc(c)}</button>`).join('');
+  const q=dirQ.trim().toLowerCase();
+  const list=biz.filter(b=>(dirCat==='all'||b.cat===dirCat)&&(!q||[b.name,b.cat,b.text,b.addr].join(' ').toLowerCase().includes(q)))
+    .sort((a,b)=>a.tier-b.tier||a.name.localeCompare(b.name));
+  g.innerHTML=list.map(bizCard).join('')||`<p class="dir-none">${biz.length?'No businesses match. Try another word or category.':'No businesses are listed yet.'}</p>`}
+function wireDir(){const q=$('#dirQ');q.value=dirQ;q.oninput=()=>{dirQ=q.value;paintDir()};
+  $('#dirCats').onclick=e=>{const c=e.target.closest('button');if(c){dirCat=c.dataset.c;paintDir()}};
+  paintDir()}
 
 /* ---------- fixtures & results ----------
    One row per game. A row with a score is a result; a row without one is a fixture.
@@ -1282,8 +1377,9 @@ function pageHTML(p){
     +(p.links?`<div class="pg-acts">${p.links.map(([t,h],i)=>`<a class="btn ${i?'btn-line':'btn-gold'}" href="${esc(h)}"${/^https?:/.test(h)?' target="_blank" rel="noopener"':''}>${esc(t)} <span class="ar">→</span></a>`).join('')}</div>`:'')
     +(p.src?'<p class="pg-src">Details are from the current club site, blessingtongaa.ie. The club confirms them before launch.</p>':'')}
 const pg=$('#pg'), isPage=()=>location.hash.startsWith('#page-');
-function route(){const p=isPage()&&CLUB.pages[location.hash.slice(6)];
-  if(p){$('#pgIn').innerHTML=pageHTML(p);if(!pg.open)pg.showModal();pg.scrollTop=0;document.documentElement.classList.add('locked')}
+function route(){const k=isPage()&&location.hash.slice(6), dir=k==='directory', p=k&&!dir&&CLUB.pages[k];
+  if(p||dir){$('#pgIn').innerHTML=dir?dirHTML():pageHTML(p);if(dir)wireDir();pg.classList.toggle('wide',dir);
+    if(!pg.open)pg.showModal();pg.scrollTop=0;document.documentElement.classList.add('locked')}
   else if(pg.open) pg.close()}
 // Closing clears the #page-… address without moving the page underneath.
 pg.addEventListener('close',()=>{document.documentElement.classList.remove('locked');if(isPage())history.replaceState(null,'',location.pathname+location.search)});

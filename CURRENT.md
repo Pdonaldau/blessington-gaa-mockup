@@ -1,6 +1,6 @@
 # CURRENT — Blessington GAA mockup
 
-Updated 2026-11-13. Live site last checked against this file: 2026-11-13.
+Updated 2026-11-18. Live site last checked against this file: 2026-11-13.
 
 ## Goal now
 
@@ -17,16 +17,18 @@ The PRO has seen the concept and liked it. The committee sees it next.
 
 The six tasks in the 2026-11-13 to-do list are done and pushed.
 The hero now has archive footage of club players as a fixed backdrop. Patrick confirmed it plays on his PC and his phone.
+A business directory panel (`#page-directory`) was added on 2026-11-18. The PRO sent the Listry GAA directory (a WordPress plugin page by Pallas Marketing) as an example of what the club wants.
 The site runs on labelled sample data until Patrick pastes the Sheet links.
 
 ## Next step
 
 Patrick's part. Nothing else is blocked on code.
 
-1. Create the Google Sheet from `sheet-template/`, following `SHEET-SETUP.md`. Paste the three links into `CLUB.sheets`.
+1. Create the Google Sheet from `sheet-template/`, following `SHEET-SETUP.md`. Paste the four links into `CLUB.sheets`.
 2. Confirm the lotto draw day, time and fortnightly rhythm. Set `CLUB.lotto.drawTime`.
 3. Confirm the sponsor differences in `SPONSORS-CHECK.md`.
 4. Get the Children's Officer contact and the current committee list from the PRO.
+   Ask the PRO for the directory listing fee and tiers, and the first businesses to list.
 5. Go through "Facts to confirm" in `LAUNCH.md` with the PRO.
 
 Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
@@ -46,11 +48,12 @@ Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 
 ## Decisions in force
 
-- **One Fixtures tab, not separate Fixtures and Results tabs.** A row with a score is a result. The PRO types a score and never moves a row. So `CLUB.sheets` has three links: `fixtures`, `news`, `lotto`.
+- **One Fixtures tab, not separate Fixtures and Results tabs.** A row with a score is a result. The PRO types a score and never moves a row. So `CLUB.sheets` has four links: `fixtures`, `news`, `lotto`, `directory`.
 - **Club pages are in-page panels, not separate HTML files.** Any link to `#page-<key>` opens the panel built from `CLUB.pages.<key>`.
 - **No "next" date is typed.** Next match is the earliest upcoming fixture. Next lotto draw comes from `CLUB.lotto.firstDraw` plus `everyDays` (14). A "Next draw" cell in the Lotto sheet overrides the rule.
 - **Sample fixtures are dated relative to today**, so the demo never goes stale.
 - **"Right now" shows the two newest News rows.** `CLUB.pinned` cards fill any gap.
+- **The business directory is a panel, fed from the Directory sheet tab.** Not a WordPress directory like the Listry example. Columns: Name, Category, Tier, Description, Phone, Email, Website, Address, Logo, Facebook, Instagram. Main sponsors get a full-width card at the top. Sample listings are made-up businesses named "Sample …" with the dead number 01 000 0000, never real local businesses. Sponsor names in the marquee link to the panel.
 - **The Welfare panel names no Children's Officer.** The current site names two different people. Only the role email is shown.
 
 ## How to test
