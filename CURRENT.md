@@ -1,6 +1,6 @@
 # CURRENT — Blessington GAA mockup
 
-Updated 2026-11-18. Live site last checked against this file: 2026-11-13.
+Updated 2026-11-19. Live site last checked against this file: 2026-11-13.
 
 ## Goal now
 
@@ -54,7 +54,7 @@ Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 - **Sample fixtures are dated relative to today**, so the demo never goes stale.
 - **"Right now" shows the two newest News rows.** `CLUB.pinned` cards fill any gap.
 - **The business directory is a panel, fed from the Directory sheet tab.** Not a WordPress directory like the Listry example. Columns: Name, Category, Tier, Description, Phone, Email, Website, Address, Logo, Facebook, Instagram. Cards are compact rows (logo, name, tier, category); a tap opens the description and Call/Website/Map buttons in place. Main sponsors come first, with a gold border. Sample listings are made-up businesses named "Sample …" with the dead number 01 000 0000, never real local businesses. Sponsor names in the marquee link to the panel.
-- **Sponsor logos are copies in `media/sponsors/`, not links to Squarespace.** They were copied from blessingtongaa.ie on 2026-11-18, so they keep working after the old site closes. They scroll in a slim strip under the news ticker that opens the directory. `CLUB.sponsors` entries are `[name, logo file, 1 for a white tile]`.
+- **Sponsor logos are copies in `media/sponsors/`, not links to Squarespace.** They were copied from blessingtongaa.ie on 2026-11-18, so they keep working after the old site closes. They scroll in a slim strip under the news ticker that opens the directory. On phones the "Our sponsors" label hangs below the strip as a tab, so the logos get the full width. `CLUB.sponsors` entries are `[name, logo file, 1 for a white tile]`.
 - **The Welfare panel names no Children's Officer.** The current site names two different people. Only the role email is shown.
 
 ## How to test
