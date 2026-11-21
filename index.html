@@ -766,7 +766,7 @@ footer{background:var(--night)}
       <!-- Two cards: the newest rows of the News sheet, topped up from CLUB.pinned. -->
       <div id="newsSlot" style="display:contents"></div>
       <div class="tile t-join rv">
-        <div><h3>2026 membership is open</h3><p>Players from €60 · families capped at €420</p></div>
+        <div><h3>2026 membership is open</h3><p>Players from €<span class="js-from">60</span> · families capped at €<span class="js-cap">420</span></p></div>
         <a href="#join" class="btn btn-dark">Work out your price <span class="ar">→</span></a>
       </div>
     </div>
@@ -845,7 +845,7 @@ footer{background:var(--night)}
   <div class="wrap">
     <div class="kicker">2026 membership</div>
     <h2 class="h2 disp">What will it cost<br>your family?</h2>
-    <p class="sub">Add everyone in your household. Family price is capped at €420.</p>
+    <p class="sub">Add everyone in your household. Family price is capped at €<span class="js-cap">420</span>.</p>
     <button class="m-toggle m-light" id="memToggle" aria-expanded="false">Open the price calculator <span>+</span></button>
     <div class="mem-grid" id="memGrid">
       <div class="mem" id="mem"></div>
@@ -929,7 +929,9 @@ const CLUB = {
   },
   // Paste the "Publish to web → CSV" link for each sheet tab here. See SHEET-SETUP.md.
   // A link left empty shows sample data, labelled "sample". A link that fails shows a "check Facebook" message.
-  sheets: { fixtures: '', news: '', lotto: '', directory: '' },
+  // club = the Club tab (lotto rule, prices, ticker, shop note). pages = the Pages tab (text of the panels below).
+  // Both override the settings here; while they are empty or failing, the settings here are used.
+  sheets: { fixtures: '', news: '', lotto: '', directory: '', club: '', pages: '' },
   // The business directory panel, opened by any link to #page-directory. Listings come from the Directory sheet tab.
   directory: {
     intro: 'Local businesses that back Blessington GAA. Support them and you support the club.',
@@ -1112,7 +1114,8 @@ function paintTicker(){
 $('#marquee').innerHTML = [...CLUB.sponsors,...CLUB.sponsors].map(([n])=>`<a class="sp" href="#page-directory">${esc(n)}</a>`).join('');
 // Logo strip: the list twice, so the scroll loops without a gap. The second copy is hidden from screen readers.
 $('#logoStrip').innerHTML = [0,1].map(k=>CLUB.sponsors.filter(s=>s[1]).map(([n,f,w])=>`<img${w?' class="tile"':''} src="media/sponsors/${esc(f)}.webp" alt="${k?'':esc(n)}"${k?' aria-hidden="true"':''} height="30" loading="lazy" onerror="this.remove()">`).join('')).join('');
-$('#shopNote').innerHTML = CLUB.shopNote ? `<b>Coaches ordering team kit:</b> ${esc(CLUB.shopNote)}` : '';
+function paintShopNote(){$('#shopNote').innerHTML = CLUB.shopNote ? `<b>Coaches ordering team kit:</b> ${esc(CLUB.shopNote)}` : ''}
+paintShopNote();
 $('#shopBtns').innerHTML =CLUB.shops.map(([n,u],i)=>`<a class="btn ${i?'btn-line':'btn-gold'}" href="${esc(u)}" target="_blank" rel="noopener">${esc(n)} <span class="ar">→</span></a>`).join('');
 
 /* ---------- header & menu ---------- */
@@ -1278,7 +1281,44 @@ function loadLive(){const s=CLUB.sheets;
     .then(r=>{news=r.map(normNews).filter(x=>x.title);newsState='live'},()=>{news=[];newsState='down'}).then(paintNews);
   if(s.directory) loadSheet(s.directory,['name','tag'])
     .then(r=>{biz=r.map(normBiz).filter(b=>b.name);bizState='live'},()=>{biz=[];bizState='down'})
-    .then(()=>{if(pg.open&&location.hash==='#page-directory')route()})}
+    .then(()=>{if(pg.open&&location.hash==='#page-directory')route()});
+  if(s.club) loadSheet(s.club,['setting','value']).then(applyClub,()=>{});   // a failure keeps the settings in CLUB
+  if(s.pages) loadSheet(s.pages,['page','group','text'])
+    .then(applyPages,()=>{pagesState='down'}).then(()=>{if(pg.open)route()})}
+
+/* ---------- Club tab: Setting | Value. Only the settings named here can change. ---------- */
+function applyClub(rows){const L=CLUB.lotto, num=v=>{const n=parseFloat(String(v).replace(/[^\d.]/g,''));return isFinite(n)?n:null}, tick=[];
+  for(const r of rows){const k=String(r.setting??'').toLowerCase().replace(/[^a-z0-9]/g,''), v=String(r.value??'').trim(), n=num(v);
+    if(k==='lottofirstdraw'){const d=parseDate(v);if(d)L.firstDraw=iso(d)}
+    else if(k==='lottodaysbetweendraws'){if(n>=1&&n<=60)L.everyDays=Math.round(n)}
+    else if(k==='lottodrawtime'){const t=parseTime(v);L.drawTime=t?`${pad(t[0])}:${pad(t[1])}`:''}
+    else if(k==='lottomatch3prize'){if(n!==null)L.match3=n}
+    else if(k==='familycap'){if(n)CLUB.familyCap=n}
+    else if(k.startsWith('price')){const m=CLUB.membership.find(x=>x[1]!==undefined&&key(x[0]).toLowerCase()===k.slice(5));if(m&&n!==null)m[1]=n}
+    else if(k==='ticker'){if(v)tick.push(v)}
+    else if(k==='shopnote') CLUB.shopNote=v}
+  if(tick.length) CLUB.ticker=tick;
+  paintShopNote(); paintMem(); paintLotto()}
+
+/* ---------- Pages tab: Page | Section | Label | Text ----------
+   Page is a panel's title or key. Section "Intro" holds the opening paragraphs; "To come" rows show as
+   "Content to come from the club". In any other section, a row with a Label is a line in a two-column list,
+   a Label of "-" is a bullet point, and an empty Label is a paragraph. A page with rows in the tab is built
+   only from them. A page with no rows keeps its text from CLUB.pages. Links and buttons stay in CLUB.pages. */
+let pagesState='code';   // 'code' | 'live' | 'down'
+function applyPages(rows){const nk=v=>String(v??'').toLowerCase().replace(/[^a-z0-9]/g,''), built={};
+  for(const r of rows){const pk=nk(r.page), k=Object.keys(CLUB.pages).find(x=>nk(x)===pk||nk(CLUB.pages[x].t)===pk);
+    const h=String(r.group??'').trim(), lab=String(r.label??'').trim(), t=String(r.text??'').trim();
+    if(!k||!t) continue;
+    const p=built[k]??={p:[],sec:[],todo:[]};
+    if(!h||/^intro$/i.test(h)){p.p.push(t);continue}
+    if(/^to ?come$/i.test(h)){p.todo.push(t);continue}
+    let s=p.sec.find(x=>x.h===h); if(!s) p.sec.push(s={h,p:[],rows:[],list:[]});
+    if(!lab) s.p.push(t); else if(/^[-•*]$/.test(lab)) s.list.push(t); else s.rows.push([lab,t])}
+  for(const [k,b] of Object.entries(built)){const p=CLUB.pages[k];
+    p.p=b.p; p.todo=b.todo; delete p.src;
+    p.sec=b.sec.map(s=>({h:s.h,p:s.p.length?s.p:undefined,rows:s.rows.length?s.rows:undefined,list:s.list.length?s.list:undefined}))}
+  pagesState='live'}
 
 /* ---------- news: the "Right now" cards ---------- */
 // A Sheet link is only used if it is a plain web address or an in-page #anchor.
@@ -1430,7 +1470,8 @@ const todoHTML = l => (l||[]).map(x=>`<div class="todo"><b>Content to come from 
 function pageHTML(p){
   return `<div class="kicker">${esc(p.k)}</div><h2 class="disp" id="pgTitle">${esc(p.t)}</h2>`
     +(p.p||[]).map(x=>`<p>${linkify(x)}</p>`).join('')
-    +(p.sec||[]).map(s=>`<h3>${esc(s.h)}</h3>${s.p?`<p>${linkify(s.p)}</p>`:''}`
+    +(pagesState==='down'?'<p class="pg-src">This page may be out of date. Check the club Facebook page for the latest.</p>':'')
+    +(p.sec||[]).map(s=>`<h3>${esc(s.h)}</h3>${[].concat(s.p||[]).map(x=>`<p>${linkify(x)}</p>`).join('')}`
       +(s.rows?`<dl>${s.rows.map(([a,b])=>`<div><dt>${esc(a)}</dt><dd>${linkify(b)}</dd></div>`).join('')}</dl>`:'')
       +(s.list?`<ul>${s.list.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:'')+todoHTML(s.todo)).join('')
     +todoHTML(p.todo)
@@ -1457,12 +1498,20 @@ $('#lucky').onclick=()=>{picks.clear();while(picks.size<4)picks.add(1+Math.floor
 
 /* ---------- membership calculator ---------- */
 const qty={}, key=n=>n.replace(/\W/g,'');
-$('#mem').innerHTML=CLUB.membership.map(([n,p])=>p===undefined?`<div class="grp">${n}</div>`:
-  `<div class="row"><div><div class="n">${n}</div><div class="p">€${p}</div></div><div class="step"><button data-k="${n}" data-d="-1" aria-label="Remove ${n}">−</button><output id="q-${key(n)}">0</output><button data-k="${n}" data-d="1" aria-label="Add ${n}">+</button></div></div>`).join('');
-$('#mem').onclick=e=>{const k=e.target.dataset.k;if(!k)return;qty[k]=Math.max(0,(qty[k]||0)+ +e.target.dataset.d);$('#q-'+key(k)).textContent=qty[k];
+// Painted again when the Club tab changes a price. Chosen quantities are kept.
+function paintMem(){$('#mem').innerHTML=CLUB.membership.map(([n,p])=>p===undefined?`<div class="grp">${n}</div>`:
+  `<div class="row"><div><div class="n">${n}</div><div class="p">€${p}</div></div><div class="step"><button data-k="${n}" data-d="-1" aria-label="Remove ${n}">−</button><output id="q-${key(n)}">${qty[n]||0}</output><button data-k="${n}" data-d="1" aria-label="Add ${n}">+</button></div></div>`).join('');
+  // "Players from": the lowest price in the first group (playing members).
+  const g=CLUB.membership.findIndex((x,i)=>i&&x[1]===undefined), play=CLUB.membership.slice(0,g<0?undefined:g).filter(x=>x[1]!==undefined).map(x=>x[1]);
+  $$('.js-cap').forEach(e=>e.textContent=CLUB.familyCap);
+  if(play.length) $$('.js-from').forEach(e=>e.textContent=Math.min(...play));
+  memTotal()}
+$('#mem').onclick=e=>{const k=e.target.dataset.k;if(!k)return;qty[k]=Math.max(0,(qty[k]||0)+ +e.target.dataset.d);$('#q-'+key(k)).textContent=qty[k];memTotal()};
+function memTotal(){
   const raw=CLUB.membership.reduce((s,[n,p])=>s+(p?(qty[n]||0)*p:0),0),ppl=Object.values(qty).reduce((a,b)=>a+b,0),tot=ppl>1?Math.min(raw,CLUB.familyCap):raw;
   $('#memTotal').textContent='€'+tot;
-  $('#memNote').textContent=raw>tot?`Family cap applied, you save €${raw-tot}`:ppl?`${ppl} member${ppl>1?'s':''}`:'Add members to see your price'};
+  $('#memNote').textContent=raw>tot?`Family cap applied, you save €${raw-tot}`:ppl?`${ppl} member${ppl>1?'s':''}`:'Add members to see your price'}
+paintMem();
 </script>
 </body>
 </html>

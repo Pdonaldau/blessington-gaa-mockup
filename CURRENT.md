@@ -1,6 +1,6 @@
 # CURRENT — Blessington GAA mockup
 
-Updated 2026-11-19. Live site last checked against this file: 2026-11-13.
+Updated 2026-11-21. Live site last checked against this file: 2026-11-13.
 
 ## Goal now
 
@@ -24,8 +24,8 @@ The site runs on labelled sample data until Patrick pastes the Sheet links.
 
 Patrick's part. Nothing else is blocked on code.
 
-1. Create the Google Sheet from `sheet-template/`, following `SHEET-SETUP.md`. Paste the four links into `CLUB.sheets`.
-2. Confirm the lotto draw day, time and fortnightly rhythm. Set `CLUB.lotto.drawTime`.
+1. Create the Google Sheet by running `sheet-template/setup.gs`, following `SHEET-SETUP.md`. Paste the six links into `CLUB.sheets`. The script has only been syntax-checked: the first real run is its test.
+2. Confirm the lotto draw day, time and fortnightly rhythm. They go in the Club tab (or `CLUB.lotto` as the fallback).
 3. Confirm the sponsor differences in `SPONSORS-CHECK.md`.
 4. Get the Children's Officer contact and the current committee list from the PRO.
    Ask the PRO for the directory listing fee and tiers, and the first businesses to list.
@@ -48,7 +48,8 @@ Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 
 ## Decisions in force
 
-- **One Fixtures tab, not separate Fixtures and Results tabs.** A row with a score is a result. The PRO types a score and never moves a row. So `CLUB.sheets` has four links: `fixtures`, `news`, `lotto`, `directory`.
+- **One Fixtures tab, not separate Fixtures and Results tabs.** A row with a score is a result. The PRO types a score and never moves a row. So `CLUB.sheets` has six links: `fixtures`, `news`, `lotto`, `directory`, `club`, `pages`.
+- **The club edits in the Sheet, not the code** (2026-11-21). `sheet-template/setup.gs` builds the Sheet: tabs, Irish locale, dropdowns, date checks, red rows, warning-protected headings, a "How to" tab, and two phone forms ("Post news", "Add a result"). Form posts count only from accounts that can edit the Sheet. The Club tab overrides a whitelist of settings (lotto rule, `Price:` rows, family cap, ticker, shop note). The Pages tab rebuilds the text of any panel it has rows for, and drops that panel's "from the current club site" note. Links and buttons stay in `CLUB.pages`. If Club fails, `CLUB` is used; if Pages fails, the panel shows its `CLUB.pages` text with a "may be out of date" note. The starter Club and Pages rows are `sheet-template/club.csv` and `pages.csv`, fetched by the script from the live site. If `CLUB.pages` changes before the Sheet exists, regenerate `pages.csv` with `node sheet-template/export-pages.js index.html sheet-template/pages.csv`.
 - **Club pages are in-page panels, not separate HTML files.** Any link to `#page-<key>` opens the panel built from `CLUB.pages.<key>`.
 - **No "next" date is typed.** Next match is the earliest upcoming fixture. Next lotto draw comes from `CLUB.lotto.firstDraw` plus `everyDays` (14). A "Next draw" cell in the Lotto sheet overrides the rule.
 - **Sample fixtures are dated relative to today**, so the demo never goes stale.
