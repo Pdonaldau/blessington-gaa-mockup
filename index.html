@@ -61,6 +61,8 @@ nav a:hover{background:rgba(255,255,255,.08)}
 nav .btn{padding:10px 18px;margin-left:6px}
 .lang{background:none;border:1px solid var(--line-d);color:#fff;border-radius:999px;padding:7px 12px;font-weight:700;font-size:12px;margin-left:4px}
 .burger{display:none;background:none;border:0;padding:8px}
+/* the phone menu has room for the full name */
+.nav-l{display:none}
 .burger span{display:block;width:24px;height:2px;background:#fff;margin:6px 0;transition:.3s}
 .burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
 .burger.open span:nth-child(2){opacity:0}
@@ -424,6 +426,7 @@ a.sp{cursor:pointer}
   nav .btn{margin:10px 0 0;justify-content:center;font-family:Inter;font-size:15px;font-weight:700}
   .lang{align-self:flex-start;margin:12px 0 0}
   .burger{display:block}
+  .nav-s{display:none}.nav-l{display:inline}
   .bento{grid-template-columns:1fr 1fr}
   .t-match{grid-column:span 2}.t-lotto{grid-row:span 1;grid-column:span 2}.t-join{grid-column:span 2}
   .paths{grid-template-columns:1fr 1fr}
@@ -688,7 +691,7 @@ footer{background:var(--night)}
         <li><a href="#fixtures" data-i18n="fixtures">Fixtures</a></li>
         <li><a href="#lotto" data-i18n="lotto">Lotto</a></li>
         <li><a href="#shop" data-i18n="shop">Shop</a></li>
-        <li><a href="#page-directory" data-i18n="sponsors">Sponsors</a></li>
+        <li><a href="#page-directory"><span class="nav-s" data-i18n="sponsors">Sponsors</span><span class="nav-l" data-i18n="sponsorsDir">Sponsors Directory</span></a></li>
         <li><a href="#join" class="btn btn-gold" data-i18n="join">Join the club</a></li>
         <li><button class="lang" id="lang" aria-label="Switch to Irish">GA</button></li>
       </ul>
@@ -1143,8 +1146,8 @@ $('#burger').onclick=()=>{$('#burger').classList.toggle('open');$('#nav').classL
 $$('#nav a').forEach(a=>a.addEventListener('click',()=>{$('#burger').classList.remove('open');$('#nav').classList.remove('open')}));
 
 /* ---------- Irish toggle (needs native-speaker review) ---------- */
-const i18n={en:{story:'Our story',play:'Play',fixtures:'Fixtures',lotto:'Lotto',shop:'Shop',sponsors:'Sponsors',join:'Join the club'},
-            ga:{story:'Ár scéal',play:'Imir',fixtures:'Cluichí',lotto:'Crannchur',shop:'Siopa',sponsors:'Urraitheoirí',join:'Bí linn'}};
+const i18n={en:{story:'Our story',play:'Play',fixtures:'Fixtures',lotto:'Lotto',shop:'Shop',sponsors:'Sponsors',sponsorsDir:'Sponsors Directory',join:'Join the club'},
+            ga:{story:'Ár scéal',play:'Imir',fixtures:'Cluichí',lotto:'Crannchur',shop:'Siopa',sponsors:'Urraitheoirí',sponsorsDir:'Eolaire na nUrraitheoirí',join:'Bí linn'}};
 let lang='en';
 $('#lang').onclick=()=>{lang=lang==='en'?'ga':'en';$('#lang').textContent=lang==='en'?'GA':'EN';$$('[data-i18n]').forEach(e=>e.textContent=i18n[lang][e.dataset.i18n])};
 
