@@ -55,6 +55,9 @@ In order:
 Not yet tested: a form post from a non-editor account (it should be ignored).
 
 Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
+Either way, then move this folder to `Desktop\Bixbo-Clients\blessington-gaa\` and the
+template to `Bixbo-Clients\_template\`, copying the Claude Code memory folder across
+(steps in `Desktop\Bixbo-Clients\README.md`). Annacurra's approach waits for this decision.
 
 ## Rules that must hold
 
