@@ -22,14 +22,24 @@ The site runs on labelled sample data until Patrick pastes the Sheet links.
 
 ## Next step
 
-Patrick's part. Nothing else is blocked on code.
+The real Sheet exists: "Blessington GAA website" in Patrick's Drive, set up 2026-11-22
+(six tabs, How to, both forms). In order:
 
-1. The real Sheet exists: "Blessington GAA website" in Patrick's Drive, set up 2026-11-22 (tabs, How to, both forms). Next: add first rows, publish, paste links into `CLUB.sheets`. Planned first: cut publishing to one "Entire document" link that the site splits per tab (format still to test on the real Sheet). Not yet tested: a form post from a non-editor account (it should be ignored), and the site reading a real published Sheet.
-2. Confirm the lotto draw day, time and fortnightly rhythm. They go in the Club tab (or `CLUB.lotto` as the fallback).
-3. Confirm the sponsor differences in `SPONSORS-CHECK.md`.
-4. Get the Children's Officer contact and the current committee list from the PRO.
-   Ask the PRO for the directory listing fee and tiers, and the first businesses to list.
-5. Go through "Facts to confirm" in `LAUNCH.md` with the PRO.
+1. **One link instead of six** (Claude). Publish the whole Sheet once as "Entire document";
+   the site builds each tab's link from it. The script writes the starter Pages rows itself
+   instead of fetching them from the site. Waiting on Patrick's OK to publish the real Sheet
+   to test the link format.
+2. **Fill the Sheet** (Patrick, or Claude from blessingtongaa.ie): coming fixtures, latest
+   news, last lotto draw.
+3. **Connect the site** (Claude): point `CLUB.sheets` at the published Sheet, check every
+   tab loads, push. The "sample" labels then disappear.
+4. **Before the committee** (Patrick, with the PRO): "Facts to confirm" in `LAUNCH.md`;
+   lotto draw day, time and rhythm (Club tab); sponsor differences in `SPONSORS-CHECK.md`;
+   Children's Officer contact and current committee; directory fee, tiers and first businesses.
+5. **After a yes**: `LAUNCH.md`, then port the editing upgrades to the template, then a
+   Bixbo client tracker (see the template's `BACKLOG.md` for the onboarding and CRM decisions).
+
+Not yet tested: a form post from a non-editor account (it should be ignored).
 
 Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 
