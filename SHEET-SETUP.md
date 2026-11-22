@@ -101,7 +101,7 @@ setting name the website doesn't know. The website may skip that row. Fix the ce
 
 - Add one row for each game. Leave **Score** and **Result** empty.
 - After the game, type the score into the same row and pick the result, or use the "Add a result" form. Don't move the row. The website moves the game from "Upcoming" to "Results" itself.
-- **Section** decides which filter button a game appears under. **Team** is free text and is what visitors read, for example `U14 Boys` or `Adult Men - League`.
+- **Section** is the code: Football, Ladies Football, Hurling or Camogie. It decides which filter button a game appears under. Juvenile games use the same codes. The website tells adult from juvenile games by the **Team**, so put the age in it, for example `U14 Boys` or `Minor A`. **Team** is free text and is what visitors read, for example `U14 Boys` or `Adult Men - League`.
 - **Time** is 24-hour, for example `14:00`. `2pm` also works.
 - **Score** puts the Blessington score first, for example `2-11 v 1-09`.
 - A game with no score, on a day that has passed, shows as "Result to come".
@@ -173,7 +173,7 @@ Buttons and links on the pages are part of the website. Ask Patrick to change th
 | "This page may be out of date" on a club page | The website can't read the Pages tab | Check that the Sheet is still published and the tab is still called Pages |
 | The lotto shows as unavailable | The Lotto tab has no draw yet | Add the last draw |
 | A game is missing | The website can't read that row's date | Look for a red row |
-| A game is under the wrong filter | The Section cell is wrong | Pick the right option from the dropdown |
+| A game is under the wrong filter | The Section cell is wrong, or the Team has no age in it | Pick the right code from the dropdown. For a juvenile game, put the age in the Team, for example `U12 Girls` |
 | A form post didn't appear | It was sent from an account that can't edit the Sheet, or the tab isn't published | Post again signed in with your editor account |
 
 The website never shows broken data. If it can't read a tab, it tells visitors to check the club

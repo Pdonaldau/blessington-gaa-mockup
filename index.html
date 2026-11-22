@@ -240,6 +240,13 @@ nav .btn{padding:10px 18px;margin-left:6px}
 .tabs button.on{background:var(--ink);color:#fff}
 .fx-cols{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:34px}
 .fx-cols h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+/* five games per column; "Show all" opens the rest */
+.fx-filters{display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:100%}
+.tabs-sm button{padding:6px 13px;font-size:13px}
+.fx-col:not(.all) .fx:nth-child(n+6){display:none}
+.more{display:block;width:100%;padding:13px;border-radius:14px;border:1.5px dashed #c5cfe2;background:none;font-weight:700;color:var(--blue);cursor:pointer}
+.more[hidden]{display:none}
+.light .more{border-color:rgba(255,255,255,.25);color:var(--sky)}
 .fx{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:16px 18px;background:#fff;border:1px solid var(--line-l);border-radius:16px;margin-bottom:10px;transition:.25s var(--ease)}
 .fx:hover{transform:translateX(5px);border-color:var(--sky)}
 .fx .d{text-align:center;border-right:1px solid var(--line-l);padding-right:14px}
@@ -444,7 +451,7 @@ a.sp{cursor:pointer}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.hero-row,.hero-years{opacity:1;transform:none}.hero h1 span b{transform:none}}
 
 /* ---------- compact controls (phone only by default) ---------- */
-.seg,.m-toggle,.more,.mbar{display:none}
+.seg,.m-toggle,.mbar{display:none}
 .bento-hint{display:none}
 
 @media(max-width:720px){
@@ -531,8 +538,9 @@ a.sp{cursor:pointer}
   .panel{margin-top:16px;gap:18px}
   .panel h3{font-size:34px}
 
-  /* fixtures: Upcoming / Results toggle, three at a time */
-  .fx-head .tabs{order:3}
+  /* fixtures: Upcoming / Results toggle */
+  .fx-head .fx-filters{order:3;align-items:flex-start}
+  .fx-filters .tabs{flex-wrap:wrap;border-radius:18px}
   .seg{display:flex;background:#e6ebf5;border-radius:12px;padding:4px;margin-top:20px}
   .seg button{flex:1;border:0;background:none;padding:11px;border-radius:9px;font-weight:700;font-size:14px;color:var(--muted)}
   .seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(15,32,72,.12)}
@@ -540,9 +548,6 @@ a.sp{cursor:pointer}
   .fx-col{display:none}
   .fx-col.on{display:block}
   .fx-col h4{display:none}
-  .fx-col:not(.all) .fx:nth-child(n+4){display:none}
-  .more{display:block;width:100%;padding:13px;border-radius:14px;border:1.5px dashed #c5cfe2;background:none;font-weight:700;color:var(--blue)}
-  .more[hidden]{display:none}
 
   /* lotto: numbers open on tap */
   .lotto .sub{font-size:14.5px}
@@ -647,7 +652,6 @@ footer{background:var(--night)}
   .light .seg{background:rgba(255,255,255,.08)}
   .light .seg button{color:var(--txt-d)}
   .light .seg button.on{background:#fff;color:var(--night)}
-  .light .more{border-color:rgba(255,255,255,.25);color:var(--sky)}
   .m-light{background:rgba(255,255,255,.08)!important;border:1px solid rgba(255,255,255,.15)!important}
 }
 
@@ -796,10 +800,11 @@ footer{background:var(--night)}
       <div>
         <div class="kicker">Match centre</div>
         <h2 class="h2 disp">Fixtures &amp; results <span class="sample">sample data</span></h2>
-        <p class="sub">Updated from the club’s Google Sheet. Filter by team.</p>
+        <p class="sub">Updated from the club’s Google Sheet. Filter by code and age.</p>
       </div>
-      <div class="tabs" id="fxTabs">
-        <button class="on" data-f="all">All</button><button data-f="men">Men</button><button data-f="ladies">Ladies</button><button data-f="juv">Juvenile</button><button data-f="hurl">Hurling</button>
+      <div class="fx-filters">
+        <div class="tabs" id="fxTabs" role="group" aria-label="Filter by code"></div>
+        <div class="tabs tabs-sm" id="fxAge" role="group" aria-label="Filter by age"><button class="on" data-a="all">All ages</button><button data-a="adult">Adult</button><button data-a="juv">Juvenile</button></div>
       </div>
     </div>
     <div class="seg" id="fxSeg"><button class="on" data-c="up">Upcoming</button><button data-c="res">Results</button></div>
@@ -935,6 +940,9 @@ const CLUB = {
   // club = the Club tab (lotto rule, prices, ticker, shop note). pages = the Pages tab (text of the panels below).
   // Both override the settings here; while they are empty or failing, the settings here are used.
   sheets: { fixtures: '', news: '', lotto: '', directory: '', club: '', pages: '' },
+  // The codes the club plays. Each gets a fixtures filter button: football, ladies, hurling, camogie.
+  // A code with games in the Fixtures tab gets a button even if it isn't listed here.
+  codes: ['football', 'ladies', 'hurling'],
   // The Sponsors Directory panel, opened by any link to #page-directory. Listings come from the Directory sheet tab.
   directory: {
     intro: 'Local businesses that back Blessington GAA. Support them and you support the club.',
@@ -1438,15 +1446,20 @@ const SAMPLE_FIXTURES=[
   {date:iso(sat(-2)),group:'Juvenile',team:'U14 Girls',opponent:'Donard-Glen',home:'Away',score:'3-06 v 1-04',result:'W'}
 ];
 // Turns one row (sample or Sheet) into a fixture. A row with no readable date is dropped.
-function normFx(r){const d=parseDate(r.date);if(!d)return null;const t=parseTime(r.time), g=String(r.group??'').toLowerCase();
+// Filter buttons: the code comes from the Section cell, or from the Team text when Section names none
+// (old "Juvenile" rows). Juvenile comes from Section and Team: U18 and younger, Minor, Academy, boys, girls.
+const CODES={football:'Football',ladies:'Ladies Football',hurling:'Hurling',camogie:'Camogie'};
+const codeOf=s=>/camog/.test(s)?'camogie':/hurl/.test(s)?'hurling':/lad|women|lgfa|girls/.test(s)?'ladies':/foot|\bmen\b|boys/.test(s)?'football':'';
+function isJuv(s){const m=s.match(/\b(?:u|under|un\.?)\s?(\d{1,2})/);return m?+m[1]<=18:/juv|academy|minor|boys|girls/.test(s)}
+function normFx(r){const d=parseDate(r.date);if(!d)return null;const t=parseTime(r.time), g=String(r.group??'').toLowerCase(), tm=String(r.team??'').toLowerCase();
   const res=String(r.result??'').trim().toUpperCase().charAt(0);
   return {d, when:t?atTime(d,t):null, time:t?`${pad(t[0])}:${pad(t[1])}`:'',
-    group:/lad|women|lgfa/.test(g)?'ladies':/hurl|camog/.test(g)?'hurl':/juv|under|^u\d|boys|girls|academy/.test(g)?'juv':/men|adult/.test(g)?'men':'',
+    code:codeOf(g)||codeOf(tm)||'football', juv:isJuv(g+' '+tm),
     team:String(r.team??''), opponent:String(r.opponent??''), home:/^(y|h)/i.test(String(r.home??'').trim()),
     score:String(r.score??'').trim(), result:/^[WLD]$/.test(res)?res:''}}
 let fixtures=SAMPLE_FIXTURES.map(normFx).filter(Boolean), fxState='sample';   // 'sample' | 'live' | 'down'
 // A game counts as upcoming until its day is over. After that it is a result, with or without a score.
-function splitFx(f){const t0=today(), list=fixtures.filter(x=>f==='all'||x.group===f);
+function splitFx(f,a='all'){const t0=today(), list=fixtures.filter(x=>(f==='all'||x.code===f)&&(a==='all'||(a==='juv')===x.juv));
   return {up:list.filter(x=>!x.score&&x.d>=t0).sort((a,b)=>(a.when||a.d)-(b.when||b.d)),
           res:list.filter(x=>x.score||x.d<t0).sort((a,b)=>b.d-a.d)}}
 // "Next match" is the earliest upcoming fixture that has not kicked off. None left: the countdown hides.
@@ -1458,23 +1471,31 @@ function renderNext(){const now=Date.now();
     <div class="meta"><b>${esc(nm.team)}</b><span>${fmtDay(nm.d)}${nm.time?' · '+nm.time:''} · ${nm.home?'Home':'Away'}</span></div>`
     :fxState==='down'?'<div class="meta"><b>Fixtures unavailable</b><span>Check the club Facebook page for this week’s games</span></div>'
     :'<div class="meta"><b>No fixture scheduled</b><span>See the latest results below</span></div>'}
-let curF='all';
-function renderFx(f){curF=f;const {up,res}=splitFx(f);
+let curF='all', curAge='all';
+function fxTabs(){const have=new Set(fixtures.map(x=>x.code)), want=CLUB.codes||Object.keys(CODES);
+  const list=Object.keys(CODES).filter(k=>want.includes(k)||have.has(k));
+  if(curF!=='all'&&!list.includes(curF))curF='all';
+  $('#fxTabs').innerHTML=[['all','All'],...list.map(k=>[k,CODES[k]])]
+    .map(([k,t])=>`<button${k===curF?' class="on"':''} data-f="${k}">${t}</button>`).join('')}
+function renderFx(f){curF=f;fxTabs();const {up,res}=splitFx(curF,curAge);
   const card=x=>`<div class="fx"><div class="d"><b>${x.d.getDate()}</b><span>${part(x.d,{month:'short'})}</span></div>
     <div><div class="t">${esc(x.team)}</div><div class="m">${x.home?'<span class="tag home">HOME</span>':'Away'} vs ${esc(x.opponent)}${x.time?' · '+x.time:''}</div></div>
     <div class="s">${x.score?`${esc(x.score)}${x.result?`<br><span class="tag ${x.result}">${({W:'WIN',L:'LOSS',D:'DRAW'})[x.result]}</span>`:''}`:x.d<today()?'<span class="tag D">RESULT TO COME</span>':''}</div></div>`;
   const down=fxState==='down';
   $('#fxUp').innerHTML=up.map(card).join('')||`<p class="sub">${down?'Fixtures are unavailable right now.':'No upcoming fixtures.'}</p>`;
   $('#fxRes').innerHTML=res.map(card).join('')||`<p class="sub">${down?'Results are unavailable right now.':'No recent results.'}</p>`;
-  [['#fxUp',up],['#fxRes',res]].forEach(([id,l])=>{const m=$(id).parentElement.querySelector('.more');if(m)m.hidden=l.length<=3});
+  [['#fxUp',up],['#fxRes',res]].forEach(([id,l])=>{const c=$(id).parentElement, m=c.querySelector('.more');
+    m.dataset.n=l.length; m.hidden=l.length<=5; m.textContent=c.classList.contains('all')?'Show fewer':`Show all ${l.length}`});
   $$('#fixtures .sample').forEach(e=>e.hidden=fxState!=='sample');
   $('#fxSrc').textContent=fxState==='live'?'Live from the club fixtures sheet.':fxState==='down'?'Fixtures are unavailable right now. Check the club Facebook page for this week’s games.':'Showing sample fixtures.';
   renderNext(); tick()}
-$$('#fxTabs button').forEach(b=>b.onclick=()=>{$$('#fxTabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderFx(b.dataset.f)});
+$('#fxTabs').onclick=e=>{const b=e.target.closest('button');if(b)renderFx(b.dataset.f)};
+$('#fxAge').onclick=e=>{const b=e.target.closest('button');if(!b)return;curAge=b.dataset.a;
+  $$('#fxAge button').forEach(x=>x.classList.toggle('on',x===b));renderFx(curF)};
 lotto=normLotto(CLUB.lotto.sample); paintLotto();
 paintNews(); renderFx('all'); loadLive(); setInterval(tick,1000);
 $$('#fxSeg button').forEach(b=>b.onclick=()=>{$$('#fxSeg button').forEach(x=>x.classList.toggle('on',x===b));$$('.fx-col').forEach(c=>c.classList.toggle('on',c.dataset.c===b.dataset.c))});
-$$('.fx-col .more').forEach(b=>b.onclick=()=>{const c=b.parentElement;c.classList.toggle('all');b.textContent=c.classList.contains('all')?'Show fewer':'Show all'});
+$$('.fx-col .more').forEach(b=>b.onclick=()=>{const c=b.parentElement;c.classList.toggle('all');b.textContent=c.classList.contains('all')?'Show fewer':`Show all ${b.dataset.n}`});
 // collapse toggles (phone)
 function toggler(btn,target,cls='open'){btn.onclick=()=>{const o=target.classList.toggle(cls);btn.setAttribute('aria-expanded',o)}}
 toggler($('#pickToggle'),$('#picker')); toggler($('#memToggle'),$('#memGrid'));

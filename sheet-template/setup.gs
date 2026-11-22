@@ -27,7 +27,7 @@ const TABS = {
 };
 const STARTER = { Club: 'club.csv', Pages: 'pages.csv' };
 
-const SECTIONS = ['Men', 'Ladies', 'Juvenile', 'Hurling'];
+const SECTIONS = ['Football', 'Ladies Football', 'Hurling', 'Camogie'];
 const NEWS_TAGS = ['Club news', 'Match report', 'Fundraising', 'Juvenile', 'Ladies', 'Development', 'Lotto'];
 const TIERS = ['Main sponsor', 'Sponsor', 'Member'];
 const RED = '#f4c7c3';
@@ -150,7 +150,7 @@ function anyIn_(sh) { return 'COUNTA($A2:$' + lastLetter_(sh) + '2)>0'; }
 function checksFixtures_(sh) {
   dateColumn_(sh, 'Date');
   body_(sh, 'Time').setNumberFormat('HH:mm');
-  dropdown_(body_(sh, 'Section'), SECTIONS, true, 'Decides which filter button the game is under.');
+  dropdown_(body_(sh, 'Section'), SECTIONS, true, 'The code. Decides which filter button the game is under. Juvenile comes from the Team, for example U14 or Minor.');
   dropdown_(body_(sh, 'Home or Away'), ['Home', 'Away'], true, 'Home or Away.');
   dropdown_(body_(sh, 'Result'), ['W', 'L', 'D'], true, 'W, L or D. Leave empty until the game is played.');
   const A = letter_(sh, 'Date'), B = letter_(sh, 'Time'), T = letter_(sh, 'Team'), O = letter_(sh, 'Opponent'),
