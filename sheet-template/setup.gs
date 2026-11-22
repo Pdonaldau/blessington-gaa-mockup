@@ -32,12 +32,6 @@ const NEWS_TAGS = ['Club news', 'Match report', 'Fundraising', 'Juvenile', 'Ladi
 const TIERS = ['Main sponsor', 'Sponsor', 'Member'];
 const RED = '#f4c7c3';
 
-function onOpen() {
-  SpreadsheetApp.getUi().createMenu('Website')
-    .addItem('Set up or repair the Sheet', 'setUpWebsiteSheet')
-    .addItem('Refresh the result form', 'refreshResultForm')
-    .addToUi();
-}
 
 function setUpWebsiteSheet() {
   const ss = SpreadsheetApp.getActive();
@@ -65,6 +59,14 @@ function setUpWebsiteSheet() {
     'The Sheet is ready.\n\nPost news form:\n' + forms.news + '\n\nAdd a result form:\n' + forms.result +
     '\n\nBoth links are also on the "How to" tab. Save them to your phone home screen.\n\n' +
     'Next: publish each tab as CSV (SHEET-SETUP.md, step 3).', SpreadsheetApp.getUi().ButtonSet.OK);
+}
+
+// Kept below setUpWebsiteSheet on purpose: the editor's Run button picks the first function in the file.
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('Website')
+    .addItem('Set up or repair the Sheet', 'setUpWebsiteSheet')
+    .addItem('Refresh the result form', 'refreshResultForm')
+    .addToUi();
 }
 
 /* ---------- tabs ---------- */
