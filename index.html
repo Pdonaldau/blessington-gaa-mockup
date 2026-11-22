@@ -927,8 +927,11 @@ const CLUB = {
     // Shown only while there is no live lotto data, and labelled "sample" on the page.
     sample: { date: '2026-10-27', numbers: '13 15 18 21', jackpot: 8200, result: 'No winner' }
   },
-  // Paste the "Publish to web → CSV" link for each sheet tab here. See SHEET-SETUP.md.
-  // A link left empty shows sample data, labelled "sample". A link that fails shows a "check Facebook" message.
+  // Paste the Sheet's "Publish to web" link (Entire document) here. See SHEET-SETUP.md.
+  // The site finds each tab by its name: Fixtures, News, Lotto, Directory, Club, Pages.
+  // Empty = sample data, labelled "sample". A link or tab that fails shows a "check Facebook" message.
+  sheet: '',
+  // Optional: a separate CSV link for one tab. A link here wins over the tab found through `sheet`.
   // club = the Club tab (lotto rule, prices, ticker, shop note). pages = the Pages tab (text of the panels below).
   // Both override the settings here; while they are empty or failing, the settings here are used.
   sheets: { fixtures: '', news: '', lotto: '', directory: '', club: '', pages: '' },
@@ -1271,7 +1274,20 @@ async function loadSheet(url,need){const ctl=new AbortController(), timer=setTim
     if(!need.every(k=>head.includes(k)))throw new Error('Not the expected sheet');
     return rows}
   finally{clearTimeout(timer)}}
-function loadLive(){const s=CLUB.sheets;
+// One published link for the whole Sheet: read its tab list (name and gid) and build a CSV link per tab.
+// A tab that can't be found gets a link that fails, so it shows the "check Facebook" message, not samples.
+const TAB_NAMES=['fixtures','news','lotto','directory','club','pages'];
+async function sheetTabs(link){const base=String(link).trim().replace(/\/pub(html)?(\?.*)?$/,'');
+  if(!/^https:\/\/docs\.google\.com\/spreadsheets\/d\/e\/[\w-]+$/.test(base))throw new Error('Not a published Sheet link');
+  const ctl=new AbortController(), timer=setTimeout(()=>ctl.abort(),8000);
+  try{const res=await fetch(base+'/pubhtml',{cache:'no-store',signal:ctl.signal});if(!res.ok)throw new Error('HTTP '+res.status);
+    const html=await res.text(), out={};
+    for(const m of html.matchAll(/name: "([^"]+)"[^}]*?gid: "(\d+)"/g)) out[m[1].trim().toLowerCase()]=base+'/pub?gid='+m[2]+'&single=true&output=csv';
+    return out}
+  finally{clearTimeout(timer)}}
+async function loadLive(){const s=CLUB.sheets;
+  if(CLUB.sheet){let tabs={};try{tabs=await sheetTabs(CLUB.sheet)}catch(e){}
+    for(const k of TAB_NAMES) if(!s[k]) s[k]=tabs[k]||'data:,'}
   if(s.fixtures) loadSheet(s.fixtures,['date','team','opponent'])
     .then(r=>{fixtures=r.map(normFx).filter(Boolean);fxState='live'},()=>{fixtures=[];fxState='down'}).then(()=>renderFx(curF));
   if(s.lotto) loadSheet(s.lotto,['date','jackpot'])

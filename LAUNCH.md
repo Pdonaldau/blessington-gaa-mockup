@@ -17,9 +17,8 @@ All settings named below are in `index.html`. Club settings are in the `CLUB` ob
 
 ## 2. Confirm the Sheet links
 
-- [ ] `CLUB.sheets` has a link for all six tabs: `fixtures`, `news`, `lotto`, `directory`, `club` and `pages`. See `SHEET-SETUP.md`.
+- [ ] `CLUB.sheet` has the Sheet's published link (Entire document, ends in `pubhtml`), and the tabs are still named Fixtures, News, Lotto, Directory, Club and Pages. See `SHEET-SETUP.md`.
 - [ ] The two phone forms post from the PRO's phone, and a post from a non-editor account is ignored.
-- [ ] Each link ends in `output=csv`.
 - [ ] No "sample" label shows anywhere on the page. A "sample" label means that tab's link is empty.
 - [ ] The PRO has added a real row to each tab and seen it appear on the site.
 - [ ] `CLUB.lotto.firstDraw` is a real draw date and `CLUB.lotto.everyDays` matches how often the draw runs.

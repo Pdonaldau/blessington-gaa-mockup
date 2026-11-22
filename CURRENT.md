@@ -23,16 +23,20 @@ The site runs on labelled sample data until Patrick pastes the Sheet links.
 ## Next step
 
 The real Sheet exists: "Blessington GAA website" in Patrick's Drive, set up 2026-11-22
-(six tabs, How to, both forms). In order:
+(six tabs, How to, both forms), and published as Entire document the same day. Its link:
+`https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5qFrzFGQ0QM6s2HwgZxZFVXMsPjZ4Fzg0sy7imQNs3-reCRDaFnjcbFRh7z9PvABM2_eqHMdsco-W/pubhtml`.
+The site reads it through `CLUB.sheet` (one link; tabs found by name). Tested locally
+against the real Sheet on 2026-11-22: all six tabs found and loaded; a broken link shows
+"down" everywhere. In order:
 
-1. **One link instead of six** (Claude). Publish the whole Sheet once as "Entire document";
-   the site builds each tab's link from it. The script writes the starter Pages rows itself
-   instead of fetching them from the site. Waiting on Patrick's OK to publish the real Sheet
-   to test the link format.
-2. **Fill the Sheet** (Patrick, or Claude from blessingtongaa.ie): coming fixtures, latest
-   news, last lotto draw.
-3. **Connect the site** (Claude): point `CLUB.sheets` at the published Sheet, check every
-   tab loads, push. The "sample" labels then disappear.
+1. **Fill the Sheet** (Patrick, or Claude from blessingtongaa.ie): coming fixtures, latest
+   news, last lotto draw. Fixtures, News, Lotto and Directory are empty now.
+2. **Connect the site** (Claude): paste the link above into `CLUB.sheet`, check, push. Not
+   before step 1: with empty tabs the live site would lose its labelled samples, and the
+   lotto would show as unavailable. The "sample" labels then disappear.
+3. **Template port of the Pages starter rows**: the script fetches `club.csv` and `pages.csv`
+   from the live site. That works for Blessington (both filled on 2026-11-22) but not for
+   Cloudflare mockups, where `.assetsignore` hides the CSVs. Fix when porting.
 4. **Before the committee** (Patrick, with the PRO): "Facts to confirm" in `LAUNCH.md`;
    lotto draw day, time and rhythm (Club tab); sponsor differences in `SPONSORS-CHECK.md`;
    Children's Officer contact and current committee; directory fee, tiers and first businesses.
@@ -58,7 +62,8 @@ Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 
 ## Decisions in force
 
-- **One Fixtures tab, not separate Fixtures and Results tabs.** A row with a score is a result. The PRO types a score and never moves a row. So `CLUB.sheets` has six links: `fixtures`, `news`, `lotto`, `directory`, `club`, `pages`.
+- **One Fixtures tab, not separate Fixtures and Results tabs.** A row with a score is a result. The PRO types a score and never moves a row. The Sheet has six tabs: Fixtures, News, Lotto, Directory, Club, Pages.
+- **One published link for the whole Sheet** (2026-11-22). `CLUB.sheet` holds the "Entire document" publish link. The site fetches its `pubhtml` page (Google allows this cross-site), reads each tab's name and gid, and fetches `pub?gid=…&single=true&output=csv` per tab. `pub?sheet=Name` does not work: Google ignores it and returns the first tab. A link in `CLUB.sheets.<tab>` still overrides one tab. A tab missing from the Sheet shows "down", not samples.
 - **The club edits in the Sheet, not the code** (2026-11-21). `sheet-template/setup.gs` builds the Sheet: tabs, Irish locale, dropdowns, date checks, red rows, warning-protected headings, a "How to" tab, and two phone forms ("Post news", "Add a result"). Form posts count only from accounts that can edit the Sheet. The Club tab overrides a whitelist of settings (lotto rule, `Price:` rows, family cap, ticker, shop note). The Pages tab rebuilds the text of any panel it has rows for, and drops that panel's "from the current club site" note. Links and buttons stay in `CLUB.pages`. If Club fails, `CLUB` is used; if Pages fails, the panel shows its `CLUB.pages` text with a "may be out of date" note. The starter Club and Pages rows are `sheet-template/club.csv` and `pages.csv`, fetched by the script from the live site. If `CLUB.pages` changes before the Sheet exists, regenerate `pages.csv` with `node sheet-template/export-pages.js index.html sheet-template/pages.csv`.
 - **Club pages are in-page panels, not separate HTML files.** Any link to `#page-<key>` opens the panel built from `CLUB.pages.<key>`.
 - **No "next" date is typed.** Next match is the earliest upcoming fixture. Next lotto draw comes from `CLUB.lotto.firstDraw` plus `everyDays` (14). A "Next draw" cell in the Lotto sheet overrides the rule.
@@ -78,5 +83,5 @@ py -3 -m http.server 8765 --bind 127.0.0.1
 ```
 
 Check three states: Sheet links empty, links working, and one link broken.
-To test working links without a real Sheet, point `CLUB.sheets` at the files in `sheet-template/` in a scratch copy. Don't commit that change.
+To test working links without a real Sheet, point `CLUB.sheets` at the files in `sheet-template/` (or `CLUB.sheet` at the real published Sheet) in a scratch copy. Don't commit that change.
 Opening `index.html` straight from disk can't fetch a Sheet, so use the local server.

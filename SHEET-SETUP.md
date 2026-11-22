@@ -50,25 +50,25 @@ Fixtures, News, Lotto and Directory start empty. Before you publish:
 - add the last lotto draw. Until there is one draw, the website says the lotto is unavailable.
 - add the directory businesses that have agreed to be listed
 
-## 3. Publish each tab
+## 3. Publish the Sheet
 
-Publish each of the six tabs on its own, so that each tab gets its own link.
-Don't publish the "How to" tab.
+Publish once, for the whole Sheet. The website finds each tab by its name, so don't rename the tabs.
 
 1. Choose **File > Share > Publish to web**.
-2. In the first dropdown, choose the tab, for example **Fixtures**. Don't leave it on "Entire document".
-3. In the second dropdown, choose **Comma-separated values (.csv)**.
-4. Select **Publish**, then **OK**.
-5. Copy the link. It ends in `output=csv`.
-6. Repeat for News, Lotto, Directory, Club and Pages.
+2. Leave the dropdowns on **Entire document** and **Web page**.
+3. Select **Publish**, then **OK**.
+4. Copy the link. It ends in `pubhtml`.
 
-Send the six links to Patrick. He pastes them into `CLUB.sheets` at the top of the script in `index.html`:
+Send the link to Patrick. He pastes it into `CLUB.sheet` at the top of the script in `index.html`:
 
 ```js
-sheets: { fixtures: 'https://docs.google.com/...', news: '...', lotto: '...', directory: '...', club: '...', pages: '...' },
+sheet: 'https://docs.google.com/spreadsheets/d/e/.../pubhtml',
 ```
 
-A published tab can be read by anyone who has the link.
+Leave **Automatically republish when changes are made** switched on (it is on by default, under
+"Published content & settings").
+
+The published Sheet can be read by anyone who has the link, including the "How to" tab.
 Don't put private phone numbers, children's names or anything private in the Sheet.
 The Directory tab is the exception for business contact details: list only what each business has agreed to publish.
 The Pages tab holds the contacts the club pages show today. Check each person is happy to be listed.
@@ -168,9 +168,10 @@ Buttons and links on the pages are part of the website. Ask Patrick to change th
 
 | What you see on the website | What it means | What to do |
 |---|---|---|
-| A "sample" label | That tab's link has not been pasted into the website yet | Send Patrick the link |
-| "Fixtures are unavailable right now" or "The directory is unavailable right now" | The website can't read the tab | Check that the tab is still published as CSV, and that the heading row has not changed |
-| "This page may be out of date" on a club page | The website can't read the Pages tab | Check that the Pages tab is still published as CSV |
+| A "sample" label | The Sheet's link has not been pasted into the website yet | Send Patrick the link |
+| "Fixtures are unavailable right now" or "The directory is unavailable right now" | The website can't read the tab | Check that the Sheet is still published, that the tab name hasn't changed, and that the heading row hasn't changed |
+| "This page may be out of date" on a club page | The website can't read the Pages tab | Check that the Sheet is still published and the tab is still called Pages |
+| The lotto shows as unavailable | The Lotto tab has no draw yet | Add the last draw |
 | A game is missing | The website can't read that row's date | Look for a red row |
 | A game is under the wrong filter | The Section cell is wrong | Pick the right option from the dropdown |
 | A form post didn't appear | It was sent from an account that can't edit the Sheet, or the tab isn't published | Post again signed in with your editor account |
