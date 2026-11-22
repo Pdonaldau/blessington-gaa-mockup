@@ -903,7 +903,7 @@ footer{background:var(--night)}
           <a href="https://www.instagram.com/blessingtongaalgfa/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
         </div>
       </div>
-      <div><h4>Play</h4><ul><li><a href="#page-academy">Academy</a></li><li><a href="#page-juvenile">Juvenile</a></li><li><a href="#page-adult">Adult men</a></li><li><a href="#page-ladies">Ladies Football</a></li><li><a href="#page-hurling">Hurling</a></li><li><a href="#page-gfmo">GFM&amp;O</a></li><li><a href="#page-allstars">Inclusion All-Stars</a></li><li><a href="#page-insurance">Player insurance</a></li></ul></div>
+      <div><h4>Play</h4><ul><li><a href="#page-academy">Academy</a></li><li><a href="#page-juvenile">Juvenile</a></li><li><a href="#page-adult">Men’s Football</a></li><li><a href="#page-ladies">Ladies Football</a></li><li><a href="#page-hurling">Hurling</a></li><li><a href="#page-gfmo">GFM&amp;O</a></li><li><a href="#page-allstars">Inclusion All-Stars</a></li><li><a href="#page-insurance">Player insurance</a></li></ul></div>
       <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#page-committee">Committee</a></li><li><a href="#page-facilities">Facilities &amp; Astro</a></li><li><a href="#page-gaeilge">Gaeilge &amp; Scór</a></li><li><a href="#page-welfare">Welfare &amp; safeguarding</a></li><li><a href="#page-mental">Mental health</a></li><li><a href="#shop">Club shop</a></li><li><a href="#page-directory">Sponsors Directory</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>PRO: Lisa Jackson</li><li><a href="tel:0863767534">086 376 7534</a></li><li><a href="mailto:pro.blessington.wicklow@gaa.ie">pro.blessington.wicklow@gaa.ie</a></li></ul></div>
     </div>
@@ -986,12 +986,13 @@ const CLUB = {
       sec:[{h:'Boys', rows:[['U17','Wes Callaghan 087 905 0216'],['U15','Alan Ellis 086 157 2918'],['U14','Kevin Foster 087 413 1408'],['U13','Declan Reape 087 051 3527'],['U12','JP Moran 087 238 8592'],['U11 and U10','Jonathan Daniels 085 273 4552'],['U9 and U8','Stephen Willoughby 087 217 2814']]},
            {h:'Girls', rows:[['U16','David Greville 087 680 4422'],['U14','Lorna Flanagan 086 217 8969'],['U10','Aidan Maguire 087 939 3405']]}],
       todo:['Contacts for U7 boys, U12 girls and U8 girls. The current site lists none.','Training days and times for each age group.'],
-      links:[['Register your child','#join'],['Ladies Football','#page-ladies'],['Welfare & safeguarding','#page-welfare']]},
-    adult: {k:'Play', t:'Adult men', src:1,
-      p:['Adult men’s football at senior and junior grades.'],
-      sec:[{h:'Teams', rows:[['Senior','Manager Ronan Joyce. Admin Lisa Jackson 086 376 7534'],['Junior A','Manager Darren Behan 087 292 7928'],['Junior B','Manager Christie Brie 085 800 9043']]}],
+      links:[['Register your child','#join'],['Men’s Football','#page-adult'],['Ladies Football','#page-ladies'],['Welfare & safeguarding','#page-welfare']]},
+    adult: {k:'Play', t:'Men’s Football', src:1,
+      p:['Men’s football for boys and men, from under 7 to senior.'],
+      sec:[{h:'Adult teams', rows:[['Senior','Manager Ronan Joyce. Admin Lisa Jackson 086 376 7534'],['Junior A','Manager Darren Behan 087 292 7928'],['Junior B','Manager Christie Brie 085 800 9043']]},
+           {h:'Boys teams', p:['Teams from under 7 to under 17. The managers are listed on the Juvenile page.']}],
       todo:['Training days and times.'],
-      links:[['Join as a player','#join'],['Ladies Football','#page-ladies']]},
+      links:[['Join as a player','#join'],['Juvenile teams','#page-juvenile'],['Ladies Football','#page-ladies']]},
     ladies: {k:'Play', t:'Ladies Football', src:1,
       p:['Ladies football for girls and women, from under 8 to senior. Blessington plays in the LGFA, the Ladies Gaelic Football Association.'],
       sec:[{h:'Adult teams', rows:[['Senior','Manager Roisin Ellis'],['Junior','Manager Johnny Murphy 086 243 2374']]},
@@ -1259,7 +1260,7 @@ function tick(){const now=Date.now();
 /* ---------- pathways ---------- */
 const paths={
   kids:{t:'Your child, our club',d:'From first kicks in the Academy through juvenile boys and girls teams. Fun first, skills always.',l:['Academy for the youngest','Juvenile boys & girls','All-Stars, Sundays 10–11','Garda-vetted coaches'],a:[['Register your child','#join','btn-gold'],['Safeguarding info','#page-welfare','btn-line']]},
-  play:{t:'Pull on the blue',d:'Adult men, adult ladies, hurling and Gaelic for Mothers & Others. Every standard welcome.',l:['Men’s & ladies’ football','Hurling, new players welcome','GFM&O, no experience needed','Injury cover with membership'],a:[['Join as a player','#join','btn-gold'],['Ladies Football','#page-ladies','btn-line'],['Men’s teams','#page-adult','btn-line']]},
+  play:{t:'Pull on the blue',d:'Men’s football, ladies football, hurling and Gaelic for Mothers & Others. Every standard welcome.',l:['Men’s & ladies’ football','Hurling, new players welcome','GFM&O, no experience needed','Injury cover with membership'],a:[['Join as a player','#join','btn-gold'],['Ladies Football','#page-ladies','btn-line'],['Men’s Football','#page-adult','btn-line']]},
   help:{t:'Clubs run on volunteers',d:'Coaching, mentoring, the gate, the grounds, events. Give an hour or a season. No experience needed.',l:['Coach or assist a team','Help on match days','Join a committee','Support Scór & Gaeilge'],a:[['I’d like to help','mailto:pro.blessington.wicklow@gaa.ie','btn-gold'],['See open roles','#page-volunteer','btn-line']]},
   back:{t:'Back the club',d:'Every Lotto line, membership and sponsorship goes into pitches, coaching and the new clubhouse.',l:['Lotto, €2 a line','Supporter membership, €60','Become a sponsor','Club shop'],a:[['Play the Lotto','#lotto','btn-gold'],['Sponsors Directory','#page-directory','btn-line'],['Sponsorship enquiry','mailto:pro.blessington.wicklow@gaa.ie','btn-line']]}
 };
