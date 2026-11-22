@@ -24,7 +24,7 @@ The site runs on labelled sample data until Patrick pastes the Sheet links.
 
 Patrick's part. Nothing else is blocked on code.
 
-1. Create the Google Sheet by running `sheet-template/setup.gs`, following `SHEET-SETUP.md`. Paste the six links into `CLUB.sheets`. The script was tested in a scratch Sheet on 2026-11-22: tabs, starter rows, How to tab, date check, red rows and both forms worked. Not yet tested: a form post from a non-editor account (it should be ignored), and the site reading a real published Sheet.
+1. The real Sheet exists: "Blessington GAA website" in Patrick's Drive, set up 2026-11-22 (tabs, How to, both forms). Next: add first rows, publish, paste links into `CLUB.sheets`. Planned first: cut publishing to one "Entire document" link that the site splits per tab (format still to test on the real Sheet). Not yet tested: a form post from a non-editor account (it should be ignored), and the site reading a real published Sheet.
 2. Confirm the lotto draw day, time and fortnightly rhythm. They go in the Club tab (or `CLUB.lotto` as the fallback).
 3. Confirm the sponsor differences in `SPONSORS-CHECK.md`.
 4. Get the Children's Officer contact and the current committee list from the PRO.
