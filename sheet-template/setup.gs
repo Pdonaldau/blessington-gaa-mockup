@@ -58,7 +58,7 @@ function setUpWebsiteSheet() {
   SpreadsheetApp.getUi().alert('Done',
     'The Sheet is ready.\n\nPost news form:\n' + forms.news + '\n\nAdd a result form:\n' + forms.result +
     '\n\nBoth links are also on the "How to" tab. Save them to your phone home screen.\n\n' +
-    'Next: publish each tab as CSV (SHEET-SETUP.md, step 3).', SpreadsheetApp.getUi().ButtonSet.OK);
+    'Next: publish the Sheet (SHEET-SETUP.md, step 3).', SpreadsheetApp.getUi().ButtonSet.OK);
 }
 
 // Kept below setUpWebsiteSheet on purpose: the editor's Run button picks the first function in the file.
