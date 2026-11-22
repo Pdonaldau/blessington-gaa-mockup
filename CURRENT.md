@@ -17,7 +17,7 @@ The PRO has seen the concept and liked it. The committee sees it next.
 
 The six tasks in the 2026-11-13 to-do list are done and pushed.
 The hero now has archive footage of club players as a fixed backdrop. Patrick confirmed it plays on his PC and his phone.
-A business directory panel (`#page-directory`) was added on 2026-11-18. The PRO sent the Listry GAA directory (a WordPress plugin page by Pallas Marketing) as an example of what the club wants.
+A sponsors directory panel (`#page-directory`, titled "Sponsors Directory" since 2026-11-22) was added on 2026-11-18. The PRO sent the Listry GAA directory (a WordPress plugin page by Pallas Marketing) as an example of what the club wants.
 The site reads real club data from the Sheet (connected 2026-11-22).
 
 ## Next step
@@ -78,7 +78,7 @@ Stop condition: the committee says yes or no. On yes, work through `LAUNCH.md`.
 - **No "next" date is typed.** Next match is the earliest upcoming fixture. Next lotto draw comes from `CLUB.lotto.firstDraw` plus `everyDays` (14). A "Next draw" cell in the Lotto sheet overrides the rule.
 - **Sample fixtures are dated relative to today**, so the demo never goes stale.
 - **"Right now" shows the two newest News rows.** `CLUB.pinned` cards fill any gap.
-- **The business directory is a panel, fed from the Directory sheet tab.** Not a WordPress directory like the Listry example. Columns: Name, Category, Tier, Description, Phone, Email, Website, Address, Logo, Facebook, Instagram. Cards are compact rows (logo, name, tier, category); a tap opens the description and Call/Website/Map buttons in place. Main sponsors come first, with a gold border. Sample listings are made-up businesses named "Sample …" with the dead number 01 000 0000, never real local businesses. Sponsor names in the marquee link to the panel.
+- **The Sponsors Directory is a panel, fed from the Directory sheet tab.** While the tab has no rows, the labelled sample listings show, so the panel is never empty. Not a WordPress directory like the Listry example. Columns: Name, Category, Tier, Description, Phone, Email, Website, Address, Logo, Facebook, Instagram. Cards are compact rows (logo, name, tier, category); a tap opens the description and Call/Website/Map buttons in place. Main sponsors come first, with a gold border. Sample listings are made-up businesses named "Sample …" with the dead number 01 000 0000, never real local businesses. Sponsor names in the marquee link to the panel.
 - **Sponsor logos are copies in `media/sponsors/`, not links to Squarespace.** They were copied from blessingtongaa.ie on 2026-11-18, so they keep working after the old site closes. They scroll in a slim strip under the news ticker that opens the directory. On phones the "Our sponsors" label hangs below the strip as a tab, so the logos get the full width. `CLUB.sponsors` entries are `[name, logo file, 1 for a white tile]`.
 - **A reusable template lives at `C:\Users\pdona\Desktop\gaa-club-template`**, copied from this repo at `8123d1e` on 2026-11-19, for pitching to other clubs. It has its own git repo, on GitHub at `Pdonaldau/gaa-club-template`. When this site changes, decide whether the change belongs in the template too.
 - **The Welfare panel names no Children's Officer.** The current site names two different people. Only the role email is shown.

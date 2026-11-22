@@ -339,7 +339,7 @@ footer a:hover{color:var(--gold)}
 .pg .pg-src{font-size:12px;opacity:.8;margin:22px 0 0}
 html.locked{overflow:hidden}
 
-/* ---------- Business directory (the #page-directory panel) ----------
+/* ---------- Sponsors Directory (the #page-directory panel) ----------
    Compact cards, so a phone shows six or more at once. Tapping a card opens its details in place. */
 .pg.wide{width:min(1320px,calc(100% - 32px));max-height:calc(100dvh - 32px)}
 .pg.wide .pg-in{padding:30px 36px 30px}
@@ -714,7 +714,7 @@ footer{background:var(--night)}
 </section>
 
 <div class="ticker" aria-hidden="true"><div class="ticker-track" id="ticker"></div></div>
-<a class="logo-strip" href="#page-directory" aria-label="Our sponsors. Open the business directory"><span class="ls-lab">Our sponsors</span><span class="ls-win"><span class="ls-track" id="logoStrip"></span></span></a>
+<a class="logo-strip" href="#page-directory" aria-label="Our sponsors. Open the sponsors directory"><span class="ls-lab">Our sponsors</span><span class="ls-win"><span class="ls-track" id="logoStrip"></span></span></a>
 
 <!-- ================= STORY (zoomed-out chronology) ================= -->
 <section class="story grain" id="story">
@@ -874,7 +874,7 @@ footer{background:var(--night)}
 
 <!-- ================= SPONSORS ================= -->
 <div class="sponsors">
-  <div class="wrap spon-head"><div class="kicker">Proudly supported by</div><a href="#page-directory" class="btn btn-line">Club business directory <span class="ar">→</span></a></div>
+  <div class="wrap spon-head"><div class="kicker">Proudly supported by</div><a href="#page-directory" class="btn btn-line">Sponsors Directory <span class="ar">→</span></a></div>
   <div class="marquee" id="marquee"></div>
 </div>
 
@@ -899,7 +899,7 @@ footer{background:var(--night)}
         </div>
       </div>
       <div><h4>Play</h4><ul><li><a href="#page-academy">Academy</a></li><li><a href="#page-juvenile">Juvenile</a></li><li><a href="#page-adult">Adult men &amp; ladies</a></li><li><a href="#page-hurling">Hurling</a></li><li><a href="#page-gfmo">GFM&amp;O</a></li><li><a href="#page-allstars">Inclusion All-Stars</a></li><li><a href="#page-insurance">Player insurance</a></li></ul></div>
-      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#page-committee">Committee</a></li><li><a href="#page-facilities">Facilities &amp; Astro</a></li><li><a href="#page-gaeilge">Gaeilge &amp; Scór</a></li><li><a href="#page-welfare">Welfare &amp; safeguarding</a></li><li><a href="#page-mental">Mental health</a></li><li><a href="#shop">Club shop</a></li><li><a href="#page-directory">Business directory</a></li></ul></div>
+      <div><h4>Club</h4><ul><li><a href="#story">Our story</a></li><li><a href="#page-committee">Committee</a></li><li><a href="#page-facilities">Facilities &amp; Astro</a></li><li><a href="#page-gaeilge">Gaeilge &amp; Scór</a></li><li><a href="#page-welfare">Welfare &amp; safeguarding</a></li><li><a href="#page-mental">Mental health</a></li><li><a href="#shop">Club shop</a></li><li><a href="#page-directory">Sponsors Directory</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>PRO: Lisa Jackson</li><li><a href="tel:0863767534">086 376 7534</a></li><li><a href="mailto:pro.blessington.wicklow@gaa.ie">pro.blessington.wicklow@gaa.ie</a></li></ul></div>
     </div>
     <div class="f-bottom"><span>© <span class="js-year">2026</span> Blessington GAA &amp; LGFA</span><span>Concept mockup · not the official site</span></div>
@@ -935,10 +935,10 @@ const CLUB = {
   // club = the Club tab (lotto rule, prices, ticker, shop note). pages = the Pages tab (text of the panels below).
   // Both override the settings here; while they are empty or failing, the settings here are used.
   sheets: { fixtures: '', news: '', lotto: '', directory: '', club: '', pages: '' },
-  // The business directory panel, opened by any link to #page-directory. Listings come from the Directory sheet tab.
+  // The Sponsors Directory panel, opened by any link to #page-directory. Listings come from the Directory sheet tab.
   directory: {
     intro: 'Local businesses that back Blessington GAA. Support them and you support the club.',
-    join: 'mailto:pro.blessington.wicklow@gaa.ie?subject=Business%20directory%20listing',
+    join: 'mailto:pro.blessington.wicklow@gaa.ie?subject=Sponsors%20Directory%20listing',
     todo: ['The listing fee, and what each tier includes: main sponsor, club sponsor and member business.']
   },
   shops: [
@@ -1246,7 +1246,7 @@ const paths={
   kids:{t:'Your child, our club',d:'From first kicks in the Academy through juvenile boys and girls teams. Fun first, skills always.',l:['Academy for the youngest','Juvenile boys & girls','All-Stars, Sundays 10–11','Garda-vetted coaches'],a:[['Register your child','#join','btn-gold'],['Safeguarding info','#page-welfare','btn-line']]},
   play:{t:'Pull on the blue',d:'Adult men, adult ladies, hurling and Gaelic for Mothers & Others. Every standard welcome.',l:['Men’s & ladies’ football','Hurling, new players welcome','GFM&O, no experience needed','Injury cover with membership'],a:[['Join as a player','#join','btn-gold'],['Contact a manager','#page-adult','btn-line']]},
   help:{t:'Clubs run on volunteers',d:'Coaching, mentoring, the gate, the grounds, events. Give an hour or a season. No experience needed.',l:['Coach or assist a team','Help on match days','Join a committee','Support Scór & Gaeilge'],a:[['I’d like to help','mailto:pro.blessington.wicklow@gaa.ie','btn-gold'],['See open roles','#page-volunteer','btn-line']]},
-  back:{t:'Back the club',d:'Every Lotto line, membership and sponsorship goes into pitches, coaching and the new clubhouse.',l:['Lotto, €2 a line','Supporter membership, €60','Become a sponsor','Club shop'],a:[['Play the Lotto','#lotto','btn-gold'],['Business directory','#page-directory','btn-line'],['Sponsorship enquiry','mailto:pro.blessington.wicklow@gaa.ie','btn-line']]}
+  back:{t:'Back the club',d:'Every Lotto line, membership and sponsorship goes into pitches, coaching and the new clubhouse.',l:['Lotto, €2 a line','Supporter membership, €60','Become a sponsor','Club shop'],a:[['Play the Lotto','#lotto','btn-gold'],['Sponsors Directory','#page-directory','btn-line'],['Sponsorship enquiry','mailto:pro.blessington.wicklow@gaa.ie','btn-line']]}
 };
 function showPath(k){const p=paths[k];
   $('#panel').innerHTML=`<div><h3>${p.t}</h3><p>${p.d}</p><ul>${p.l.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="acts">${p.a.map(([t,h,c])=>`<a class="btn ${c}" href="${h}" style="justify-content:center">${t} <span class="ar">→</span></a>`).join('')}</div>`;
@@ -1296,7 +1296,7 @@ async function loadLive(){const s=CLUB.sheets;
   if(s.news) loadSheet(s.news,['title'])
     .then(r=>{news=r.map(normNews).filter(x=>x.title);newsState='live'},()=>{news=[];newsState='down'}).then(paintNews);
   if(s.directory) loadSheet(s.directory,['name','tag'])
-    .then(r=>{biz=r.map(normBiz).filter(b=>b.name);bizState='live'},()=>{biz=[];bizState='down'})
+    .then(r=>{const l=r.map(normBiz).filter(b=>b.name);if(l.length){biz=l;bizState='live'}},()=>{biz=[];bizState='down'})
     .then(()=>{if(pg.open&&location.hash==='#page-directory')route()});
   if(s.club) loadSheet(s.club,['setting','value']).then(applyClub,()=>{});   // a failure keeps the settings in CLUB
   if(s.pages) loadSheet(s.pages,['page','group','text'])
@@ -1354,10 +1354,10 @@ function paintNews(){
       <p>${esc(c.text)}</p>${c.when?`<span class="when">${esc(c.when)}</span>`:''}
       ${c.link?`<span class="go">${esc(c.cta||'Read more')} <span class="ar">→</span></span>`:''}</${el}>`}).join('')}
 
-/* ---------- business directory: the #page-directory panel ----------
+/* ---------- Sponsors Directory: the #page-directory panel ----------
    Sheet columns: Name | Category | Tier | Description | Phone | Email | Website | Address | Logo | Facebook | Instagram
    Tier: "Main sponsor", "Sponsor" or "Member". Main sponsors come first, with a gold border. */
-// Made-up businesses for the demo. The panel heading labels them "sample listings".
+// Made-up businesses for the demo. The panel heading labels them "sample listings". An empty Directory tab keeps them, so the panel never shows empty.
 // 01 000 0000 is not a real number, so a test tap on "Call" rings nobody.
 const SAMPLE_BIZ=[
   {name:'Sample Motors',tag:'Motoring',tier:'Main sponsor',text:'Example listing. A main sponsor is listed first, with a gold border.',phone:'01 000 0000',website:'https://example.com',address:'Blessington, Co. Wicklow',facebook:'https://www.facebook.com/'},
@@ -1397,7 +1397,7 @@ function bizCard(b,i){
     </div>
   </article>`}
 function dirHTML(){const D=CLUB.directory;
-  return `<div class="kicker">Our sponsors &amp; local businesses</div><h2 class="disp" id="pgTitle">Business directory${bizState==='sample'?' <span class="sample">sample listings</span>':''}</h2>
+  return `<div class="kicker">Our sponsors &amp; local businesses</div><h2 class="disp" id="pgTitle">Sponsors Directory${bizState==='sample'?' <span class="sample">sample listings</span>':''}</h2>
     <p class="dir-lead">${bizState==='sample'?'These are made-up businesses that show how the directory works. ':''}${esc(D.intro)} Tap a business for its details.</p>
     <div class="dir-tools"><input class="dir-q" id="dirQ" type="search" placeholder="Search businesses" aria-label="Search businesses">
       <a class="btn btn-gold" href="${esc(D.join)}"><span class="long">List your business</span><span class="short">Get listed</span> <span class="ar">→</span></a></div>

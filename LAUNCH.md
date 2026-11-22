@@ -10,7 +10,7 @@ All settings named below are in `index.html`. Club settings are in the `CLUB` ob
 - [ ] Every "Content to come from the club" slot is filled. Search `index.html` for `todo:` to find them all.
 - [ ] The club has confirmed the facts listed under [Facts to confirm](#facts-to-confirm).
 - [ ] The sponsor list is confirmed and `SPONSORS-CHECK.md` is deleted.
-- [ ] The club has set the business directory listing fee and tiers, replacing the `todo` in `CLUB.directory`. Every business in the Directory tab has agreed to its listing.
+- [ ] The club has set the Sponsors Directory listing fee and tiers, replacing the `todo` in `CLUB.directory`. Every business in the Directory tab has agreed to its listing.
 - [ ] A native Irish speaker has checked the Irish menu text. It is in the `i18n` object in the script.
 - [ ] The PRO and every person named in a panel agree to their name and phone number being on the site.
 - [ ] `CLUB.membership`, `CLUB.familyCap` and the "2026 membership" wording match the season on sale.

@@ -10,7 +10,7 @@ The Sheet has six tabs, plus a "How to" tab:
 | Fixtures | The fixtures and results lists, and the "Next match" countdown |
 | News | The news cards under "Right now" |
 | Lotto | The jackpot, the last draw's numbers and the result |
-| Directory | The business directory panel: local businesses and sponsors |
+| Directory | The Sponsors Directory panel: local businesses and sponsors |
 | Club | The lotto draw rule, membership prices, the family cap, the ticker messages and the shop note |
 | Pages | The text of the club pages: Academy, Juvenile, Committee, Welfare and the rest |
 

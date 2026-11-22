@@ -4,7 +4,7 @@ A concept mockup for a new Blessington GAA & LGFA website. Not the official club
 
 Single-file static page (`index.html`), hosted on GitHub Pages. Club-specific settings live in the `CLUB` object at the top of the script.
 
-Fixtures, results, news, the lotto, the business directory, club settings and the club page text come from a Google Sheet. Until the Sheet links are set, the page shows sample data labelled "sample".
+Fixtures, results, news, the lotto, the Sponsors Directory, club settings and the club page text come from a Google Sheet. Until the Sheet links are set, the page shows sample data labelled "sample".
 
 | File | What it is for |
 |---|---|
