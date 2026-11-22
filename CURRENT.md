@@ -1,6 +1,6 @@
 # CURRENT — Blessington GAA mockup
 
-Updated 2026-11-21. Live site last checked against this file: 2026-11-13.
+Updated 2026-11-22. Live site last checked against this file: 2026-11-22.
 
 ## Goal now
 
@@ -18,25 +18,31 @@ The PRO has seen the concept and liked it. The committee sees it next.
 The six tasks in the 2026-11-13 to-do list are done and pushed.
 The hero now has archive footage of club players as a fixed backdrop. Patrick confirmed it plays on his PC and his phone.
 A business directory panel (`#page-directory`) was added on 2026-11-18. The PRO sent the Listry GAA directory (a WordPress plugin page by Pallas Marketing) as an example of what the club wants.
-The site runs on labelled sample data until Patrick pastes the Sheet links.
+The site reads real club data from the Sheet (connected 2026-11-22).
 
 ## Next step
 
 The real Sheet exists: "Blessington GAA website" in Patrick's Drive, set up 2026-11-22
 (six tabs, How to, both forms), and published as Entire document the same day. Its link:
 `https://docs.google.com/spreadsheets/d/e/2PACX-1vQ5qFrzFGQ0QM6s2HwgZxZFVXMsPjZ4Fzg0sy7imQNs3-reCRDaFnjcbFRh7z9PvABM2_eqHMdsco-W/pubhtml`.
-The site reads it through `CLUB.sheet` (one link; tabs found by name). Tested locally
-against the real Sheet on 2026-11-22: all six tabs found and loaded; a broken link shows
-"down" everywhere. In order:
+The site reads it through `CLUB.sheet` (one link; tabs found by name). **Connected and live
+since 2026-11-22**: no "sample" labels show.
 
-1. **Fill the Sheet.** Done 2026-11-22 from public sources: Lotto has the 27 Oct 2026 draw
-   (blessingtongaa.ie/lotto; the 10 Nov result isn't published there), News has the
-   20 Nov 2026 Facebook post on the 2027 Senior Ladies management. Still empty: Fixtures (the
-   old site's only fixtures are a 14 Sept image; Facebook needs a login past the first post)
-   and Directory (needs each business's agreement). Ask the PRO for the coming fixtures.
-2. **Connect the site** (Claude): paste the link above into `CLUB.sheet`, check, push. Not
-   before step 1: with empty tabs the live site would lose its labelled samples, and the
-   lotto would show as unavailable. The "sample" labels then disappear.
+What the Sheet holds (filled 2026-11-22 from public sources):
+- Fixtures: 50 Blessington games, 10 Aug to 27 Nov 2026, copied once from the Wicklow GAA
+  team page (officialwicklowgaa.ie/fixtures-results/team/blessington/be6c7b09-4f88-532b-6c6b-35bbcd522248/).
+  Home or Away is by venue (Home only at Blessington). The conceded U14 game is left out.
+  Nobody at the club keeps this tab up to date yet. The club's fixtures are kept by
+  Graham Keogh (club web admin); Patrick won't contact him before the committee decides.
+- Lotto: the 27 Oct 2026 draw. News: the 20 Nov 2026 Senior Ladies management post.
+- Directory: empty, needs each business's agreement.
+
+In order:
+
+1. **Keep fixtures fresh until the committee meets**: recopy from the Wicklow GAA page by
+   hand when needed. Don't scrape it automatically (fragile, no permission).
+2. **After a yes: automatic fixtures** from the Foireann Open Data API (see the template's
+   `BACKLOG.md`). The club must request the API key.
 3. **Template port of the Pages starter rows**: the script fetches `club.csv` and `pages.csv`
    from the live site. That works for Blessington (both filled on 2026-11-22) but not for
    Cloudflare mockups, where `.assetsignore` hides the CSVs. Fix when porting.
