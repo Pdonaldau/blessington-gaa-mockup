@@ -71,6 +71,41 @@ The current site is on Squarespace. Anything still loaded from it breaks when th
 - [ ] The three shop links, the Clubforce membership link and the Clubforce lotto link open the right pages.
 - [ ] The page title and description in the `<head>` are right for search results.
 
+## 8. Hand over to the club
+
+After launch the club keeps the Sheet up to date. Bixbo changes only the website itself:
+new pages or sections, design, membership types, the domain, and fixes.
+
+### Move ownership to the club
+
+- [ ] The club has a role Google account that isn't tied to one person, for example `pro.blessingtongaa@gmail.com`. Its password is kept by the secretary as well as the PRO.
+- [ ] In Apps Script, open **Triggers** (the clock icon) and delete every trigger listed under Patrick's account. If you skip this, each form post is handled twice: once as Patrick and once as the club.
+- [ ] Transfer ownership of the Sheet and of the two forms ("post news" and "add a result") to the club account: **Share**, set the club account as an editor, then change its role to **Owner**. The club account accepts each transfer from its email.
+- [ ] Signed in as the club account, open the Sheet and choose **Website > Set up or repair the Sheet**. Approve the Google permission screen (**Advanced > Go to project > Select all > Allow**). The form handlers and the daily refresh now run as the club.
+- [ ] Post one test story from the "Post news" form, signed in as the club account. It appears once in the News tab. Delete the test row.
+- [ ] The Sheet is still published (**File > Share > Publish to web** says "published"), and the link in `CLUB.sheet` hasn't changed.
+
+### Add editors
+
+- [ ] Share the Sheet as an editor with 2 or 3 people, for example the PRO, the secretary and the lotto organiser. One person leaving must not stop updates.
+- [ ] Each editor opens both form links once, signed in to the Google account they shared with. Only editors' posts count.
+- [ ] Decide whether Patrick keeps editor access for support. If not, remove it after the handover call.
+
+### Hold a 20-minute handover call
+
+- [ ] Show the PRO, on their phone: post a news story, and add a result with the "Add a result" form.
+- [ ] Add one fixture row together in the Fixtures tab, and show a red row and how to fix it.
+- [ ] Point out the "How to" tab and the **Website** menu.
+- [ ] Save both form links to the PRO's phone home screen.
+- [ ] Agree who adds fixtures each week, and who adds the lotto row after each draw.
+
+### Keep it fresh
+
+Fixtures are the most work and change the most. If they fall behind, the site shows old games.
+
+- [ ] Agree a monthly check-in: Patrick looks at the site and messages the PRO if fixtures or the lotto look stale.
+- [ ] Check whether Foireann or ClubZap offer a public fixtures feed that could fill the Fixtures tab automatically (see the template's `BACKLOG.md`).
+
 ## Facts to confirm
 
 These claims are on the page but could not be matched to the current club site on 2026-11-13.
