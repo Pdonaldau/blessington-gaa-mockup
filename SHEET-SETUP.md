@@ -23,9 +23,11 @@ Setup takes about 15 minutes and is done once. A script does most of it.
 3. Delete the few lines already in the editor. Open `sheet-template/setup.gs`, copy all of it, and paste it in.
 4. Select **Save** (the disk icon).
 5. In the function list at the top, choose **setUpWebsiteSheet**, then select **Run**.
-6. Google asks for permission. Choose your account, then **Advanced > Go to project (unsafe) > Allow**.
+6. Google asks for permission. Choose your account, then **Advanced > Go to project (unsafe)**.
+   If Google lists the permissions with tick boxes, tick **Select all**. Then select **Allow**.
    Google shows this warning for any script that isn't published in its store. The script runs only in your Sheet.
-7. Go back to the Sheet tab. When the script finishes, a box shows the links to two phone forms. Select **OK**.
+7. Go back to the Sheet tab. After about a minute, a "Done" box shows the links to two phone forms. Select **OK**.
+   If no box shows, reload the Sheet and choose **Website > Set up or repair the Sheet**. It is safe to run again.
 
 The script:
 

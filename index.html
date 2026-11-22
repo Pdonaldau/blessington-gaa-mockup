@@ -1091,7 +1091,7 @@ const fmtDay = d => `${part(d,{weekday:'short'})} ${fmtShort(d)}`;
 // Accepts 2026-11-08, 08/11/2026 or 8-11-26 (day first, the Irish way) and "8 Nov 2026".
 function parseDate(v){const s=String(v??'').trim();let m;
   if(m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/)) return mkDate(+m[1],+m[2],+m[3]);
-  if(m=s.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2}|\d{4})$/)) return mkDate(+m[3]<100?2000+ +m[3]:+m[3],+m[2],+m[1]);
+  if(m=s.match(/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2}|\d{4})(?:\s.*)?$/)) return mkDate(+m[3]<100?2000+ +m[3]:+m[3],+m[2],+m[1]);
   if(/[a-z]{3}/i.test(s)&&/\d{4}/.test(s)){const t=new Date(s);if(!isNaN(t)) return mkDate(t.getFullYear(),t.getMonth()+1,t.getDate())}
   return null}
 // Accepts 11:30, 11.30, 14:00:00, 2pm and 2:30 pm.

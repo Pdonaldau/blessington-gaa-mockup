@@ -59,6 +59,8 @@ function setUpWebsiteSheet() {
   const forms = setUpForms_(ss);
   writeHowTo_(ss, forms);
   onOpen();
+  // Save everything before the Done box: the box waits for OK, and a run stopped there loses unsaved writes.
+  SpreadsheetApp.flush();
   SpreadsheetApp.getUi().alert('Done',
     'The Sheet is ready.\n\nPost news form:\n' + forms.news + '\n\nAdd a result form:\n' + forms.result +
     '\n\nBoth links are also on the "How to" tab. Save them to your phone home screen.\n\n' +
@@ -321,6 +323,8 @@ function onNewsForm(e) {
   const sh = SpreadsheetApp.getActive().getSheetByName('News');
   const date = a['Date'] ? toDate_(a['Date']) : new Date();
   sh.appendRow([date, a['Tag'] || 'Club news', a['Headline'], a['Summary'], a['Link'] || '']);
+  // appendRow stamps a date-time; the website wants the date alone.
+  sh.getRange(sh.getLastRow(), 1).setNumberFormat('yyyy-mm-dd');
 }
 
 // Labels for games waiting for a score: "Sat 22 Nov · U14 Boys v Kilbride".
