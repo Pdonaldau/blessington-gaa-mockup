@@ -29,8 +29,11 @@ The site reads it through `CLUB.sheet` (one link; tabs found by name). Tested lo
 against the real Sheet on 2026-11-22: all six tabs found and loaded; a broken link shows
 "down" everywhere. In order:
 
-1. **Fill the Sheet** (Patrick, or Claude from blessingtongaa.ie): coming fixtures, latest
-   news, last lotto draw. Fixtures, News, Lotto and Directory are empty now.
+1. **Fill the Sheet.** Done 2026-11-22 from public sources: Lotto has the 27 Oct 2026 draw
+   (blessingtongaa.ie/lotto; the 10 Nov result isn't published there), News has the
+   20 Nov 2026 Facebook post on the 2027 Senior Ladies management. Still empty: Fixtures (the
+   old site's only fixtures are a 14 Sept image; Facebook needs a login past the first post)
+   and Directory (needs each business's agreement). Ask the PRO for the coming fixtures.
 2. **Connect the site** (Claude): paste the link above into `CLUB.sheet`, check, push. Not
    before step 1: with empty tabs the live site would lose its labelled samples, and the
    lotto would show as unavailable. The "sample" labels then disappear.
