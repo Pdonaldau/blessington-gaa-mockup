@@ -1,6 +1,6 @@
 # CURRENT — Blessington GAA mockup
 
-Updated 2026-11-22. Live site last checked against this file: 2026-11-22.
+Updated 2026-11-25. Live site last checked against this file: 2026-11-25.
 
 ## Goal now
 
@@ -12,6 +12,12 @@ The PRO has seen the concept and liked it. The committee sees it next.
 - It replaces https://blessingtongaa.ie, which is on Squarespace.
 
 **A push to `main` publishes at once. There is no staging.**
+
+**The repo must stay public.** GitHub Free serves no Pages site from a private repo.
+On 2026-11-24 the repo was made private: the site went to 404 and the Pages settings
+were wiped. Making it public again did not bring the site back. Pages had to be
+switched on again (`main`, root) on 2026-11-25. The other mockups are on Cloudflare
+Workers, so their repos can stay private.
 
 ## State
 
