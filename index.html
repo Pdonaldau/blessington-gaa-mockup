@@ -1351,8 +1351,9 @@ const SHEET={news:null,lotto:null}, PORTAL={news:null,lotto:null}, CODE_SPONSORS
 function showData(){
   const n=PORTAL.news||SHEET.news||{list:SAMPLE_NEWS.map(normNews),state:'sample'};
   const l=PORTAL.lotto||SHEET.lotto||{d:null,state:'sample'};
-  news=n.list;newsState=n.state;lotto=l.d;lottoState=l.state;
-  paintNews();paintLotto()}
+  news=n.list;newsState=n.state;newsSlots=!!n.slots;lotto=l.d;lottoState=l.state;
+  paintNews();paintLotto();
+  if(previewing) spot(...lastSpot)}   // a repaint (e.g. the Sheet arriving late) drops the outline
 const portalImg = v => v&&typeof v.src==='string'&&/^https:\/\/bixbo\.com\/content\/[\w-]+\/media\/[\w.-]+$/.test(v.src)?v.src:'';
 let previewing=false, spotId='';
 function applyPortal(c,focus){c=c&&typeof c==='object'?c:{};
@@ -1362,8 +1363,11 @@ function applyPortal(c,focus){c=c&&typeof c==='object'?c:{};
   // In the editor, a banner that is off still shows, greyed, so the club can see where it goes.
   else if(focus==='notice') el.textContent=msg?`Banner is off. Turn on "Show the banner" to show: ${msg}`:'Banner is off. Type a message and turn on "Show the banner".';
   el.hidden=!on&&focus!=='notice';
-  const posts=(c.news&&Array.isArray(c.news.posts)?c.news.posts:[]).filter(p=>p&&String(p.title??'').trim());
-  PORTAL.news=posts.length?{list:posts.map(p=>normNews({date:p.date,tag:String(p.tag??'').trim(),title:p.title,text:p.body,link:p.link})),state:'live'}:null;
+  // Portal posts are slots: Post 1 is the first "Right now" card, Post 2 the second. An empty slot
+  // gets a standing card from CLUB.pinned. Both empty = the Sheet's news.
+  const slots=(c.news&&Array.isArray(c.news.posts)?c.news.posts:[]).slice(0,2)
+    .map(p=>p&&String(p.title??'').trim()?normNews({date:p.date,tag:String(p.tag??'').trim(),title:p.title,text:p.body,link:p.link}):null);
+  PORTAL.news=slots.some(Boolean)?{list:slots,state:'live',slots:true}:null;
   const L=c.lotto||{}, j=Math.round(Number(L.jackpot))||0;
   PORTAL.lotto=j>0?{d:{d:parseDate(L.lastDraw), jackpot:j, result:String(L.result??'').trim(), next:parseDate(L.drawDate),
     numbers:(String(L.lastNumbers??'').match(/\d+/g)||[]).map(Number).filter(x=>x>0&&x<100).slice(0,8)},state:'live'}:null;
@@ -1376,14 +1380,17 @@ async function loadPortal(){if(!CLUB.portal)return;
     c=(await res.json()).content||{}}catch(e){return}finally{clearTimeout(timer)}
   if(!previewing) applyPortal(c)}   // a draft from the editor wins over the published file
 // The part of the page each portal section changes.
-const SPOT={notice:'#notice',news:'#newsSlot .t-news',lotto:'.t-lotto',sponsors:'.logo-strip'};
-function spot(id){$$('.bx-spot').forEach(x=>x.classList.remove('bx-spot'));
-  const el=SPOT[id]&&$(SPOT[id]);if(!el)return;el.classList.add('bx-spot');
-  if(spotId!==id){spotId=id;if(id==='notice')scrollTo({top:0});else el.scrollIntoView({block:'center'})}}
+// The section outlines every part it changes; an open slot ("news.posts.1") outlines just its card.
+const SPOT={notice:'#notice',news:'#newsSlot>.tile',lotto:'.t-lotto',sponsors:'.logo-strip'};
+let lastSpot=[];
+function spot(id,item){lastSpot=[id,item];$$('.bx-spot').forEach(x=>x.classList.remove('bx-spot'));
+  const m=/^news\.posts\.([01])$/.exec(item||''), els=m?[$$('#newsSlot>.tile')[+m[1]]].filter(Boolean):SPOT[id]?$$(SPOT[id]):[];
+  if(!els.length)return;els.forEach(x=>x.classList.add('bx-spot'));
+  const key=id+'|'+(item||'');if(spotId!==key){spotId=key;if(id==='notice')scrollTo({top:0});else els[0].scrollIntoView({block:'center'})}}
 if(CLUB.portal&&window.parent!==window){const origin=new URL(CLUB.portal).origin;
   addEventListener('message',e=>{if(e.origin!==origin||e.source!==window.parent)return;
     const m=e.data;if(!m||m.type!=='bixbo:preview'||!m.content||typeof m.content!=='object')return;
-    previewing=true;applyPortal(m.content,m.focus);spot(m.focus)});
+    previewing=true;applyPortal(m.content,m.focus);spot(m.focus,typeof m.item==='string'?m.item:'')});
   window.parent.postMessage({type:'bixbo:ready'},origin)}
 
 /* ---------- Club tab: Setting | Value. Only the settings named here can change. ---------- */
@@ -1427,10 +1434,12 @@ function normNews(r){const d=parseDate(r.date);
   return {d, when:d?`${fmtShort(d)} ${d.getFullYear()}`:String(r.date??''), tag:r.tag||'Club news', title:String(r.title??''), text:String(r.text??''), link:safeLink(r.link)}}
 const SAMPLE_NEWS=[{date:iso(addDays(today(),-9)),tag:'Development',title:'New clubhouse gets the green light',text:'Planning granted by Wicklow County Council for a new clubhouse at Blessington Demesne.',link:'#page-development'}];
 let news=SAMPLE_NEWS.map(normNews), newsState='sample';   // 'sample' | 'live' | 'down'
-function paintNews(){
-  const cards=[...news].sort((a,b)=>(b.d||0)-(a.d||0)).slice(0,2).map(n=>({...n,sample:newsState==='sample'}));
-  if(newsState==='down') cards.push({tag:'Club news',title:'News is unavailable right now',text:'Check the club Facebook page for the latest.',link:CLUB.social.facebook,cta:'Open Facebook'});
-  for(const p of CLUB.pinned){if(cards.length>=2)break;cards.push(p)}
+let newsSlots=false;   // true = portal posts, kept in their slot order
+function paintNews(){let cards;
+  if(newsSlots){const pins=[...CLUB.pinned];cards=[0,1].map(i=>news[i]||pins.shift()).filter(Boolean)}
+  else{cards=[...news].sort((a,b)=>(b.d||0)-(a.d||0)).slice(0,2).map(n=>({...n,sample:newsState==='sample'}));
+    if(newsState==='down') cards.push({tag:'Club news',title:'News is unavailable right now',text:'Check the club Facebook page for the latest.',link:CLUB.social.facebook,cta:'Open Facebook'});
+    for(const p of CLUB.pinned){if(cards.length>=2)break;cards.push(p)}}
   $('#newsSlot').innerHTML=cards.map((c,i)=>{const ext=/^https?:/i.test(c.link||''), el=c.link?'a':'div';
     return `<${el} class="tile ${i?'t-allstars':'t-news'}"${c.link?` href="${esc(c.link)}"${ext?' target="_blank" rel="noopener"':''}`:''}>
       <span class="tk">${esc(c.tag)}${c.sample?' <span class="sample">sample</span>':''}</span>
