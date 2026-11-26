@@ -1,6 +1,6 @@
 # CURRENT — Blessington GAA mockup
 
-Updated 2026-11-25. Live site last checked against this file: 2026-11-25.
+Updated 2026-11-26. Live site last checked against this file: 2026-11-26.
 
 ## Goal now
 
@@ -25,6 +25,16 @@ The six tasks in the 2026-11-13 to-do list are done and pushed.
 The hero now has archive footage of club players as a fixed backdrop. Patrick confirmed it plays on his PC and his phone.
 A sponsors directory panel (`#page-directory`, titled "Sponsors Directory" since 2026-11-22) was added on 2026-11-18. The PRO sent the Listry GAA directory (a WordPress plugin page by Pallas Marketing) as an example of what the club wants.
 The site reads real club data from the Sheet (connected 2026-11-22).
+
+**Bixbo portal test (2026-11-26).** The site also reads `CLUB.portal`
+(`https://bixbo.com/content/blessington-gaa/content.json`), published from bixbo.com/admin.
+Portal site `blessington-gaa` (schema in `Bixbo-Website\portal\schemas\blessington-gaa.json`):
+notice banner, news, lotto, sponsors. A filled portal section wins over the Sheet; an empty
+one, or a portal that can't be reached, leaves the Sheet (or `CLUB`) in charge. The notice
+banner exists only in the portal (`#notice`, top of the header). Shared test account
+`admin@gaa.ie`, customer role, this site only, fixed password with no forced change (Patrick
+has it; never write it in this public repo). After testing: `user reset admin@gaa.ie` or
+`user disable admin@gaa.ie` on the server, and decide whether the portal replaces the Sheet.
 
 ## Next step
 
