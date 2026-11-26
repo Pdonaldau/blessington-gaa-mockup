@@ -51,6 +51,12 @@ header{position:fixed;top:0;left:0;right:0;z-index:60;transition:.35s var(--ease
 .notice{display:block;background:var(--gold);color:var(--ink);text-align:center;font-weight:700;font-size:14px;line-height:1.35;padding:8px 16px}
 .notice[hidden]{display:none}
 .notice a{color:inherit;text-decoration:underline}
+.notice.off{background:#cfd5e3;color:#3b4660;font-weight:600;font-style:italic}
+/* Portal editor preview: the part being edited gets a gold outline. */
+.bx-spot{outline:3px solid var(--gold)!important;outline-offset:4px;animation:bxspot 1.6s ease-in-out infinite}
+.notice.bx-spot{outline-offset:-3px;outline-color:var(--ink)!important}
+@keyframes bxspot{50%{outline-color:rgba(255,200,61,.35)}}
+@media (prefers-reduced-motion:reduce){.bx-spot{animation:none}}
 header.solid{background:rgba(15,32,72,.86);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-d)}
 .bar{display:flex;align-items:center;justify-content:space-between;height:74px}
 .brand{display:flex;align-items:center;gap:12px}
@@ -1321,12 +1327,12 @@ async function loadLive(){const s=CLUB.sheets;
     for(const k of TAB_NAMES) if(!s[k]) s[k]=tabs[k]||'data:,'}
   if(s.fixtures) loadSheet(s.fixtures,['date','team','opponent'])
     .then(r=>{fixtures=r.map(normFx).filter(Boolean);fxState='live'},()=>{fixtures=[];fxState='down'}).then(()=>renderFx(curF));
-  // Lotto and news from the Sheet are skipped when the portal already filled them (portalHas).
+  // Lotto and news from the Sheet go into SHEET; showData() picks the portal's version when it has one.
   if(s.lotto) loadSheet(s.lotto,['date','jackpot'])
-    .then(r=>{if(portalHas.lotto)return;const d=r.map(normLotto).filter(x=>x.d).sort((a,b)=>b.d-a.d)[0];if(!d)throw new Error('No draws');lotto=d;lottoState='live'})
-    .catch(()=>{if(!portalHas.lotto){lotto=null;lottoState='down'}}).then(paintLotto);
+    .then(r=>{const d=r.map(normLotto).filter(x=>x.d).sort((a,b)=>b.d-a.d)[0];if(!d)throw new Error('No draws');SHEET.lotto={d,state:'live'}})
+    .catch(()=>{SHEET.lotto={d:null,state:'down'}}).then(showData);
   if(s.news) loadSheet(s.news,['title'])
-    .then(r=>{if(!portalHas.news){news=r.map(normNews).filter(x=>x.title);newsState='live'}},()=>{if(!portalHas.news){news=[];newsState='down'}}).then(paintNews);
+    .then(r=>{SHEET.news={list:r.map(normNews).filter(x=>x.title),state:'live'}},()=>{SHEET.news={list:[],state:'down'}}).then(showData);
   if(s.directory) loadSheet(s.directory,['name','tag'])
     .then(r=>{const l=r.map(normBiz).filter(b=>b.name);if(l.length){biz=l;bizState='live'}},()=>{biz=[];bizState='down'})
     .then(()=>{if(pg.open&&location.hash==='#page-directory')route()});
@@ -1337,24 +1343,48 @@ async function loadLive(){const s=CLUB.sheets;
 /* ---------- Bixbo portal: content.json published from bixbo.com/admin ----------
    { content: { notice:{show,message,link}, news:{posts:[{title,date,tag,body,link}]},
                 lotto:{jackpot,lastDraw,lastNumbers,result,drawDate}, sponsors:{list:[{name,logo:{src}}]} } }
-   A filled section wins over the Sheet; an empty one, or a failed fetch, changes nothing. */
-const portalHas={news:false,lotto:false};
+   A filled section wins over the Sheet; an empty one, or a failed fetch, leaves the Sheet in charge.
+   Live preview: inside the portal's editor this page sits in a frame. It tells the portal it is
+   ready, then redraws from each unpublished draft the portal sends, and outlines the part being edited. */
+const SHEET={news:null,lotto:null}, PORTAL={news:null,lotto:null}, CODE_SPONSORS=CLUB.sponsors.slice();
+// news and lotto on the page: the portal's when it has them, else the Sheet's, else the samples.
+function showData(){
+  const n=PORTAL.news||SHEET.news||{list:SAMPLE_NEWS.map(normNews),state:'sample'};
+  const l=PORTAL.lotto||SHEET.lotto||{d:null,state:'sample'};
+  news=n.list;newsState=n.state;lotto=l.d;lottoState=l.state;
+  paintNews();paintLotto()}
 const portalImg = v => v&&typeof v.src==='string'&&/^https:\/\/bixbo\.com\/content\/[\w-]+\/media\/[\w.-]+$/.test(v.src)?v.src:'';
+let previewing=false, spotId='';
+function applyPortal(c,focus){c=c&&typeof c==='object'?c:{};
+  const n=c.notice||{}, msg=String(n.message??'').trim(), link=safeLink(n.link), el=$('#notice'), on=n.show===true&&!!msg;
+  el.classList.toggle('off',!on);
+  if(on) el.innerHTML=link?`<a href="${esc(link)}"${/^https?:/i.test(link)?' target="_blank" rel="noopener"':''}>${esc(msg)}</a>`:esc(msg);
+  // In the editor, a banner that is off still shows, greyed, so the club can see where it goes.
+  else if(focus==='notice') el.textContent=msg?`Banner is off. Turn on "Show the banner" to show: ${msg}`:'Banner is off. Type a message and turn on "Show the banner".';
+  el.hidden=!on&&focus!=='notice';
+  const posts=(c.news&&Array.isArray(c.news.posts)?c.news.posts:[]).filter(p=>p&&String(p.title??'').trim());
+  PORTAL.news=posts.length?{list:posts.map(p=>normNews({date:p.date,tag:String(p.tag??'').trim(),title:p.title,text:p.body,link:p.link})),state:'live'}:null;
+  const L=c.lotto||{}, j=Math.round(Number(L.jackpot))||0;
+  PORTAL.lotto=j>0?{d:{d:parseDate(L.lastDraw), jackpot:j, result:String(L.result??'').trim(), next:parseDate(L.drawDate),
+    numbers:(String(L.lastNumbers??'').match(/\d+/g)||[]).map(Number).filter(x=>x>0&&x<100).slice(0,8)},state:'live'}:null;
+  const sp=(c.sponsors&&Array.isArray(c.sponsors.list)?c.sponsors.list:[]).map(s=>[String(s&&s.name||'').trim(),portalImg(s&&s.logo),1]).filter(s=>s[0]);
+  CLUB.sponsors=sp.length?sp:CODE_SPONSORS; paintSponsors();
+  showData()}
 async function loadPortal(){if(!CLUB.portal)return;
   const ctl=new AbortController(), timer=setTimeout(()=>ctl.abort(),8000);let c;
   try{const res=await fetch(CLUB.portal,{cache:'no-cache',signal:ctl.signal});if(!res.ok)throw new Error('HTTP '+res.status);
     c=(await res.json()).content||{}}catch(e){return}finally{clearTimeout(timer)}
-  const n=c.notice||{}, msg=String(n.message??'').trim(), link=safeLink(n.link);
-  if(n.show===true&&msg){$('#notice').innerHTML=link?`<a href="${esc(link)}"${/^https?:/i.test(link)?' target="_blank" rel="noopener"':''}>${esc(msg)}</a>`:esc(msg);$('#notice').hidden=false}
-  const posts=(c.news&&Array.isArray(c.news.posts)?c.news.posts:[]).filter(p=>p&&String(p.title??'').trim());
-  if(posts.length){portalHas.news=true;newsState='live';
-    news=posts.map(p=>normNews({date:p.date,tag:String(p.tag??'').trim(),title:p.title,text:p.body,link:p.link}));paintNews()}
-  const L=c.lotto||{}, j=Math.round(Number(L.jackpot))||0;
-  if(j>0){portalHas.lotto=true;lottoState='live';
-    lotto={d:parseDate(L.lastDraw), jackpot:j, result:String(L.result??'').trim(), next:parseDate(L.drawDate),
-      numbers:(String(L.lastNumbers??'').match(/\d+/g)||[]).map(Number).filter(x=>x>0&&x<100).slice(0,8)};paintLotto()}
-  const sp=(c.sponsors&&Array.isArray(c.sponsors.list)?c.sponsors.list:[]).map(s=>[String(s&&s.name||'').trim(),portalImg(s&&s.logo),1]).filter(s=>s[0]);
-  if(sp.length){CLUB.sponsors=sp;paintSponsors()}}
+  if(!previewing) applyPortal(c)}   // a draft from the editor wins over the published file
+// The part of the page each portal section changes.
+const SPOT={notice:'#notice',news:'#newsSlot .t-news',lotto:'.t-lotto',sponsors:'.logo-strip'};
+function spot(id){$$('.bx-spot').forEach(x=>x.classList.remove('bx-spot'));
+  const el=SPOT[id]&&$(SPOT[id]);if(!el)return;el.classList.add('bx-spot');
+  if(spotId!==id){spotId=id;if(id==='notice')scrollTo({top:0});else el.scrollIntoView({block:'center'})}}
+if(CLUB.portal&&window.parent!==window){const origin=new URL(CLUB.portal).origin;
+  addEventListener('message',e=>{if(e.origin!==origin||e.source!==window.parent)return;
+    const m=e.data;if(!m||m.type!=='bixbo:preview'||!m.content||typeof m.content!=='object')return;
+    previewing=true;applyPortal(m.content,m.focus);spot(m.focus)});
+  window.parent.postMessage({type:'bixbo:ready'},origin)}
 
 /* ---------- Club tab: Setting | Value. Only the settings named here can change. ---------- */
 function applyClub(rows){const L=CLUB.lotto, num=v=>{const n=parseFloat(String(v).replace(/[^\d.]/g,''));return isFinite(n)?n:null}, tick=[];
